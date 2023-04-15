@@ -29,7 +29,7 @@ eHospital е уеб приложение, разработено с PHP/MySQL, J
 ![alt text](https://github.com/sensgithub/eHospital-Management-System/blob/main/screenshots/mobile-patient.gif)
 
 # Доктори
-◉ Регистрация и логин в системата
+◉ Логин в системата (въвеждат се от администратор)
 <br>
 ◉ Преглед на пациентите, записани за преглед
 <br>
