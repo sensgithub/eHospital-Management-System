@@ -370,21 +370,5 @@
 
 ?>
 </div>
-
 </body>
 </html>
-Footer
-© 2023 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-eHospital/patient.php at main · sensgithub/eHospital
