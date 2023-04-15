@@ -7,10 +7,7 @@ eHospital е уеб приложение, разработено с PHP/MySQL, J
 
 <br>
 
-# Възможности на системата
-
-◉ Пациенти
-<br>
+# Пациенти
 ◉ Регистрация и логин в системата
 <br>
 ◉ Търсене на лекари по специалност
@@ -21,7 +18,7 @@ eHospital е уеб приложение, разработено с PHP/MySQL, J
 <br>
 ◉ Преглед на запазените часове за прегледи
 <br>
-
+<br>
 ![alt text](https://github.com/sensgithub/eHospital-Management-System/blob/main/screenshots/patient_dashboard.png)
 
 ![alt text](https://github.com/sensgithub/eHospital-Management-System/blob/main/screenshots/settings.png?raw=true&width=200)
