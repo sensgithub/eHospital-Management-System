@@ -22,6 +22,8 @@ eHospital е уеб приложение, разработено с PHP/MySQL, J
 ◉ Преглед на запазените часове за прегледи
 <br>
 
+![alt text](https://github.com/sensgithub/eHospital-Management-System/blob/main/screenshots/patient_dashboard.png)
+
 ![alt text](https://github.com/sensgithub/eHospital-Management-System/blob/main/screenshots/settings.png?raw=true&width=200)
 
 ![alt text](https://github.com/sensgithub/eHospital-Management-System/blob/main/screenshots/mobile-patient.gif)
@@ -53,5 +55,3 @@ eHospital е уеб приложение, разработено с PHP/MySQL, J
 ![alt text](https://github.com/sensgithub/eHospital-Management-System/blob/main/screenshots/admin.png)
 
 ![alt text](https://github.com/sensgithub/eHospital-Management-System/blob/main/screenshots/doctors.png)
-
-![alt text](https://github.com/sensgithub/eHospital-Management-System/blob/main/screenshots/patient_dashboard.png)
