@@ -10,6 +10,8 @@ env:
   IMAGE_NAME: sens31/ehospital
   GITHUB_REPO: sensgithub/eHospital-Management-System
   SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+  DD_API_KEY: ${{ secrets.DD_API_KEY }}
+  DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
   
 permissions:
   contents: read
@@ -104,6 +106,6 @@ jobs:
     - name: Run Datadog Synthetic tests
       uses: DataDog/synthetics-ci-github-action@2b56dc0cca9daa14ab69c0d1d6844296de8f941e
       with:
-        api_key: ${{secrets.DD_API_KEY}}
-        app_key: ${{secrets.DD_APP_KEY}}
+        api_key: ${{ secrets.DD_API_KEY }}
+        app_key: ${{ secrets.DD_APP_KEY }}
         test_search_query: 'image:sens31/ehospital' 
