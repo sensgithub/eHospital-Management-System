@@ -2,9 +2,11 @@
 
 eHospital е уеб приложение, разработено с PHP/MySQL, JS, jQuery, HTML/CSS, предназначено за здравни заведения. <br> Системата предоставя възможност за регистрация и логин на потребителите, които могат да бъдат от три типа - пациенти, доктори и администратори.
 <br> 
-![alt text](https://github.com/sensgithub/eHospital/blob/main/screenshots/ehospital.gif)
+<br>
+![alt text](https://github.com/sensgithub/eHospital-Management-System/blob/main/screenshots/ehospital.gif)
 
 <br>
+
 # Възможности на системата
 
 ◉ Пациенти
@@ -19,6 +21,10 @@ eHospital е уеб приложение, разработено с PHP/MySQL, J
 <br>
 ◉ Преглед на запазените часове за прегледи
 <br>
+
+![alt text](https://github.com/sensgithub/eHospital-Management-System/blob/main/screenshots/settings.png?raw=true&width=200)
+
+![alt text](https://github.com/sensgithub/eHospital-Management-System/blob/main/screenshots/mobile-patient.gif)
 
 # Доктори
 ◉ Регистрация и логин в системата
@@ -43,10 +49,9 @@ eHospital е уеб приложение, разработено с PHP/MySQL, J
 ◉ Преглед на всички потребители в системата
 <br>
 <br>
-![alt text](https://github.com/sensgithub/eHospital/blob/main/screenshots/admin.png)
 
-<br>
-![alt text](https://github.com/sensgithub/eHospital/blob/main/screenshots/doctors.png)
+![alt text](https://github.com/sensgithub/eHospital-Management-System/blob/main/screenshots/admin.png)
 
-<br>
-![alt text](https://github.com/sensgithub/eHospital/blob/main/screenshots/patinet-dashboard.png)
+![alt text](https://github.com/sensgithub/eHospital-Management-System/blob/main/screenshots/doctors.png)
+
+![alt text](https://github.com/sensgithub/eHospital-Management-System/blob/main/screenshots/patient_dashboard.png)
