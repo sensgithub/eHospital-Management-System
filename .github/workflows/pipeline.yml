@@ -94,3 +94,16 @@ jobs:
           dockerfile: Dockerfile
           push: true
           tags: ${{ env.IMAGE_NAME }}:latest
+          
+  monitor:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Run Datadog Synthetic tests
+      uses: DataDog/synthetics-ci-github-action@2b56dc0cca9daa14ab69c0d1d6844296de8f941e
+      with:
+        api_key: ${{secrets.DD_API_KEY}}
+        app_key: ${{secrets.DD_APP_KEY}}
+        test_search_query: 'image:sens31/ehospital' 
