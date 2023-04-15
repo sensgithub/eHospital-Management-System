@@ -1,0 +1,113 @@
+
+body{
+    margin: 2%;
+    background-color: #F6F7FA;
+}
+.container{
+    width: 45%;
+    background-color: white;
+    border: 1px solid rgb(235, 235, 235);
+    border-radius: 8px;
+    margin: 0;
+    padding: 0;
+    box-shadow: 0 3px 5px 0 rgba(240, 240, 240, 0.3);
+    animation: transitionIn-Y-over 0.5s;
+}
+td{
+    text-align: center;
+
+}
+
+.header-text{
+    font-weight: 600;
+    font-size: 30px;
+    letter-spacing: -1px;
+    margin-bottom: 10px;
+}
+
+.sub-text{
+    font-size: 15px;
+    color: rgb(138, 138, 138);
+}
+
+.form-label{
+    color: rgb(44, 44, 44);
+    text-align: left;
+    font-size: 14px;
+}
+.label-td{
+    text-align: left;
+    padding-top: 10px;
+}
+
+.hover-link1{
+    font-weight: bold;
+}
+
+
+.hover-link1:hover{
+    opacity: 0.8;
+    transition: 0.5s;
+
+
+}.login-btn{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+    .container {
+        width: 90%;
+        min-width: 280px;
+        padding: 20px;
+        font-size: 14px;
+    }
+    .header-text {
+        font-size: 24px;
+    }
+    .sub-text {
+        font-size: 16px;
+    }
+    .form-label {
+        font-size: 16px;
+    }
+    .input-text {
+        padding: 8px;
+        font-size: 16px;
+    }
+    .login-btn {
+        font-size: 16px;
+    }
+}
+
+        .container {
+        width: 45%;
+        background-color: white;
+        border: 1px solid rgb(235, 235, 235);
+        border-radius: 8px;
+        margin: 0;
+        padding: 0;
+        box-shadow: 0 3px 5px 0 rgba(240, 240, 240, 0.3);
+            animation: transitionIn-Y-over 0.5s;
+        }
+        .btn-primary-soft {
+        background-color: #64B9C4;
+        border: 1px solid rgba(57,108,240,0.1);
+        color: #1969AA;
+        font-weight: 500;
+        font-size: 16px;
+        border: none;
+        box-shadow: 0 3px 5px 0 rgb(57 108 240 / 30%);
+        }
+        .btn-primary {
+            border: 1px #57B0BE;
+        }
+        .btn-primary:hover {
+         background-color: #57B0BE;
+        }
+        @media screen and (max-width: 768px) {
+            .container {
+        width: 100%;
+        }
+        }     

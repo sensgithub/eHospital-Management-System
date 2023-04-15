@@ -1,0 +1,31 @@
+@media only screen and (max-width: 768px) {  
+.hamburger {
+    display: block;
+    top: 5%;
+    left: 48%;
+    width: 30px;
+    height: 30px;
+    transform: translateY(-50%);
+    border: 0;
+    background: 0 0;
+}
+.login-btn .btn-primary-soft .btn{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-left: 0px;
+  width: 90px;
+}
+.input-text {
+    font-size: 10px;
+}
+.login-btn .btn-primary .btn{
+  padding-left: 10px;
+  padding-right: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.dash-body{
+  margin-top:75px;
+}
+}
+

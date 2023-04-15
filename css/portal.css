@@ -1,0 +1,257 @@
+@import url('font-inter.css');
+:root {
+  --primarycolor:#39d6d4;
+  --primarycolorhover: #02c2c9fd;
+  --btnice:#57B0BE;
+  --btnnicetext:#40e6e6;
+}
+
+.menu{
+    border-right: 1.5px solid rgb(235, 235, 235);
+    width: 21%;
+    height: 100vh;
+    box-shadow: 0 0px 0px 2px rgba(240, 240, 240, 0.3);
+    display: contents;
+}
+
+.menu-text {
+    padding-left: 79px;
+}
+.dash-body{
+    width: 75%;
+    height: 100vh;
+}
+.menu-container{
+    width: 100%;
+    border-spacing: 0;
+}
+
+.profile-title{
+    font-weight: 500;
+    color: #161c2d;
+    font-size: 22px;
+    margin: 0;
+    text-align: left;
+    padding-left: 8%;
+}
+
+.profile-subtitle{
+    font-weight: 300;
+    color: #8492a6;
+    font-size: 15px;
+    margin: 0;
+    text-align: left;
+    padding-left: 8%;
+}
+
+.logout-btn{
+    margin-top: 30px;
+    width: 85%;
+}
+
+.profile-container{
+    border-bottom: 1.5px solid rgb(235, 235, 235);
+    padding-top: 18%;
+    padding-bottom: 12%;
+    text-align: center;
+    
+}
+
+.heading-main12{
+    font-weight: 500;
+    font-size: 25px;
+}
+
+.heading-sub12{
+    font-weight: 500;
+    font-size: 20px;
+    text-align: right;
+}
+
+
+.header-search{
+    display: flex;
+    justify-content: center;
+
+    
+}
+.header-searchbar{
+    width: 75%;
+    background-color: rgba(255, 255, 255, 0.705);
+    border: 0.5px solid rgba(190, 190, 190, 0.884);
+    
+}
+
+.add-doc-form-container{
+    padding: 25px;
+    margin-top: 30px;
+    
+}
+.menu-container {
+    width: 22%;
+    border-spacing: 0;
+}
+
+.menu-btn:hover{
+color: #57B0BE;
+}
+
+a, button {
+    cursor: pointer;
+  }
+  nav {
+    position: relative;
+    right: 50px;
+    width: 100%;
+    bottom: 20px;
+  }
+  .menu-text{
+    padding-right: 80%;
+    font-weight: 500;
+    font-size: 16px;
+  }
+  .navigation {
+    position: fixed;
+    right: -500px;
+    width: 350px;
+    height: 100%;
+    background-color: white;
+    transition: .5s;
+  }
+  .navigation ul li {
+    color: white;
+    text-align: right;
+    text-transform: uppercase;
+    list-style-type: none;
+    font-size:1.5em;
+    padding: 10px 30px;
+    border-bottom: 1ot solid #252525;
+  }
+  .hamburger, .bar {
+      position: fixed;
+  }
+  .bar {
+    top: 3px; 
+    background: #000;
+    width: 100%;
+    height:4px;
+    transition: all .3s ease-in;
+  }
+  #bar2 {
+    top: 11px;
+  }
+  
+  #bar3 {
+    top:19px;
+  }
+  .navigation.active{
+      right: 0;
+      width: 100%;
+  }
+  .hamburger.open #bar1 {
+    background: black;
+    transform: rotate(45deg) translate(6px, 5px);
+  }
+  .hamburger.open #bar2 {
+    background: transparent;
+  }
+  .hamburger.open #bar3 {
+    background: black;
+    transform: rotate(-45deg) translate(6px, -5px);
+  }
+  .hamburger {
+      display: block;
+      top: 5%;
+      left: 90%;
+      width: 30px;
+      height: 30px;
+      transform: translateY(-50%);
+      border: 0;
+      background: 0 0;
+  }
+  .navbar-toggler {
+      display: none;
+  }
+  @media screen and (max-width: 768px) {
+  
+      .menu {
+          display: none;
+      }
+      .menu-btn {
+        padding: 10px 85px 30px;
+      }
+      .nav-item:last-child {
+          border-bottom: none;
+      }
+      .menu-container {
+        width: 100%;
+       }
+      .navbar-toggler {
+          position: absolute;
+          top: 16px;
+          right: 20px;
+          border: none;
+          background-color: transparent;
+          cursor: pointer;
+          display: block;
+          float: right;
+        }
+      .input-text {
+          font-size: 15px;
+      }
+      .date {
+          padding-left: 50px;
+      }
+      .dash-body{
+          width: 100%;
+      }
+  }
+
+.button-icon{
+  
+  background-position: 10px 50%;
+  background-repeat: no-repeat;
+  transition: 0.5s;
+  padding: 8px 20px 8px 40px;
+}
+
+.menu-btn{
+    padding: 10px 80px 16px;
+    margin: 10px 0px 10px;
+    color: #3b3b3b;
+    background-position: 30% 50%;
+    background-repeat: no-repeat;
+    transition: 0.5s;
+  }
+  
+  .menu-text{
+    padding-right: 80%;
+    font-weight: 500;
+    font-size: 16px;
+    color: black;
+  }
+  
+  .menu-active{
+    color: var(--primarycolor);
+    border-right: 7px solid var(--primarycolor);
+    background-color: var();
+  }
+  
+  .menu-btn:hover{
+    background-color: var(--btnice);
+    color: var(--primarycolor);
+    opacity: 0.9;
+  }
+
+.dashbord-tables,.doctor-heade{
+    animation: transitionIn-Y-over 0.5s;
+}
+.filter-container{
+    animation: transitionIn-Y-bottom  0.5s;
+}
+.sub-table, #anim{
+    animation: transitionIn-Y-bottom 0.5s;
+}
+.popup{
+  animation: transitionIn-Y-bottom 0.5s;
+}

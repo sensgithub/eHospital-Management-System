@@ -1,0 +1,68 @@
+/* -----------Buttons---------------*/
+.btn{
+    cursor: pointer;
+    padding: 8px 20px;
+    outline: none;
+    text-decoration: none;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    transition: all 0.3s;
+    border-radius: 5px;
+    font-family: 'Inter', sans-serif;
+}
+
+
+.btn:hover{
+    background-color: var(--primarycolorhover);
+    box-shadow: none;
+    transition: all 0.5s;
+    font-family: 'Inter', sans-serif;
+}
+
+
+.btn-primary {
+  background-color: #57B0BE;
+  border: #57B0BE;
+  color: #fff;
+  box-shadow: 0 3px 5px 0 rgb(57 108 240 / 30%);
+}
+
+.btn-primary-soft{
+    background-color: #57B0BE;
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+    border: none;
+}
+
+
+.btn-primary-soft:hover{
+    background-color: var(--primarycolor) ;
+    color: #fff ;
+    box-shadow: 0 3px 5px 0 rgba(57,108,240,0.3);
+}
+
+
+.btn-in-text{
+    font-size: 15px;
+    letter-spacing: 0.5px;
+}
+
+.non-style-link:link, .non-style-link:visited, .non-style-link:hover, .non-style-link:active{
+    text-decoration: none;
+    color: rgb(43, 43, 43);
+}
+
+.btn-label{
+    margin-left: 10px;
+    padding: 12px 12px;
+    outline: none;
+    text-decoration: none;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    transition: all 0.3s;
+    border-radius: 5px;
+    background-color: #f0f0f073;
+    border: 1px solid rgba(57,108,240,0.1) ;
+    font-family: 'Inter', sans-serif;
+}

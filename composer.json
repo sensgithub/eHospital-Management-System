@@ -1,0 +1,21 @@
+{
+    "name": "root/html",
+    "description": "eHospital Management System (composer)",
+    "type": "project",
+    "require": {
+        "mpdf/mpdf": "^6.1",
+        "dompdf/dompdf": "^0.6.2",
+        "symfony/mailer": "^6.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Root\\Html\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Svetlan Nikolov",
+            "email": "svetlan.nikolov@yahoo.com"
+        }
+    ]
+}
