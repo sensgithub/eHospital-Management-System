@@ -8,7 +8,7 @@ on:
 
 env:
   IMAGE_NAME: sens31/ehospital
-  GITHUB_REPO: sensgithub/eHospital
+  GITHUB_REPO: sensgithub/eHospital-Management-System
   SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
   
 permissions:
