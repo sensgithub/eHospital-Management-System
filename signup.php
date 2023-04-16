@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/login.css">   
     <link rel="stylesheet" href="css/main.css">  
     <link rel="stylesheet" href="css/signup.css">  
+    <link rel="stylesheet" href="css/register.css"> 
     <link rel="stylesheet" href="assets/vendor/animate/animate.css">
         
     <title> eHospital | Регистрация </title>
@@ -22,12 +23,54 @@ $_SESSION["user"]="";
 $_SESSION["usertype"]="";
 
 date_default_timezone_set('Europe/Sofia');
-$date = date('d.M.YYYY');
+$date = date('d.M.Y');
 
 $_SESSION["date"]=$date;
 
-if($_POST){
+include("connection.php");
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $egn = $_POST['egn'];
+
+    $check_egn_query = "SELECT patient_egn FROM patient WHERE patient_egn = ? LIMIT 1";
+    $stmt = mysqli_prepare($database, $check_egn_query);
+    mysqli_stmt_bind_param($stmt, "s", $egn); 
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_store_result($stmt);
+    $egn_exists = mysqli_stmt_num_rows($stmt) > 0;
+    mysqli_stmt_close($stmt);
+
+    if ($egn_exists) {
+        $_SESSION['status'] = "Вече съществуващо ЕГН!";
+        echo '<script>
+            var alertBox = document.createElement("div");
+            alertBox.style.position = "fixed";
+            alertBox.style.top = "17%";
+            alertBox.style.left = "50%";
+            alertBox.style.fontSize = "22px";
+            alertBox.style.transform = "translate(-50%, -50%)";
+            alertBox.style.padding = "20px";
+            alertBox.style.background = "white";
+            alertBox.style.color = "black";
+            alertBox.style.border = "1px solid cyan";
+            alertBox.style.borderRadius = "5px";
+            alertBox.style.textAlign = "center";
+            alertBox.style.fontFamily = "Arial, sans-serif";
+            alertBox.innerHTML = "Вече съществуващо ЕГН!";
+            document.body.appendChild(alertBox);
+            setTimeout(function() {
+                document.body.removeChild(alertBox);
+            }, 3000);
+            setTimeout(function() {
+                window.location="create-account.php";
+            }, 3000);
+        </script>';
+        exit();
+    }
+}
+
+if($_POST)
+{
     $_SESSION["personal"]=array(
         'fname'=>$_POST['fname'],
         'lname'=>$_POST['lname'],
@@ -50,7 +93,7 @@ if($_POST){
                 </td>
             </tr>
             <tr>
-                <form action="" method="POST" >
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                 <td class="label-td" colspan="2">
                     <label for="name" class="form-label">Име: </label>
                 </td>
@@ -120,44 +163,5 @@ if($_POST){
         </table>
     </div>
 </center>
-<style>
-    .login-btn.btn-primary.btn{
-        width:60%;
-    }
-    .login-btn.btn-primary-soft.btn{
-        width:80%;
-    }
-@media only screen and (max-width: 768px) {
-    .container {
-        width:90%;
-        min-width: 280px;
-        padding: 20px;
-        font-size: 14px;
-    }
-    .header-text {
-        font-size: 24px;
-    }
-    .sub-text {
-        font-size: 16px;
-    }
-    .form-label {
-        font-size: 16px;
-    }
-    .input-text {
-        padding: 8px;
-        font-size: 16px;
-    }
-    .login-btn {
-        font-size: 16px;
-    }
-    .login-btn.btn-primary.btn{
-        width:70%;
-    }
-    .login-btn.btn-primary-soft.btn{
-        width:75%;
-    }
-}
-
-    </style>
 </body>
 </html>

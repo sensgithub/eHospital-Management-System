@@ -49,7 +49,7 @@
                 $error = '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Невалиден е-майл или парола.</label>';
             }
         } elseif ($utype == 'a') {
-            $stmt = $database->prepare("select * from admin WHERE admin_email=? and admin_password=?");
+            $stmt = $database->prepare("SELECT * FROM admin WHERE admin_email=? and admin_password=?");
             $stmt->bind_param("ss", $email, $password);
             $stmt->execute();
             $checker = $stmt->get_result();
@@ -62,7 +62,7 @@
                 $error = '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Невалиден е-майл или парола.</label>';
             }
         } elseif ($utype == 'd') {
-            $stmt = $database->prepare("select * from doctor where doctor_email=? AND doctor_password=?");
+            $stmt = $database->prepare("SELECT * FROM doctor WHERE doctor_email=? AND doctor_password=?");
             $stmt->bind_param("ss", $email, $password);
             $stmt->execute();
             $checker = $stmt->get_result();
@@ -149,61 +149,6 @@
             </tr>                
         </form>
     </table>
-
-    <style>
-    .container{
-    width: 35%;
-    background-color: white;
-    border: 1px solid rgb(235, 235, 235);
-    border-radius: 8px;
-    margin: 100px 5px 5px;
-    padding: 0;
-    box-shadow: 0 3px 5px 0 rgba(240, 240, 240, 0.3);
-    animation: transitionIn-Y-over 0.5s;
-    }
-    .login-btn.btn-primary.btn{
-        width:40%;
-        padding-left: 0px;
-        padding-right: 0px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-    .login-btn.btn-primary-soft.btn{
-        width:30%;
-    }
-@media only screen and (max-width: 768px) {
-    .container {
-        width:90%;
-        min-width: 280px;
-        padding: 20px;
-        font-size: 14px;
-    }
-    .header-text {
-        font-size: 24px;
-    }
-    .sub-text {
-        font-size: 16px;
-    }
-    .form-label {
-        font-size: 16px;
-    }
-    .input-text {
-        padding: 8px;
-        font-size: 16px;
-    }
-    .login-btn {
-        font-size: 16px;
-    }
-    .login-btn.btn-primary.btn{
-        width:70%;
-    }
-    .login-btn.btn-primary-soft.btn{
-        width:55%;
-    }
-}
-
-    </style>
-
 </div>
 </center>
 <script src="js/loader.js"></script>
