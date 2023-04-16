@@ -188,13 +188,13 @@
                                     echo '<tr>
                                     <div style="margin: 10px 20px 20px">
                                         <td style="text-align: center;"> &nbsp;'.
-                                        substr($name,0,30)
+                                        substr($name,0,50)
                                         .'</td>
                                         <td style="text-align: center;">
                                         '.substr($email,0,50).'
                                         </td>
                                         <td style="text-align: center;">
-                                            '.substr($spcil_name,0,20).'
+                                            '.substr($spcil_name,0,50).'
                                         </td>
                                         <td>
                                         <div style="display:flex;justify-content: center;">
