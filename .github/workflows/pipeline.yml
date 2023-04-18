@@ -94,3 +94,76 @@ jobs:
           dockerfile: Dockerfile
           push: true
           tags: ${{ env.IMAGE_NAME }}:latest
+  
+  import:
+    runs-on: ubuntu-latest
+    needs: build
+    
+    services:
+      mysql:
+        # https://hub.docker.com/_/mysql
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: test
+        ports:
+          - 33306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+    - name: Import MySQL file
+      env:
+        SQL: |
+          SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+          SET AUTOCOMMIT = 0;
+          START TRANSACTION;
+          SET time_zone = "+00:00";
+          DROP TABLE IF EXISTS `admin`;
+          CREATE TABLE IF NOT EXISTS `admin` (
+          `admin_email` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+          `admin_password` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+          PRIMARY KEY (`admin_email`)
+          ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+          INSERT INTO `admin` (`admin_email`, `admin_password`) VALUES
+          ('admin@ehospital.bg', 'admin123');
+          CREATE TABLE IF NOT EXISTS `appointment` (
+          `appointment_id` int(11) NOT NULL AUTO_INCREMENT,
+          `patient_id` int(10) DEFAULT NULL,
+          `appointment_num` int(3) DEFAULT NULL,
+          `schedule_id` int(10) DEFAULT NULL,
+          `appointment_date` date DEFAULT NULL,
+          PRIMARY KEY (`appointment_id`),
+          KEY `patient_id` (`patient_id`),
+          KEY `schedule_id` (`schedule_id`)
+          ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+          INSERT INTO `appointment` (`appointment_id`, `patient_id`, `appointment_num`, `schedule_id`, `appointment_date`) VALUES
+          (1, 1, 1, 1, '20-03-2023');
+          DROP TABLE IF EXISTS `doctor`;
+          CREATE TABLE IF NOT EXISTS `doctor` (
+          `doctor_id` int(11) NOT NULL AUTO_INCREMENT,
+          `doctor_email` varchar(50) DEFAULT NULL,
+          `doctor_name` varchar(25) DEFAULT NULL,
+          `doctor_password` varchar(25) DEFAULT NULL,
+          `doctor_tel` varchar(15) DEFAULT NULL,
+          `specialties` int(2) DEFAULT NULL,
+          PRIMARY KEY (`doctor_id`),
+          KEY `specialties` (`specialties`)
+          ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+          INSERT INTO `doctor` (`doctor_id`, `doctor_email`, `doctor_name`, `doctor_password`, `doctor_tel`, `specialties`) VALUES
+          (1, 'velislav_stoyanov@ehospital.bg', 'Velislav Stoyanov', '111654161', '0898314551', 5);
+          INSERT INTO `doctor` (`doctor_id`, `doctor_email`, `doctor_name`, `doctor_password`, `doctor_tel`, `specialties`) VALUES
+          (2, 'veselin_mladenov@ehospital.bg', 'Veselin Mladenov', '651145611', '0874117654', 8);
+          INSERT INTO `doctor` (`doctor_id`, `doctor_email`, `doctor_name`, `doctor_password`, `doctor_tel`, `specialties`) VALUES
+          (3, 'toni_hristova@ehospital.bg', 'Antoaneta Hristova', '145641634', '0981116721', 16);
+          INSERT INTO `doctor` (`doctor_id`, `doctor_email`, `doctor_name`, `doctor_password`, `doctor_tel`, `specialties`) VALUES
+          (4, 'dobrin_ignatov@ehospital.bg', 'Dobrin Ignatov', '456213453', '0876789090', 14);
+      run: |
+        mysql --host 127.0.0.1 --port 33306 -uroot -ppassword -e "SHOW DATABASES LIKE 'ehospital';" 2>/dev/null
+        echo "$SQL" > person.sql
+        echo "--- SQL ---"
+        cat ehospital.sql
+        echo "--- --- ---"
+        echo "Importing from ehospita.sql file"
+        mysql --host 127.0.0.1 --port 33306 -uroot -ppassword ehospital < ehospital.sql 2>/dev/null
+        echo "Checking the imported data"
+        mysql --host 127.0.0.1 --port 33306 -uroot -ppassword ehospital <<< 'SELECT * from doctor' 2>/dev/null
