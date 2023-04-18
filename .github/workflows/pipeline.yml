@@ -15,6 +15,7 @@ permissions:
   contents: read
 
 jobs:
+
   security:
   
     permissions:
@@ -52,6 +53,7 @@ jobs:
           sarif_file: snyk-code.sarif
           
   test:
+  
     runs-on: ubuntu-latest
     needs: security
     steps:
@@ -74,7 +76,9 @@ jobs:
         
         
   build:
+  
     runs-on: ubuntu-latest
+    needs: test
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -92,12 +96,14 @@ jobs:
           push: true
           tags: ${{ env.IMAGE_NAME }}:latest
         
+        
   import-mysql:
+  
     runs-on: ubuntu-latest
     needs: build
     steps:
       - name: Clone database repository
-        run: git clone https://github.com/yourusername/yourdatabaserepo.git
+        run: git clone https://github.com/sensgithub/eHospital-Management-System.git
       
       - name: Import SQL file
         run: mysql --host 127.0.0.1 --port 33306 -uroot -ppassword ehospital < sensgithub/eHospital-Management-System/ehospital.sql
