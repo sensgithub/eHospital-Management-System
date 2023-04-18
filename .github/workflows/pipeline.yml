@@ -99,7 +99,7 @@ jobs:
       - name: Run container
         run: |
           ip a 
-          docker run -p 33306:3306 sens31/ehospital
+          docker run -d -p 33306:3306 sens31/ehospital
           
   import-mysql:
   
