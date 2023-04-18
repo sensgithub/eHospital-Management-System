@@ -95,8 +95,12 @@ jobs:
           dockerfile: Dockerfile
           push: true
           tags: ${{ env.IMAGE_NAME }}:latest
-        
-        
+          
+      - name: Run container
+        run: |
+          ip a 
+          docker run -p 33306:3306 sens31/ehospital
+          
   import-mysql:
   
     runs-on: ubuntu-latest
@@ -106,8 +110,13 @@ jobs:
       run: git clone https://github.com/sensgithub/eHospital-Management-System.git
     
     - name: Import SQL file & Check
-      run: | 
-          mysql --host localhost --port 33306 -uroot -ppassword ehospital < ${{github.workspace}}/eHospital-Management-System/ehospital.sql
+      env:
+        RUNNER_IP: ${{ runner.ip_address }}
+      run: |
+          echo "MySQL status and enable"
+          sudo systemctl status mysql && systemctl start mysql
+          mysql --host ${{ runner.ip_address }} --port 33306 -uroot -ppassword ehospital < ${{github.workspace}}/eHospital-Management-System/ehospital.sql
           echo "Checking the imported data"
-          mysql --host localhost --port 33306 -uroot -ppassword ehospital <<< 'SELECT * from doctor' 2>/dev/null
+          mysql --host ${{ runner.ip_address }} --port 33306 -uroot -ppassword ehospital <<< 'SELECT * from doctor' 2>/dev/null
+
         
