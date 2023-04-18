@@ -102,16 +102,14 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Clone database repository
-        run: git clone https://github.com/sensgithub/eHospital-Management-System.git
+    - name: Clone database repository
+      run: git clone https://github.com/sensgithub/eHospital-Management-System.git
+    
+    - name: Import SQL file
+      run: mysql --host 127.0.0.1 --port 33306 -uroot -ppassword ehospital < ${{github.workspace}}/eHospital-Management-System/ehospital.sql
       
-      - name: Import SQL file
-        run: mysql --host 127.0.0.1 --port 33306 -uroot -ppassword ehospital < sensgithub/eHospital-Management-System/ehospital.sql
-        
-      - name: Import SQL file
-      
-        run: |
-          echo "Importing from ehospital.sql file"
-          mysql --host 127.0.0.1 --port 33306 -uroot -ppassword ehospital < sensgithub/eHospital-Management-System/ehospital.sql 2>/dev/null
-          echo "Checking the imported data"
-          mysql --host 127.0.0.1 --port 33306 -uroot -ppassword ehospital <<< 'SELECT * from doctor' 2>/dev/null
+    - name: Check imported data
+      run: |
+        echo "Checking the imported data"
+        mysql --host 127.0.0.1 --port 33306 -uroot -ppassword ehospital <<< 'SELECT * from doctor' 2>/dev/null
+
