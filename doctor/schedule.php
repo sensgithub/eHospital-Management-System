@@ -48,32 +48,6 @@
     </button>
     </div>
     <div class="menu-container">
-    <nav>
-                <ul>
-                         <li>    
-                             <div style="padding:10px">
-                                <div class="profile-container">
-                                <div style="width:30%; padding-left:20px;"> 
-                                <img src="../img/user.png?v=2" alt="" width="100%" style="border-radius:50%">
-                        </div>
-                        <div style="padding:0px;margin:0px;">
-                            <td style="padding:0px; margin:0px">
-                            <p class="profile-title"> <?php echo substr($username,0,50) ?> </p>
-                            <p class="profile-subtitle"> <?php echo substr($useremail,0,50) ?> </p>
-                        </div>
-                        <div>
-                            <a href="../logout.php"><input type="button" value="Излизане" class="logout-btn btn-primary-soft btn"></a>
-                        </div>
-                     </div>
-                    </div> 
-                        </li>
-                        <div class="menu-btn"> <a href="index.php"    style="text-decoration: none;"> <p class="menu-text">Начало</p> </a> </div>
-                        <div class="menu-btn"> <a href="doctors.php"  style="text-decoration: none;"> <p class="menu-text">Лекари</p> </a> </div>
-                        <div class="menu-btn"> <a href="schedule.php" style="text-decoration: none;"> <p class="menu-text">Сесии</p> </a> </div>
-                        <div class="menu-btn"> <a href="appointment.php" style="text-decoration: none;"> <p class="menu-text">Запазени часове</p> </a> </div>
-                        <div class="menu-btn"> <a href="settings.php" style="text-decoration: none;"> <p class="menu-text">Настройки</p> </a> </div>
-                </ul>
-        </nav>
         </div>
     </div>
     <div class="menu">
@@ -94,11 +68,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="menu-btn"> <a href="index.php"    style="text-decoration: none;"> <p class="menu-text">Начало</p> </a> </div>
+                        <div class="menu-btn"> <a href="index.php"    style="text-decoration: none;"> <p class="menu-text">Начало</p> </a> </div>
                         <div class="menu-btn"> <a href="doctors.php"  style="text-decoration: none;"> <p class="menu-text">Лекари</p> </a> </div>
                         <div class="menu-btn"> <a href="schedule.php" style="text-decoration: none;"> <p class="menu-text">Сесии</p> </a> </div>
                         <div class="menu-btn"> <a href="appointment.php" style="text-decoration: none;"> <p class="menu-text">Запазени часове</p> </a> </div>
                         <div class="menu-btn"> <a href="patient.php" style="text-decoration: none;"> <p class="menu-text">Пациенти</p> </a> </div>
+                        <div class="menu-btn"> <a href="prescription.php" style="text-decoration: none;"> <p class="menu-text">Рецепти</p> </a> </div>
     </div>
 </div>
         <div class="dash-body">
@@ -174,11 +149,8 @@
                             $sheduledate=$_POST["schedule_date"];
                             $sqlmain.=" and schedule.schedule_date='$schedule_date' ";
                         }
-
                     }
-
-                ?>
-                  
+                ?>                  
                 <tr>
                    <td colspan="4">
                        <center>
@@ -217,7 +189,7 @@
                                     $nop=$row["nop"];
                                     echo '<tr>
                                         <td> &nbsp;'.
-                                        substr($title,0,30)
+                                        substr($title,0,100)
                                         .'</td>
                                         
                                         <td style="text-align:center;">
@@ -230,9 +202,9 @@
                                         <td>
                                         <div style="display:flex;justify-content: center;">
                                         
-                                        <a href="?action=view&id='.$schedule_id.'" class="non-style-link"><button  class="btn-primary-soft btn button-icon btn-view"  style="padding-left: 40px;padding-top: 12px;padding-bottom: 12px;margin-top: 10px;"><font class="tn-in-text">View</font></button></a>
+                                        <a href="?action=view&id='.$schedule_id.'" class="non-style-link"><button  class="btn-primary-soft btn button-icon btn-view"  style="padding-left: 20px;padding-top: 12px;padding-bottom: 12px;margin-top: 10px;"><font class="tn-in-text">Преглед</font></button></a>
                                        &nbsp;&nbsp;&nbsp;
-                                       <a href="?action=drop&id='.$schedule_id.'&name='.$title.'" class="non-style-link"><button  class="btn-primary-soft btn button-icon btn-delete"  style="padding-left: 40px;padding-top: 12px;padding-bottom: 12px;margin-top: 10px;"><font class="tn-in-text">Cancel Session</font></button></a>
+                                       <a href="?action=drop&id='.$schedule_id.'&name='.$title.'" class="non-style-link"><button  class="btn-primary-soft btn button-icon btn-delete"  style="padding-left: 20px;padding-top: 12px;padding-bottom: 12px;margin-top: 10px;"><font class="tn-in-text">Отмяна</font></button></a>
                                         </div>
                                         </td>
                                     </tr>';
@@ -263,7 +235,7 @@
                         <h2> Сигурни ли сте?</h2>
                         <a class="close" href="schedule.php">&times;</a>
                         <div class="content">
-                            Искате да изтриете този запис?<br>('.substr($nameget,0,40).').
+                            Искате да изтриете този запис?<br>('.substr($nameget,0,100).').
                             
                         </div>
                         <div style="display: flex;justify-content: center;">
@@ -304,18 +276,11 @@
                         <div class="content">                    
                         </div>
                         <div class="abc scroll" style="display: flex;justify-content: center;">
-                        <table width="80%" class="sub-table scrolldown add-doc-form-container" border="0">
-                        
-                            <tr>
-                                <td>
-                                    <p style="padding: 0;margin: 0;text-align: left;font-size: 25px;font-weight: 500;">View Details.</p><br><br>
-                                </td>
-                            </tr>
-                            
+                        <table width="80%" class="sub-table scrolldown add-doc-form-container" border="0">                                            
                             <tr>
                                 
                                 <td class="label-td" colspan="2">
-                                    <label for="title" class="form-label">Запазен час: </label>
+                                    <label for="title" class="form-label" style="font-weight: bold; font-size:20px">Запазен час: </label>
                                 </td>
                             </tr>
                             <tr>
@@ -326,7 +291,7 @@
                             </tr>
                             <tr>
                                 <td class="label-td" colspan="2">
-                                    <label for="doc" class="form-label">Лекар: </label>
+                                <label for="title" class="form-label" style="font-weight: bold; font-size:20px"> Лекар: </label>
                                 </td>
                             </tr>
                             <tr>
@@ -336,7 +301,7 @@
                             </tr>
                             <tr>
                                 <td class="label-td" colspan="2">
-                                    <label for="date" class="form-label">Дата: </label>
+                                <label for="title" class="form-label" style="font-weight: bold; font-size:20px"> Дата: </label>
                                 </td>
                             </tr>
                             <tr>
@@ -346,7 +311,7 @@
                             </tr>
                             <tr>
                                 <td class="label-td" colspan="2">
-                                    <label for="tele" class="form-label">Час: </label>
+                                <label for="title" class="form-label" style="font-weight: bold; font-size:20px"> Час: </label>
                                 </td>
                             </tr>
                             <tr>

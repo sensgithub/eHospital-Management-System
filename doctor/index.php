@@ -48,32 +48,6 @@
     </button>
     </div>
     <div class="menu-container">
-    <nav>
-                <ul>
-                         <li>    
-                             <div style="padding:10px">
-                                <div class="profile-container">
-                                <div style="width:30%; padding-left:20px;"> 
-                                <img src="../img/user.png?v=2" alt="" width="100%" style="border-radius:50%">
-                        </div>
-                        <div style="padding:0px;margin:0px;">
-                            <td style="padding:0px; margin:0px">
-                            <p class="profile-title"> <?php echo substr($username,0,50) ?> </p>
-                            <p class="profile-subtitle"> <?php echo substr($useremail,0,50) ?> </p>
-                        </div>
-                        <div>
-                            <a href="../logout.php"><input type="button" value="Излизане" class="logout-btn btn-primary-soft btn"></a>
-                        </div>
-                     </div>
-                    </div> 
-                        </li>
-                        <div class="menu-btn"> <a href="index.php"    style="text-decoration: none;"> <p class="menu-text">Начало</p> </a> </div>
-                        <div class="menu-btn"> <a href="doctors.php"  style="text-decoration: none;"> <p class="menu-text">Лекари</p> </a> </div>
-                        <div class="menu-btn"> <a href="schedule.php" style="text-decoration: none;"> <p class="menu-text">Сесии</p> </a> </div>
-                        <div class="menu-btn"> <a href="appointment.php" style="text-decoration: none;"> <p class="menu-text">Запазени часове</p> </a> </div>
-                        <div class="menu-btn"> <a href="settings.php" style="text-decoration: none;"> <p class="menu-text">Настройки</p> </a> </div>
-                </ul>
-        </nav>
         </div>
     </div>
     <div class="menu">
@@ -94,11 +68,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="menu-btn"> <a href="index.php"    style="text-decoration: none;"> <p class="menu-text">Начало</p> </a> </div>
+                        <div class="menu-btn"> <a href="index.php"    style="text-decoration: none;"> <p class="menu-text">Начало</p> </a> </div>
                         <div class="menu-btn"> <a href="doctors.php"  style="text-decoration: none;"> <p class="menu-text">Лекари</p> </a> </div>
                         <div class="menu-btn"> <a href="schedule.php" style="text-decoration: none;"> <p class="menu-text">Сесии</p> </a> </div>
                         <div class="menu-btn"> <a href="appointment.php" style="text-decoration: none;"> <p class="menu-text">Запазени часове</p> </a> </div>
                         <div class="menu-btn"> <a href="patient.php" style="text-decoration: none;"> <p class="menu-text">Пациенти</p> </a> </div>
+                        <div class="menu-btn"> <a href="prescription.php" style="text-decoration: none;"> <p class="menu-text">Рецепти</p> </a> </div>
     </div>
 </div>
         <div class="dash-body" style="margin-top: 15px">
@@ -120,12 +95,10 @@
         
                                 $today = date('d.m.Y');
 
-
                                 $patientrow = $database->query("SELECT  * FROM  patient;");
                                 $doctorrow = $database->query("SELECT  * FROM  doctor;");
                                 $appointmentrow = $database->query("SELECT  * FROM  appointment where appointment_date>='$today';");
                                 $schedulerow = $database->query("SELECT  * FROM  schedule where schedule_date='$today';");
-
 
                                 ?>
                                 </p>
