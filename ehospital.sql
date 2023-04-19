@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `admin_email` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `admin_password` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
   PRIMARY KEY (`admin_email`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `appointment` (
   PRIMARY KEY (`appointment_id`),
   KEY `patient_id` (`patient_id`),
   KEY `schedule_id` (`schedule_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `doctor` (
   `specialties` int(2) DEFAULT NULL,
   PRIMARY KEY (`doctor_id`),
   KEY `specialties` (`specialties`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `doctor`
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `patient` (
   `patient_dob` date DEFAULT NULL,
   `patient_tel` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`patient_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -119,45 +119,117 @@ CREATE TABLE IF NOT EXISTS `schedule` (
   `nop` int(4) DEFAULT NULL,
   PRIMARY KEY (`schedule_id`),
   KEY `doctor_id` (`doctor_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `schedule`
 --
 
 INSERT INTO `schedule` (`schedule_id`, `doctor_id`, `title`, `schedule_date`, `schedule_time`, `nop`) VALUES
-(1, '1', 'Тест сесия', '2023-01-01', '18:00:00', 50),
-(2, '1', '1', '25-03-2023', '20:36:00', 1),
-(3, '1', '12', '25-03-2023', '20:33:00', 1),
-(4, '1', '1', '25-03-2023', '12:32:00', 1),
-(5, '1', '1', '25-05-2023', '20:35:00', 1),
-(6, '1', '12', '25-03-2023', '20:35:00', 1),
-(7, '1', '1', '2022-06-24', '20:36:00', 1),
-(8, '1', '12', '25-03-2023', '13:33:00', 1);
+(1, '1', 'Отказване на вредни навици', '2023-06-31', '14:25:00', 50),
+(2, '2', 'Здравен преглед и профилактика', '2023-05-22', '16:45:00', 1),
+(3, '3', 'Управление на хронични заболявания', '2023-05-28', '13:30:00', 1),
+(4, '4', 'Здравословна храна и хидратация', '2023-06-15', '12:00:00', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `appointment`
+-- Table structure for table `diagnoses`
 --
-
-/*
-DROP TABLE IF EXISTS `prescription`;
-CREATE TABLE IF NOT EXISTS `prescription` (
-  `prescription_id` int(20) NOT NULL AUTO_INCREMENT,
-  `patient_id` int(10) DEFAULT NULL,
-  `appointment_num` int(3) DEFAULT NULL,
-  `schedule_id` int(10) DEFAULT NULL,
-  `appointment_date` date DEFAULT NULL,
-  PRIMARY KEY (`appointment_id`),
-  KEY `patient_id` (`patient_id`),
-  KEY `schedule_id` (`schedule_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-*/
+DROP TABLE IF EXISTS `diagnoses`;
+CREATE TABLE IF NOT EXISTS `diagnoses` (
+  `diagnosis_id` int(11) NOT NULL AUTO_INCREMENT,
+  `diagnosis_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`diagnosis_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `prescription`
+-- Table structure for table `medications`
 --
+DROP TABLE IF EXISTS `medications`;
+CREATE TABLE IF NOT EXISTS `medications` (
+  `medication_id` int(11) NOT NULL AUTO_INCREMENT,
+  `medication_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`medication_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Table structure for table `prescriptions`
+--
+
+DROP TABLE IF EXISTS `prescriptions`;
+CREATE TABLE IF NOT EXISTS `prescriptions` (
+  `prescription_id` int(11) NOT NULL AUTO_INCREMENT,
+  `patient_id` int(11) NOT NULL,
+  `diagnosis_id` int(11) NOT NULL,
+  `medication_id` int(11) NOT NULL,
+  `prescription_date` DATE NOT NULL,
+  `doctor_id` int(11) NOT NULL,
+  PRIMARY KEY (`prescription_id`),
+  KEY `fk_prescriptions_patient_idx` (`patient_id`),
+  KEY `fk_prescriptions_diagnoses_idx` (`diagnosis_id`),
+  KEY `fk_prescriptions_medications_idx` (`medication_id`),
+  KEY `fk_prescriptions_doctor_idx` (`doctor_id`),
+  CONSTRAINT `fk_prescriptions_patients` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_prescriptions_diagnoses` FOREIGN KEY (`diagnosis_id`) REFERENCES `diagnoses` (`diagnosis_id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_prescriptions_medications` FOREIGN KEY (`medication_id`) REFERENCES `medications` (`medication_id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_prescriptions_doctors` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`doctor_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+--
+-- Dumping data for table `medications`
+--
+
+INSERT INTO `medications` (`medication_id`, `medication_name`) VALUES
+(1, 'Аспирин'),
+(2, 'Ибупрофен'),
+(3, 'Парацетамол'),
+(4, 'Нурофен'),
+(5, 'Диклофенак'),
+(6, 'Антибиотик Амоксицилин'),
+(7, 'Лекарство за повишено кръвно налягане - Лозартан'),
+(8, 'Лекарство за диабет - Метформин'),
+(9, 'Лекарство за алергии - Цетиризин'),
+(10, 'Хепарин');
+
+--
+-- Dumping data for table `diagnoses`
+--
+
+INSERT INTO `diagnoses` (`diagnosis_id`, `diagnosis_name`) VALUES
+(1, 'Хипертония'),
+(2, 'Диабет'),
+(3, 'Астма'),
+(4, 'Кардиомиопатия'),
+(5, 'Депресия'),
+(6, 'Алергия'),
+(7, 'Туберкулоза'),
+(8, 'Грип'),
+(9, 'Анемия'),
+(10, 'Артрит');
+
+
+--
+-- Table structure for Patient Medical Records
+--
+
+-- DROP TABLE IF EXISTS `patient_medical_records`;
+-- CREATE TABLE IF NOT EXISTS `patient_medical_records` (
+--   `record_id` int(11) NOT NULL AUTO_INCREMENT,
+--   `patient_id` int(11) NOT NULL,
+--   `diagnosis_id` int(11) NOT NULL,
+--   `medication_id` int(11) NOT NULL,
+--   PRIMARY KEY (`record_id`),
+--   KEY `fk_patient_medical_records_patients_idx` (`patient_id`),
+--   KEY `fk_patient_medical_records_diagnoses_idx` (`diagnosis_id`),
+--   KEY `fk_patient_medical_records_medications_idx` (`medication_id`),
+--   CONSTRAINT `fk_patient_medical_records_patients` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE,
+--   CONSTRAINT `fk_patient_medical_records_diagnoses` FOREIGN KEY (`diagnosis_id`) REFERENCES `diagnoses` (`diagnosis_id`) ON DELETE CASCADE,
+--   CONSTRAINT `fk_patient_medical_records_medications` FOREIGN KEY (`medication_id`) REFERENCES `medications` (`medication_id`) ON DELETE CASCADE
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 -- --------------------------------------------------------
 
@@ -170,7 +242,7 @@ CREATE TABLE IF NOT EXISTS `specialties` (
   `specialty_id` int(2) NOT NULL,
   `specialty_name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`specialty_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `specialties`
@@ -205,7 +277,7 @@ CREATE TABLE IF NOT EXISTS `webuser` (
   `email` varchar(255) NOT NULL,
   `usertype` char(1) DEFAULT NULL,
   PRIMARY KEY (`email`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `webuser`

@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 document.body.removeChild(alertBox);
             }, 3000);
             setTimeout(function() {
-                window.location="create-account.php";
+                window.location="signup.php";
             }, 3000);
         </script>';
         exit();
@@ -83,6 +83,7 @@ if($_POST)
 }
 
 ?>
+
     <center>
     <div class="container">
         <table border="0">
@@ -97,6 +98,17 @@ if($_POST)
                 <td class="label-td" colspan="2">
                     <label for="name" class="form-label">Име: </label>
                 </td>
+                <?php
+                // Валидация на възраст
+                if (isset($_POST['dob'])) {
+                $dob = new DateTime($_POST['dob']);
+                $today = new DateTime();
+                $age = $today->diff($dob)->y;
+                if ($age < 18) {
+                echo '<script>alert("Трябва да сте на 18, за да се регистрирате в системата.");</script>';
+                }
+                }  
+                ?>
             </tr>
             <tr>
                 <td class="label-td">

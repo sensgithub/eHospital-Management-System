@@ -45,6 +45,7 @@ if($_POST){
     $tele = filter_var($_POST['tele'], FILTER_SANITIZE_NUMBER_INT);
     $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
     $cpassword = filter_var($_POST['cpassword'], FILTER_SANITIZE_STRING);
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     $email = mysqli_real_escape_string($database, $email);
 
@@ -53,6 +54,13 @@ if($_POST){
     mysqli_stmt_bind_param($stmt, "s", $email);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_store_result($stmt);
+
+    $check_email_query = "SELECT email from webuser WHERE email=? LIMIT 1";
+    $stmt = mysqli_prepare($database, $check_email_query);
+    mysqli_stmt_bind_param($stmt, "s", $email);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_store_result($stmt);
+
     $email_exists = mysqli_stmt_num_rows($stmt) > 0;
     mysqli_stmt_close($stmt);
 
@@ -85,9 +93,9 @@ if($_POST){
     }
     else
     {
-        $query = "INSERT INTO patient (patient_email, patient_name, patient_city, patient_egn, patient_dob, patient_tel) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO patient (patient_email, patient_name, patient_password, patient_city, patient_egn, patient_dob, patient_tel) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = mysqli_prepare($database, $query);
-        mysqli_stmt_bind_param($stmt, "sssssss", $email, $name, $city, $egn, $dob, $tele);
+        mysqli_stmt_bind_param($stmt, "sssssss", $email, $name,$hashed_password, $city, $egn, $dob, $tele);
         $query_run = mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
         
