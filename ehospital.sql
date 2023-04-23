@@ -103,7 +103,9 @@ CREATE TABLE IF NOT EXISTS `patient` (
   PRIMARY KEY (`patient_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
--- --------------------------------------------------------
+INSERT INTO `patient` (`patient_email`, `patient_name`, `patient_password`, `patient_city`, `patient_egn`, `patient_dob`, `patient_tel`)
+VALUES ('john.doe@example.com', 'John Doe', 'password123', 'New York', '1234567890', '1990-01-01', '555-1234');
+
 
 --
 -- Table structure for table `schedule`
@@ -157,6 +159,24 @@ CREATE TABLE IF NOT EXISTS `medications` (
 -- Table structure for table `prescriptions`
 --
 
+-- -- DROP TABLE IF EXISTS `prescriptions`;
+-- -- CREATE TABLE IF NOT EXISTS `prescriptions` (
+-- --   `prescription_id` int(11) NOT NULL AUTO_INCREMENT,
+-- --   `patient_id` int(11) NOT NULL,
+-- --   `diagnosis_id` int(11) NOT NULL,
+-- --   `medication_id` int(11) NOT NULL,
+-- --   `prescription_date` DATE NOT NULL,
+-- --   PRIMARY KEY (`prescription_id`),
+-- --   KEY `fk_prescriptions_patient_idx` (`patient_id`),
+-- --   KEY `fk_prescriptions_diagnoses_idx` (`diagnosis_id`),
+-- --   KEY `fk_prescriptions_medications_idx` (`medication_id`),
+-- --   CONSTRAINT `fk_prescriptions_patients` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE,
+-- --   CONSTRAINT `fk_prescriptions_diagnoses` FOREIGN KEY (`diagnosis_id`) REFERENCES `diagnoses` (`diagnosis_id`) ON DELETE CASCADE,
+-- --   CONSTRAINT `fk_prescriptions_medications` FOREIGN KEY (`medication_id`) REFERENCES `medications` (`medication_id`) ON DELETE CASCADE
+-- -- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
 DROP TABLE IF EXISTS `prescriptions`;
 CREATE TABLE IF NOT EXISTS `prescriptions` (
   `prescription_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -170,10 +190,10 @@ CREATE TABLE IF NOT EXISTS `prescriptions` (
   KEY `fk_prescriptions_diagnoses_idx` (`diagnosis_id`),
   KEY `fk_prescriptions_medications_idx` (`medication_id`),
   KEY `fk_prescriptions_doctor_idx` (`doctor_id`),
-  CONSTRAINT `fk_prescriptions_patients` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_prescriptions_patient` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE,
   CONSTRAINT `fk_prescriptions_diagnoses` FOREIGN KEY (`diagnosis_id`) REFERENCES `diagnoses` (`diagnosis_id`) ON DELETE CASCADE,
   CONSTRAINT `fk_prescriptions_medications` FOREIGN KEY (`medication_id`) REFERENCES `medications` (`medication_id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_prescriptions_doctors` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`doctor_id`) ON DELETE CASCADE
+  CONSTRAINT `fk_prescriptions_doctor` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`doctor_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -210,28 +230,6 @@ INSERT INTO `diagnoses` (`diagnosis_id`, `diagnosis_name`) VALUES
 (9, 'Анемия'),
 (10, 'Артрит');
 
-
---
--- Table structure for Patient Medical Records
---
-
--- DROP TABLE IF EXISTS `patient_medical_records`;
--- CREATE TABLE IF NOT EXISTS `patient_medical_records` (
---   `record_id` int(11) NOT NULL AUTO_INCREMENT,
---   `patient_id` int(11) NOT NULL,
---   `diagnosis_id` int(11) NOT NULL,
---   `medication_id` int(11) NOT NULL,
---   PRIMARY KEY (`record_id`),
---   KEY `fk_patient_medical_records_patients_idx` (`patient_id`),
---   KEY `fk_patient_medical_records_diagnoses_idx` (`diagnosis_id`),
---   KEY `fk_patient_medical_records_medications_idx` (`medication_id`),
---   CONSTRAINT `fk_patient_medical_records_patients` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE,
---   CONSTRAINT `fk_patient_medical_records_diagnoses` FOREIGN KEY (`diagnosis_id`) REFERENCES `diagnoses` (`diagnosis_id`) ON DELETE CASCADE,
---   CONSTRAINT `fk_patient_medical_records_medications` FOREIGN KEY (`medication_id`) REFERENCES `medications` (`medication_id`) ON DELETE CASCADE
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `specialties`

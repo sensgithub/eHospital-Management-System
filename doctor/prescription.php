@@ -37,6 +37,54 @@
     $userid= $userfetch["doctor_id"];
     $username=$userfetch["doctor_name"];
 
+    if (isset($_POST['submit'])) {
+      $patientName = $_POST['patient_id'];
+      $diagnosisName = $_POST['diagnosis_id'];
+      $medicationName = $_POST['medication_id'];
+      $prescriptionDate = $_POST['prescription_date'];
+  
+      $patientQuery = "SELECT patient_id FROM patient WHERE patient_name='$patientName'";
+      $diagnosisQuery = "SELECT diagnosis_id FROM diagnoses WHERE diagnosis_name='$diagnosisName'";
+      $medicationQuery = "SELECT medication_id FROM medications WHERE medication_name='$medicationName'";
+  
+      $patientResult = mysqli_query($database, $patientQuery);
+      $diagnosisResult = mysqli_query($database, $diagnosisQuery);
+      $medicationResult = mysqli_query($database, $medicationQuery);
+  
+      if ($patientResult && $diagnosisResult && $medicationResult) {
+          $patientId = mysqli_fetch_assoc($patientResult)['patient_id'];
+          $diagnosisId = mysqli_fetch_assoc($diagnosisResult)['diagnosis_id'];
+          $medicationId = mysqli_fetch_assoc($medicationResult)['medication_id'];
+          $doctorID = $userid;
+  
+          $sql = "INSERT INTO prescriptions (patient_id, diagnosis_id, medication_id, prescription_date, doctor_id) VALUES ('$patientId', '$diagnosisId', '$medicationId', '$prescriptionDate', '$doctorID')";
+          if ($database->query($sql)) {
+            echo '<script>
+            var alertBox = document.createElement("div");
+            alertBox.style.position = "fixed";
+            alertBox.style.top = "17%";
+            alertBox.style.left = "50%";
+            alertBox.style.fontSize = "22px";
+            alertBox.style.transform = "translate(-50%, -50%)";
+            alertBox.style.padding = "20px";
+            alertBox.style.background = "white";
+            alertBox.style.color = "black";
+            alertBox.style.border = "1px solid cyan";
+            alertBox.style.borderRadius = "5px";
+            alertBox.style.textAlign = "center";
+            alertBox.style.fontFamily = "Arial, sans-serif";
+            alertBox.innerHTML = "Успешно зададено лекарско предписание!";
+            document.body.appendChild(alertBox);
+            setTimeout(function() {
+                document.body.removeChild(alertBox);
+            }, 3000);
+          </script>';
+           header('Refresh: 3; URL=prescription.php');
+          } else {
+            echo "<div class='alert alert-danger'>Error: " . mysqli_error($database) . "</div>";
+        }
+  }
+}
 ?>
 
 <div class="container">
@@ -124,8 +172,116 @@
                         </form>
                             </td>
                         </table>
-<div>
-  <form method="POST" action="process-form.php">
+                        <tr>
+   <td colspan="6">
+       <center>
+        <div style="padding: 30px 10px 0px; margin-bottom: -50px">
+        <table width="70%" class="sub-table scrolldown" border="0">
+        <thead>
+        <tr>
+            <th class="table-headin">Пациент</th>
+            <th class="table-headin">Диагноза</th>         
+            <th class="table-headin">Медикамент</th>     
+            <th class="table-headin">Лекар</th>
+            <th class="table-headin">Дата</th>
+            <th class="table-headin">Опции</th>
+        </thead>
+        <tbody>                      
+            <?php                             
+               
+               $sqlmain = "SELECT p.prescription_id, d.doctor_name, pt.patient_name, m.medication_name, dgn.diagnosis_name, p.prescription_date
+               FROM prescriptions p
+               INNER JOIN doctor d ON p.doctor_id = d.doctor_id
+               INNER JOIN patient pt ON p.patient_id = pt.patient_id
+               INNER JOIN medications m ON p.medication_id = m.medication_id
+               INNER JOIN diagnoses dgn ON p.diagnosis_id = dgn.diagnosis_id
+               WHERE p.doctor_id=$userid;";
+
+               $result= $database->query($sqlmain);
+               if($result->num_rows==0){
+                   echo '<tr>
+                   <td colspan="4">
+                   <br><br><br><br>
+                   <center>
+                   <br>
+                   <p class="heading-main12" style="margin-left: 45px;font-size:20px;color:rgb(49, 49, 49)">Системата не намери търсеното!</p>
+                   </center>
+                   <br><br><br><br>
+                   </td>
+                   </tr>';                                    
+               }
+               else{
+               for ($x=0; $x<$result->num_rows;$x++){
+                   $row=$result->fetch_assoc();
+                   $prescription_id=$row["prescription_id"];
+                   $patient_name=$row["patient_name"];
+                   $diagnosis=$row["diagnosis_name"];
+                   $medication_name=$row["medication_name"];
+                   $doctor_name=$row["doctor_name"];
+                   $prescription_date=$row["prescription_date"];
+                   echo '<tr>
+                       <td> &nbsp;'.
+                       substr($patient_name,0,100)
+                       .'</td>
+                       <td style="text-align:center;">
+                       '.substr($diagnosis,0,100).'
+                      </td>
+                       <td> &nbsp;'.
+                       substr($medication_name,0,100)
+                       .'</td>
+                       <td style="text-align:center;">
+                       '.substr($doctor_name,0,50).'
+                       </td>
+                       <td style="text-align:center;">
+                           '.substr($prescription_date,0,10).' 
+                       </td>
+                   <td>
+                   <div style="display:flex;justify-content: center;">
+                   
+                  <a href="?action=view&id='.$prescription_id.'" class="non-style-link"><button  class="btn-primary-soft btn button-icon btn-view"  style="padding-left: 20px;padding-top: 12px;padding-bottom: 12px;margin-top: 10px;"><font class="tn-in-text">PDF</font></button></a>
+                  &nbsp;&nbsp;&nbsp;
+                  <a href="?action=drop&id='.$prescription_id.'&name='.$diagnosis.'" class="non-style-link"><button  class="btn-primary-soft btn button-icon btn-delete"  style="padding-left: 20px;padding-top: 12px;padding-bottom: 12px;margin-top: 10px;"><font class="tn-in-text">Отмяна</font></button></a>
+                   </div>
+                   </td>
+                   </tr>';
+               }
+           }
+           if($_GET){
+            $id=$_GET["id"];
+            $action=$_GET["action"];
+            if($action=='drop'){
+                $nameget=$_GET["name"];
+                echo '
+                <div id="popup1" class="overlay">
+                        <div class="popup">
+                        <center>
+                            <h2> Сигурни ли сте?</h2>
+                            <a class="close" href="schedule.php">&times;</a>
+                            <div class="content">
+                                Искате да изтриете този запис?<br>('.substr($nameget,0,100).').
+                                
+                            </div>
+                            <div style="display: flex;justify-content: center;">
+                            <a href="delete-prescription.php?id='.$id.'" class="non-style-link"><button  class="btn-primary btn"  style="display: flex;justify-content: center;align-items: center;margin:10px;padding:10px;"<font class="tn-in-text">&nbsp; Да &nbsp;</font></button></a>&nbsp;&nbsp;&nbsp;
+                            <a href="prescription.php" class="non-style-link"><button  class="btn-primary btn"  style="display: flex;justify-content: center;align-items: center;margin:10px;padding:10px;"><font class="tn-in-text">&nbsp;&nbsp; Не &nbsp;&nbsp;</font></button></a>
+    
+                            </div>
+                        </center>
+                </div>
+                </div>
+                '; 
+            }
+          }          
+            ?> 
+            </tbody>
+        </table>
+        </div>
+        </center>
+   </td> 
+</tr> 
+
+<div style="width: 50%; padding-left: 300px">
+  <form method="POST" action="">
     <table width="100%" class="sub-table scrolldown" border="0" style="padding: 50px;border:none">
     <table class="filter-container" style="margin: 0 30px 10px">
       <tbody> 
@@ -175,10 +331,14 @@
           </td>
         </tr>
         <tr>
-        <td width="25%" style="font-size: 24px; padding: 30px 20px 10px"> Дата:</td>
-          <td>
-            <input type="date" name="prescription_date" style="font-size: 18px;">
-          </td>
+           <td width="25%" style="font-size: 24px; padding: 30px 20px 10px">Дата:</td>
+            <td>
+                <?php
+                date_default_timezone_set('Europe/Sofia');
+                $today = date('Y-m-d');
+                ?>
+               <input type="text" name="prescription_date" value="<?php echo $today; ?>" size="6.5" readonly style="font-size: 20px;">
+           </td>
         </tr>
         <tr>
           <td colspan="2" style="padding-top:30px">
@@ -192,6 +352,5 @@
     </table>
   </table>
 </form>
-</div>
 </body>
 </html>

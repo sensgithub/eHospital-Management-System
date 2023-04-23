@@ -42,7 +42,7 @@
     $username=$userfetch["patient_name"];
 
     ?>
-     <div class="container">
+    <div class="container">
     <div class="navigation">
     <div class="navbar-toggler">
     <button class="hamburger" onclick="show()">
@@ -62,7 +62,7 @@
                         </div>
                         <div style="padding:0px;margin:0px;">
                             <p class="profile-title">
-                                <?php echo substr($username,0,50)?>
+                                <?php echo substr($username,0,50)?>             
                             </p>
                             <p class="profile-subtitle">
                                 <?php echo substr($useremail,0,50)?>
@@ -78,6 +78,7 @@
                         <div class="menu-btn"> <a href="doctors.php"  style="text-decoration: none;"> <p class="menu-text">Лекари</p> </a> </div>
                         <div class="menu-btn"> <a href="schedule.php" style="text-decoration: none;"> <p class="menu-text">Сесии</p> </a> </div>
                         <div class="menu-btn"> <a href="appointment.php" style="text-decoration: none;"> <p class="menu-text">Запазени часове</p> </a> </div>
+                        <div class="menu-btn"> <a href="diagnoses.php" style="text-decoration: none;"> <p class="menu-text">Диагнози</p> </a> </div>
                         <div class="menu-btn"> <a href="settings.php" style="text-decoration: none;"> <p class="menu-text">Настройки</p> </a> </div>
                 </ul>
         </nav>
@@ -103,6 +104,7 @@
                         <div class="menu-btn"> <a href="doctors.php"  style="text-decoration: none;"> <p class="menu-text">Лекари</p> </a> </div>
                         <div class="menu-btn"> <a href="schedule.php" style="text-decoration: none;"> <p class="menu-text">Сесии</p> </a> </div>
                         <div class="menu-btn"> <a href="appointment.php" style="text-decoration: none;"> <p class="menu-text">Запазени часове</p> </a> </div>
+                        <div class="menu-btn"> <a href="diagnoses.php" style="text-decoration: none;"> <p class="menu-text">Диагнози</p> </a> </div>
                         <div class="menu-btn"> <a href="settings.php" style="text-decoration: none;"> <p class="menu-text">Настройки</p> </a> </div>
     </div>
 </div>
@@ -187,7 +189,7 @@
                                     <br><br><br><br>
                                     <center>
                                     <br>
-                                    <p class="heading-main12" style="margin-left: 45px;font-size:20px;color:rgb(49, 49, 49)">Системата не намери вашето търсене!</p>
+                                    <p class="heading-main12" style="margin-left: 25px;font-size:20px;color:rgb(49, 49, 49)">Системата не намери вашето търсене!</p>
                                     </center>
                                     <br><br><br><br>
                                     </td>
@@ -218,9 +220,9 @@
                                         <td style="text-align:center">
                                         <div style="display:flex;justify-content: center;">
                                         
-                                        <a href="?action=view&id='.$doctor_id.'" class="non-style-link"><button  class="btn-primary-soft btn"  style="padding-left: 10px;padding-top: 12px;padding-bottom: 12px;margin-top: 10px;"><font class="tn-in-text">Преглед</font></button></a>
+                                        <a href="?action=view&id='.$doctor_id.'" class="non-style-link"><button  class="btn-primary-soft btn"  style="padding-left: 20px;padding-top: 12px;padding-bottom: 12px;margin-top: 10px;"><font class="tn-in-text">Преглед</font></button></a>
                                        &nbsp;&nbsp;&nbsp;
-                                       <a href="?action=session&id='.$doctor_id.'&name='.$name.'"  class="non-style-link"><button  class="btn-primary-soft btn button-icon"  style="padding-left: 10px;padding-top: 12px;padding-bottom: 12px;margin-top: 10px;"><font class="tn-in-text">Сесии</font></button></a>
+                                       <a href="?action=session&id='.$doctor_id.'&name='.$name.'"  class="non-style-link"><button  class="btn-primary-soft btn button-icon"  style="padding-left: 20px;padding-top: 12px;padding-bottom: 12px;margin-top: 10px;"><font class="tn-in-text">Сесии</font></button></a>
                                         </div>
                                         </td>
                                     </tr>';

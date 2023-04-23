@@ -172,7 +172,7 @@
                                     <br><br><br><br>
                                     <center>
                                     <br>
-                                    <p class="heading-main12" style="margin-left: 45px;font-size:20px;color:rgb(49, 49, 49)">We  couldnt find anything related to your keywords !</p>
+                                    <p class="heading-main12" style="margin-left: 45px;font-size:20px;color:rgb(49, 49, 49)">Системата не намери търсеното!</p>
                                     </center>
                                     <br><br><br><br>
                                     </td>

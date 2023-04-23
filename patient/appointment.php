@@ -66,7 +66,7 @@ include("../connection.php");
     $stmt->execute();
     $result = $stmt->get_result();
 ?>
-    <div class="container">
+      <div class="container">
     <div class="navigation">
     <div class="navbar-toggler">
     <button class="hamburger" onclick="show()">
@@ -86,7 +86,7 @@ include("../connection.php");
                         </div>
                         <div style="padding:0px;margin:0px;">
                             <p class="profile-title">
-                                <?php echo substr($username,0,50)?>
+                                <?php echo substr($username,0,50)?>             
                             </p>
                             <p class="profile-subtitle">
                                 <?php echo substr($useremail,0,50)?>
@@ -102,6 +102,7 @@ include("../connection.php");
                         <div class="menu-btn"> <a href="doctors.php"  style="text-decoration: none;"> <p class="menu-text">Лекари</p> </a> </div>
                         <div class="menu-btn"> <a href="schedule.php" style="text-decoration: none;"> <p class="menu-text">Сесии</p> </a> </div>
                         <div class="menu-btn"> <a href="appointment.php" style="text-decoration: none;"> <p class="menu-text">Запазени часове</p> </a> </div>
+                        <div class="menu-btn"> <a href="diagnoses.php" style="text-decoration: none;"> <p class="menu-text">Диагнози</p> </a> </div>
                         <div class="menu-btn"> <a href="settings.php" style="text-decoration: none;"> <p class="menu-text">Настройки</p> </a> </div>
                 </ul>
         </nav>
@@ -127,6 +128,7 @@ include("../connection.php");
                         <div class="menu-btn"> <a href="doctors.php"  style="text-decoration: none;"> <p class="menu-text">Лекари</p> </a> </div>
                         <div class="menu-btn"> <a href="schedule.php" style="text-decoration: none;"> <p class="menu-text">Сесии</p> </a> </div>
                         <div class="menu-btn"> <a href="appointment.php" style="text-decoration: none;"> <p class="menu-text">Запазени часове</p> </a> </div>
+                        <div class="menu-btn"> <a href="diagnoses.php" style="text-decoration: none;"> <p class="menu-text">Диагнози</p> </a> </div>
                         <div class="menu-btn"> <a href="settings.php" style="text-decoration: none;"> <p class="menu-text">Настройки</p> </a> </div>
     </div>
 </div>

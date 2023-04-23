@@ -48,7 +48,7 @@
 
 
  ?>
-    <div class="container">
+      <div class="container">
     <div class="navigation">
     <div class="navbar-toggler">
     <button class="hamburger" onclick="show()">
@@ -68,7 +68,7 @@
                         </div>
                         <div style="padding:0px;margin:0px;">
                             <p class="profile-title">
-                                <?php echo substr($username,0,50)?>
+                                <?php echo substr($username,0,50)?>             
                             </p>
                             <p class="profile-subtitle">
                                 <?php echo substr($useremail,0,50)?>
@@ -84,6 +84,7 @@
                         <div class="menu-btn"> <a href="doctors.php"  style="text-decoration: none;"> <p class="menu-text">Лекари</p> </a> </div>
                         <div class="menu-btn"> <a href="schedule.php" style="text-decoration: none;"> <p class="menu-text">Сесии</p> </a> </div>
                         <div class="menu-btn"> <a href="appointment.php" style="text-decoration: none;"> <p class="menu-text">Запазени часове</p> </a> </div>
+                        <div class="menu-btn"> <a href="diagnoses.php" style="text-decoration: none;"> <p class="menu-text">Диагнози</p> </a> </div>
                         <div class="menu-btn"> <a href="settings.php" style="text-decoration: none;"> <p class="menu-text">Настройки</p> </a> </div>
                 </ul>
         </nav>
@@ -109,12 +110,15 @@
                         <div class="menu-btn"> <a href="doctors.php"  style="text-decoration: none;"> <p class="menu-text">Лекари</p> </a> </div>
                         <div class="menu-btn"> <a href="schedule.php" style="text-decoration: none;"> <p class="menu-text">Сесии</p> </a> </div>
                         <div class="menu-btn"> <a href="appointment.php" style="text-decoration: none;"> <p class="menu-text">Запазени часове</p> </a> </div>
+                        <div class="menu-btn"> <a href="diagnoses.php" style="text-decoration: none;"> <p class="menu-text">Диагнози</p> </a> </div>
                         <div class="menu-btn"> <a href="settings.php" style="text-decoration: none;"> <p class="menu-text">Настройки</p> </a> </div>
     </div>
 </div>
         <?php
 
-                $sqlmain= "SELECT * FROM schedule INNER JOIN doctor on schedule.doctor_id=doctor.doctor_id where schedule.schedule_date>='$today'  order by schedule.schedule_date asc";
+                $sqlmain= "SELECT * FROM schedule 
+                INNER JOIN doctor on schedule.doctor_id=doctor.doctor_id 
+                WHERE schedule.schedule_date>='$today'  order by schedule.schedule_date asc";
                 $sqlpt1="";
                 $insertkey="";
                 $q='';
@@ -122,7 +126,7 @@
                         if($_POST){                     
                         if(!empty($_POST["search"])){
                             $keyword=$_POST["search"];
-                            $sqlmain= "SELECT * FROM schedule INNER JOIN doctor on schedule.doctor_id=doctor.doctor_id where schedule.schedule_date>='$today' and (doctor.doctor_name='$keyword' or doctor.doctor_name like '$keyword%' or doctor.doctor_name like '%$keyword' or doctor.doctor_name like '%$keyword%' or schedule.title='$keyword' or schedule.title like '$keyword%' or schedule.title like '%$keyword' or schedule.title like '%$keyword%' or schedule.schedule_date like '$keyword%' or schedule.schedule_date like '%$keyword' or schedule.schedule_date like '%$keyword%' or schedule.schedule_date='$keyword' )  order by schedule.schedule_date asc";
+                            $sqlmain= "SELECT * FROM schedule INNER JOIN doctor on schedule.doctor_id=doctor.doctor_id WHERE schedule.schedule_date>='$today' and (doctor.doctor_name='$keyword' or doctor.doctor_name like '$keyword%' or doctor.doctor_name like '%$keyword' or doctor.doctor_name like '%$keyword%' or schedule.title='$keyword' or schedule.title like '$keyword%' or schedule.title like '%$keyword' or schedule.title like '%$keyword%' or schedule.schedule_date like '$keyword%' or schedule.schedule_date like '%$keyword' or schedule.schedule_date like '%$keyword%' or schedule.schedule_date='$keyword' )  order by schedule.schedule_date asc";
                             $insertkey=$keyword;
                             $searchtype="Търсен резултат: ";
                             $q='"';
@@ -223,7 +227,7 @@
                                                 
                                                     <div style="width:100%">
                                                             <div class="h1-search">
-                                                                Сесия '.substr($title,0,21).'
+                                                            '.substr($title,0,100).'
                                                             </div><br>
                                                             <div class="h3-search">
                                                                 '.substr($doctor_name,0,50).'

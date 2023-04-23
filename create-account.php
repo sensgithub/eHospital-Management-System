@@ -32,7 +32,7 @@ $_SESSION["date"]=$date;
 
 if($_POST){
 
-    $result= $database->query("select * from webuser");
+    $result= $database->query("SELECT * FROM webuser");
 
     $fname=$_SESSION['personal']['fname'];
     $lname=$_SESSION['personal']['lname'];
@@ -45,7 +45,6 @@ if($_POST){
     $tele = filter_var($_POST['tele'], FILTER_SANITIZE_NUMBER_INT);
     $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
     $cpassword = filter_var($_POST['cpassword'], FILTER_SANITIZE_STRING);
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     $email = mysqli_real_escape_string($database, $email);
 
@@ -93,20 +92,13 @@ if($_POST){
     }
     else
     {
-        $query = "INSERT INTO patient (patient_email, patient_name, patient_password, patient_city, patient_egn, patient_dob, patient_tel) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        $stmt = mysqli_prepare($database, $query);
-        mysqli_stmt_bind_param($stmt, "sssssss", $email, $name,$hashed_password, $city, $egn, $dob, $tele);
-        $query_run = mysqli_stmt_execute($stmt);
-        mysqli_stmt_close($stmt);
+        $query = "INSERT INTO patient (patient_email, patient_name, patient_password, patient_city, patient_egn, patient_dob, patient_tel) VALUES ('$email', '$name', '$password', '$city', '$egn', '$dob', '$tele')";
+        $query_run = mysqli_query($database, $query);
         
-        $query2 = "INSERT INTO webuser (email, usertype) VALUES (?, ?)";
-        $stmt2 = mysqli_prepare($database, $query2);
+        $query2 = "INSERT INTO webuser (email, usertype) VALUES ('$email', 'p')";
+        $query_run2 = mysqli_query($database, $query2); 
         $usertype = 'p';
-        mysqli_stmt_bind_param($stmt2, "ss", $email, $usertype);
-        $query_run2 = mysqli_stmt_execute($stmt2);
-        mysqli_stmt_close($stmt2);
-        
-        
+           
 
         if($query_run)
         {

@@ -10,14 +10,6 @@
     <link rel="stylesheet" href="../css/portal.css">
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
     <title>eHospital | Booking </title>
-    <style>
-        .popup{
-            animation: transitionIn-Y-bottom 0.5s;
-        }
-        .sub-table{
-            animation: transitionIn-Y-bottom 0.5s;
-        }
-</style>
 </head>
 <body>
     <?php
@@ -54,7 +46,7 @@
     $today = date('d.m.Y');
 
  ?>
-     <div class="container">
+    <div class="container">
     <div class="navigation">
     <div class="navbar-toggler">
     <button class="hamburger" onclick="show()">
@@ -74,7 +66,7 @@
                         </div>
                         <div style="padding:0px;margin:0px;">
                             <p class="profile-title">
-                                <?php echo substr($username,0,50)?>
+                                <?php echo substr($username,0,50)?>             
                             </p>
                             <p class="profile-subtitle">
                                 <?php echo substr($useremail,0,50)?>
@@ -90,6 +82,7 @@
                         <div class="menu-btn"> <a href="doctors.php"  style="text-decoration: none;"> <p class="menu-text">Лекари</p> </a> </div>
                         <div class="menu-btn"> <a href="schedule.php" style="text-decoration: none;"> <p class="menu-text">Сесии</p> </a> </div>
                         <div class="menu-btn"> <a href="appointment.php" style="text-decoration: none;"> <p class="menu-text">Запазени часове</p> </a> </div>
+                        <div class="menu-btn"> <a href="diagnoses.php" style="text-decoration: none;"> <p class="menu-text">Диагнози</p> </a> </div>
                         <div class="menu-btn"> <a href="settings.php" style="text-decoration: none;"> <p class="menu-text">Настройки</p> </a> </div>
                 </ul>
         </nav>
@@ -115,6 +108,7 @@
                         <div class="menu-btn"> <a href="doctors.php"  style="text-decoration: none;"> <p class="menu-text">Лекари</p> </a> </div>
                         <div class="menu-btn"> <a href="schedule.php" style="text-decoration: none;"> <p class="menu-text">Сесии</p> </a> </div>
                         <div class="menu-btn"> <a href="appointment.php" style="text-decoration: none;"> <p class="menu-text">Запазени часове</p> </a> </div>
+                        <div class="menu-btn"> <a href="diagnoses.php" style="text-decoration: none;"> <p class="menu-text">Диагнози</p> </a> </div>
                         <div class="menu-btn"> <a href="settings.php" style="text-decoration: none;"> <p class="menu-text">Настройки</p> </a> </div>
     </div>
 </div>
@@ -124,8 +118,8 @@
                     <td width="13%" >
                     <a href="javascript:history.go(-1)"><button class="login-btn btn-primary-soft btn" style="padding-top:11px;padding-bottom:11px;margin-left:20px;width:125px">Назад</button></a>
                     </td>
-                    <td >
-                            <form action="schedule.php" method="post" class="header-search">
+                    <td>
+                            <form action="schedule.php" method="POST" class="header-search">
 
                                         <input type="search" name="search" class="input-text header-searchbar" placeholder="Търсене на лекар" list="doctors" >&nbsp;&nbsp;
                                         
@@ -170,11 +164,9 @@
                             <?php
                             
                             if(($_GET)){
-                                
-                                
+                                                               
                                 if(isset($_GET["id"])){
                                     
-
                                     $id=$_GET["id"];
 
                                     $sqlmain= "SELECT * FROM schedule 
