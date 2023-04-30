@@ -238,8 +238,11 @@
                    <td>
                    <div style="display:flex;justify-content: center;">
                    
-                  <a href="?action=view&id='.$prescription_id.'" class="non-style-link"><button  class="btn-primary-soft btn button-icon btn-view"  style="padding-left: 20px;padding-top: 12px;padding-bottom: 12px;margin-top: 10px;"><font class="tn-in-text">PDF</font></button></a>
-                  &nbsp;&nbsp;&nbsp;
+                <a href="print-prescription.php" onclick="generatePDF(<?php echo $prescription_id; ?>);" class="non-style-link">
+                   <button class="btn-primary-soft btn button-icon btn-view" style="padding-left: 20px;padding-top: 12px;padding-bottom: 12px;margin-top: 10px;">
+                       <font class="tn-in-text">PDF</font>
+                   </button>
+               </a>
                   <a href="?action=drop&id='.$prescription_id.'&name='.$diagnosis.'" class="non-style-link"><button  class="btn-primary-soft btn button-icon btn-delete"  style="padding-left: 20px;padding-top: 12px;padding-bottom: 12px;margin-top: 10px;"><font class="tn-in-text">Отмяна</font></button></a>
                    </div>
                    </td>
