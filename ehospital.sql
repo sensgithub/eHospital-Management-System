@@ -1,6 +1,7 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
-SET time_zone = "+00:00";
+SET time_zone = '+02:00';
 
 --
 -- Database: `ehospital`
@@ -12,10 +13,12 @@ SET time_zone = "+00:00";
 -- Table structure for table `admin`
 --
 
-CREATE TABLE `admin` (
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE IF NOT EXISTS `admin` (
   `admin_email` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
-  `admin_password` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `admin_password` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  PRIMARY KEY (`admin_email`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `admin`
@@ -30,21 +33,23 @@ INSERT INTO `admin` (`admin_email`, `admin_password`) VALUES
 -- Table structure for table `appointment`
 --
 
-CREATE TABLE `appointment` (
-  `appointment_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `appointment` (
+  `appointment_id` int(11) NOT NULL AUTO_INCREMENT,
   `patient_id` int(10) DEFAULT NULL,
   `appointment_num` int(3) DEFAULT NULL,
   `schedule_id` int(10) DEFAULT NULL,
-  `appointment_date` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `appointment_date` date DEFAULT NULL,
+  PRIMARY KEY (`appointment_id`),
+  KEY `patient_id` (`patient_id`),
+  KEY `schedule_id` (`schedule_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `appointment`
 --
 
 INSERT INTO `appointment` (`appointment_id`, `patient_id`, `appointment_num`, `schedule_id`, `appointment_date`) VALUES
-(1, 1, 1, 1, '0000-00-00'),
-(2, 7, 1, 2, '0000-00-00');
+(1, 1, 1, 1, '20-03-2023');
 
 -- --------------------------------------------------------
 
@@ -52,10 +57,12 @@ INSERT INTO `appointment` (`appointment_id`, `patient_id`, `appointment_num`, `s
 -- Table structure for table `diagnoses`
 --
 
-CREATE TABLE `diagnoses` (
-  `diagnosis_id` int(11) NOT NULL,
-  `diagnosis_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+DROP TABLE IF EXISTS `diagnoses`;
+CREATE TABLE IF NOT EXISTS `diagnoses` (
+  `diagnosis_id` int(11) NOT NULL AUTO_INCREMENT,
+  `diagnosis_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`diagnosis_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `diagnoses`
@@ -79,14 +86,17 @@ INSERT INTO `diagnoses` (`diagnosis_id`, `diagnosis_name`) VALUES
 -- Table structure for table `doctor`
 --
 
-CREATE TABLE `doctor` (
-  `doctor_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `doctor`;
+CREATE TABLE IF NOT EXISTS `doctor` (
+  `doctor_id` int(11) NOT NULL AUTO_INCREMENT,
   `doctor_email` varchar(50) DEFAULT NULL,
   `doctor_name` varchar(25) DEFAULT NULL,
   `doctor_password` varchar(25) DEFAULT NULL,
   `doctor_tel` varchar(15) DEFAULT NULL,
-  `specialties` int(2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `specialties` int(2) DEFAULT NULL,
+  PRIMARY KEY (`doctor_id`),
+  KEY `specialties` (`specialties`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `doctor`
@@ -106,10 +116,12 @@ INSERT INTO `doctor` (`doctor_id`, `doctor_email`, `doctor_name`, `doctor_passwo
 -- Table structure for table `medications`
 --
 
-CREATE TABLE `medications` (
-  `medication_id` int(11) NOT NULL,
-  `medication_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+DROP TABLE IF EXISTS `medications`;
+CREATE TABLE IF NOT EXISTS `medications` (
+  `medication_id` int(11) NOT NULL AUTO_INCREMENT,
+  `medication_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`medication_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `medications`
@@ -163,14 +175,24 @@ INSERT INTO `patient` (`patient_id`, `patient_email`, `patient_name`, `patient_p
 -- Table structure for table `prescriptions`
 --
 
-CREATE TABLE `prescriptions` (
-  `prescription_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `prescriptions`;
+CREATE TABLE IF NOT EXISTS `prescriptions` (
+  `prescription_id` int(11) NOT NULL AUTO_INCREMENT,
   `patient_id` int(11) NOT NULL,
   `diagnosis_id` int(11) NOT NULL,
   `medication_id` int(11) NOT NULL,
-  `prescription_date` date NOT NULL,
-  `doctor_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `prescription_date` DATE NOT NULL,
+  `doctor_id` int(11) NOT NULL,
+  PRIMARY KEY (`prescription_id`),
+  KEY `fk_prescriptions_patient_idx` (`patient_id`),
+  KEY `fk_prescriptions_diagnoses_idx` (`diagnosis_id`),
+  KEY `fk_prescriptions_medications_idx` (`medication_id`),
+  KEY `fk_prescriptions_doctor_idx` (`doctor_id`),
+  CONSTRAINT `fk_prescriptions_patient` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_prescriptions_diagnoses` FOREIGN KEY (`diagnosis_id`) REFERENCES `diagnoses` (`diagnosis_id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_prescriptions_medications` FOREIGN KEY (`medication_id`) REFERENCES `medications` (`medication_id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_prescriptions_doctor` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`doctor_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `prescriptions`
@@ -195,14 +217,17 @@ INSERT INTO `prescriptions` (`prescription_id`, `patient_id`, `diagnosis_id`, `m
 -- Table structure for table `schedule`
 --
 
-CREATE TABLE `schedule` (
-  `schedule_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `schedule`;
+CREATE TABLE IF NOT EXISTS `schedule` (
+  `schedule_id` int(11) NOT NULL AUTO_INCREMENT,
   `doctor_id` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `schedule_date` date DEFAULT NULL,
   `schedule_time` time DEFAULT NULL,
-  `nop` int(4) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `nop` int(4) DEFAULT NULL,
+  PRIMARY KEY (`schedule_id`),
+  KEY `doctor_id` (`doctor_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `schedule`
@@ -220,10 +245,12 @@ INSERT INTO `schedule` (`schedule_id`, `doctor_id`, `title`, `schedule_date`, `s
 -- Table structure for table `specialties`
 --
 
-CREATE TABLE `specialties` (
+DROP TABLE IF EXISTS `specialties`;
+CREATE TABLE IF NOT EXISTS `specialties` (
   `specialty_id` int(2) NOT NULL,
-  `specialty_name` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `specialty_name` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`specialty_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `specialties`
@@ -253,10 +280,12 @@ INSERT INTO `specialties` (`specialty_id`, `specialty_name`) VALUES
 -- Table structure for table `webuser`
 --
 
-CREATE TABLE `webuser` (
+DROP TABLE IF EXISTS `webuser`;
+CREATE TABLE IF NOT EXISTS `webuser` (
   `email` varchar(255) NOT NULL,
-  `usertype` char(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `usertype` char(1) DEFAULT NULL,
+  PRIMARY KEY (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `webuser`
@@ -273,138 +302,4 @@ INSERT INTO `webuser` (`email`, `usertype`) VALUES
 ('velislav_stoyanov@ehospital.bg', 'd'),
 ('veselin_mladenov@ehospital.bg', 'd');
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `admin`
---
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`admin_email`);
-
---
--- Indexes for table `appointment`
---
-ALTER TABLE `appointment`
-  ADD PRIMARY KEY (`appointment_id`),
-  ADD KEY `patient_id` (`patient_id`),
-  ADD KEY `schedule_id` (`schedule_id`);
-
---
--- Indexes for table `diagnoses`
---
-ALTER TABLE `diagnoses`
-  ADD PRIMARY KEY (`diagnosis_id`);
-
---
--- Indexes for table `doctor`
---
-ALTER TABLE `doctor`
-  ADD PRIMARY KEY (`doctor_id`),
-  ADD KEY `specialties` (`specialties`);
-
---
--- Indexes for table `medications`
---
-ALTER TABLE `medications`
-  ADD PRIMARY KEY (`medication_id`);
-
---
--- Indexes for table `patient`
---
-ALTER TABLE `patient`
-  ADD PRIMARY KEY (`patient_id`);
-
---
--- Indexes for table `prescriptions`
---
-ALTER TABLE `prescriptions`
-  ADD PRIMARY KEY (`prescription_id`),
-  ADD KEY `fk_prescriptions_patient_idx` (`patient_id`),
-  ADD KEY `fk_prescriptions_diagnoses_idx` (`diagnosis_id`),
-  ADD KEY `fk_prescriptions_medications_idx` (`medication_id`),
-  ADD KEY `fk_prescriptions_doctor_idx` (`doctor_id`);
-
---
--- Indexes for table `schedule`
---
-ALTER TABLE `schedule`
-  ADD PRIMARY KEY (`schedule_id`),
-  ADD KEY `doctor_id` (`doctor_id`);
-
---
--- Indexes for table `specialties`
---
-ALTER TABLE `specialties`
-  ADD PRIMARY KEY (`specialty_id`);
-
---
--- Indexes for table `webuser`
---
-ALTER TABLE `webuser`
-  ADD PRIMARY KEY (`email`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `appointment`
---
-ALTER TABLE `appointment`
-  MODIFY `appointment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `diagnoses`
---
-ALTER TABLE `diagnoses`
-  MODIFY `diagnosis_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `doctor`
---
-ALTER TABLE `doctor`
-  MODIFY `doctor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `medications`
---
-ALTER TABLE `medications`
-  MODIFY `medication_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
--- AUTO_INCREMENT for table `patient`
---
-ALTER TABLE `patient`
-  MODIFY `patient_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `prescriptions`
---
-ALTER TABLE `prescriptions`
-  MODIFY `prescription_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
---
--- AUTO_INCREMENT for table `schedule`
---
-ALTER TABLE `schedule`
-  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `prescriptions`
---
-ALTER TABLE `prescriptions`
-  ADD CONSTRAINT `fk_prescriptions_diagnoses` FOREIGN KEY (`diagnosis_id`) REFERENCES `diagnoses` (`diagnosis_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_prescriptions_doctor` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`doctor_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_prescriptions_medications` FOREIGN KEY (`medication_id`) REFERENCES `medications` (`medication_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_prescriptions_patient` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE;
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
