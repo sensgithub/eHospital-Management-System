@@ -37,6 +37,8 @@ eHospital е уеб приложение, разработено с PHP/MySQL, J
 ◉ Издаване на лекарско предписание (рецепта)
 <br>
 
+![alt text](https://github.com/sensgithub/eHospital-Management-System/blob/main/screenshots/pdf.gif)
+
 # Администратор
 <br>
 ◉ Регистрация и логин в системата
