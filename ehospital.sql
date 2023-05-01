@@ -165,9 +165,9 @@ CREATE TABLE `patient` (
 -- Dumping data for table `patient`
 --
 
-INSERT INTO `patient` (`patient_id`, `patient_email`, `patient_name`, `patient_password`, `patient_city`, `patient_egn`, `patient_dob`, `patient_tel`) VALUES
-(1, 'ivan.ivanov@gmail.com', 'Иван Иванов', '1234', 'Варна', '0034318885', '2000-05-08', '0894563133'),
-(7, 'georgi.georgiev@gmail.com', 'Георги Георгиев', '094151', 'Варна', '0033318885', '2000-07-31', '0884563133');
+-- INSERT INTO `patient` (`patient_id`, `patient_email`, `patient_name`, `patient_password`, `patient_city`, `patient_egn`, `patient_dob`, `patient_tel`) VALUES
+-- (1, 'ivan.ivanov@gmail.com', 'Иван Иванов', '1234', 'Варна', '0034318885', '2000-05-08', '0894563133'),
+-- (7, 'georgi.georgiev@gmail.com', 'Георги Георгиев', '094151', 'Варна', '0033318885', '2000-07-31', '0884563133');
 
 -- --------------------------------------------------------
 
@@ -198,18 +198,8 @@ CREATE TABLE IF NOT EXISTS `prescriptions` (
 -- Dumping data for table `prescriptions`
 --
 
-INSERT INTO `prescriptions` (`prescription_id`, `patient_id`, `diagnosis_id`, `medication_id`, `prescription_date`, `doctor_id`) VALUES
-(4, 7, 9, 11, '2023-05-01', 4),
-(5, 7, 1, 7, '2023-05-01', 4),
-(6, 7, 4, 2, '2023-05-01', 4),
-(8, 1, 7, 2, '2023-05-01', 4),
-(10, 1, 8, 6, '2023-05-01', 4),
-(12, 7, 5, 10, '2023-05-01', 4),
-(14, 7, 10, 13, '2023-05-01', 4),
-(15, 1, 2, 8, '2023-05-01', 4),
-(16, 7, 3, 14, '2023-05-01', 4),
-(17, 7, 3, 15, '2023-05-01', 4),
-(18, 1, 6, 9, '2023-05-01', 4);
+-- INSERT INTO `prescriptions` (`prescription_id`, `patient_id`, `diagnosis_id`, `medication_id`, `prescription_date`, `doctor_id`) VALUES
+-- (4, 7, 9, 11, '2023-05-01', 4);
 
 -- --------------------------------------------------------
 
