@@ -169,6 +169,9 @@
                                 <th class="table-headin">                         
                                         Доктор                  
                                 </th>
+                                <th class="table-headin">                         
+                                        Рецепта                  
+                                </th>
                         </thead>
                         <tbody>
                                     <?php
@@ -177,6 +180,7 @@
                                     
                                     if ($result->num_rows > 0) {
                                         while ($row = $result->fetch_assoc()) {
+                                            $prescription_id=$row["prescription_id"];
                                             $diagnosis_id = $row['diagnosis_id'];
                                             $medication_id = $row['medication_id'];
                                             $prescription_date = $row['prescription_date'];
@@ -202,6 +206,9 @@
                                             echo '<td style="text-align: center; font-size:18px">' . $medication_name . '</td>';
                                             echo '<td style="text-align: center; font-size:18px">' . $prescription_date . '</td>';
                                             echo '<td style="text-align: center; font-size:18px">' . $doctor_name . '</td>';
+                                            echo '<td style="text-align: center; font-size:18px"> <a href="print-prescription.php?prescription_id='.$prescription_id.'" class="non-style-link"> <button  class="btn-primary-soft btn button-icon btn-delete"  style="padding-left: 20px;padding-top: 12px;padding-bottom: 12px;margin-top: 10px;"><font class="tn-in-text">PDF </font> </button> </a>
+                                            </button> 
+                                           </a> </td>';
                                             echo '</tr>';
                                         }
                                     } else {
