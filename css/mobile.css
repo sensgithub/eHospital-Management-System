@@ -1,7 +1,5 @@
  
-    .about-text-2{
-      display: none;
-    }
+
     section{
       height: 100vh;
     }
@@ -9,7 +7,7 @@
       font-size: 12px;
     }
     .about-image{
-      width:45%; 
+      width:40%; 
       float:left; 
       margin-right:50px;
     }
@@ -20,15 +18,20 @@
       .slides img{
         height:145vh;
       }
+      .about-text-3{
+        padding-top:30px;
+        font-size: 10px;
+      }
       .about-text-2{
-          font-size:14px;
+          padding-top:200px;
+          font-size:12px;
           display: block;
         }
         .features-box{
           padding: 0px;
         }
         .about-image{
-          width:70%;
+          width:65%;
         }
         .column{
         float: left;
@@ -48,7 +51,7 @@
         padding: 0px;
       }
       .about-text-2{
-          font-size:14px;
+          font-size:12px;
           display: block;
         }
         .column{
