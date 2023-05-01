@@ -14,7 +14,14 @@
     <title>eHospital | Prescriptions </title>
 
 </head>
+
 <body>
+  <style>
+    .non-style-link:link, .non-style-link:visited, .non-style-link:hover, .non-style-link:active 
+    {
+    padding-right:10px;
+    }
+    </style>
     <?php
 
     ob_start();
@@ -87,7 +94,7 @@
 }
 ?>
 
-<div class="container">
+    <div class="container">
     <div class="navigation">
     <div class="navbar-toggler">
     <button class="hamburger" onclick="show()">
@@ -151,8 +158,7 @@
                         INNER JOIN schedule on schedule.schedule_id=appointment.schedule_id 
                         WHERE schedule.doctor_id=$userid;";
                     }
-
-                ?>
+                    ?>
                             <input type="search" name="search12" class="input-text header-searchbar" placeholder="Търсене на пациент (име/е-майл)" list="patient">&nbsp;&nbsp;
                             
                             <?php
@@ -238,11 +244,9 @@
                    <td>
                    <div style="display:flex;justify-content: center;">
                    
-                <a href="print-prescription.php" onclick="generatePDF(<?php echo $prescription_id; ?>);" class="non-style-link">
-                   <button class="btn-primary-soft btn button-icon btn-view" style="padding-left: 20px;padding-top: 12px;padding-bottom: 12px;margin-top: 10px;">
-                       <font class="tn-in-text">PDF</font>
+                  <a href="print-prescription.php?prescription_id='.$prescription_id.'" class="non-style-link"> <button  class="btn-primary-soft btn button-icon btn-delete"  style="padding-left: 20px;padding-top: 12px;padding-bottom: 12px;margin-top: 10px;"><font class="tn-in-text">PDF </font> </button> </a>
                    </button>
-               </a>
+                  </a>   
                   <a href="?action=drop&id='.$prescription_id.'&name='.$diagnosis.'" class="non-style-link"><button  class="btn-primary-soft btn button-icon btn-delete"  style="padding-left: 20px;padding-top: 12px;padding-bottom: 12px;margin-top: 10px;"><font class="tn-in-text">Отмяна</font></button></a>
                    </div>
                    </td>

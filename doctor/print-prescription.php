@@ -13,12 +13,8 @@ if(isset($_SESSION["user"])){
 }else{
     header("location: ../login.php");
 }
-    
+
 include("../connection.php");
-$userrow = $database->query("SELECT * FROM doctor WHERE doctor_email='$useremail'");
-$userfetch=$userrow->fetch_assoc();
-$userid= $userfetch["doctor_id"];
-$username=$userfetch["doctor_name"];
 
 // reference the Dompdf namespace
 use Dompdf\Dompdf;
@@ -35,7 +31,7 @@ $html = '<html>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-        <title>Prescription Report</title>
+        <title>Рецепта</title>
         <style>
             table {
                 border-collapse: collapse;
@@ -80,26 +76,33 @@ $html = '<html>
         </div>
         </div>';
 
-// Fetch the required data from the database
-    $query = "SELECT p.prescription_id, d.doctor_name, pt.patient_name, m.medication_name, dgn.diagnosis_name, p.prescription_date
-        FROM prescriptions p
-        INNER JOIN doctor d ON p.doctor_id = d.doctor_id
-        INNER JOIN patient pt ON p.patient_id = pt.patient_id
-        INNER JOIN medications m ON p.medication_id = m.medication_id
-        INNER JOIN diagnoses dgn ON p.diagnosis_id = dgn.diagnosis_id
-        WHERE p.doctor_id=$userid;";
 
-$result = $database->query($query);
-while($row = $result->fetch_assoc()) {
-    $html .= '<tr>
-                <td>'.$row["patient_name"].'</td>
-                <td>'.$row["diagnosis_name"].'</td>
-                <td>'.$row["medication_name"].'</td>
-                <td>'.$row["prescription_date"].'</td>
-                <td>'.$row["doctor_name"].'</td>
-            </tr>';
-}
-$html .= '</tbody></table>';
+    $prescription_id = $_GET['prescription_id'];
+
+    $query = "SELECT p.prescription_id, d.doctor_name, pt.patient_name, m.medication_name, dgn.diagnosis_name, p.prescription_date
+            FROM prescriptions p
+            INNER JOIN doctor d ON p.doctor_id = d.doctor_id
+            INNER JOIN patient pt ON p.patient_id = pt.patient_id
+            INNER JOIN medications m ON p.medication_id = m.medication_id
+            INNER JOIN diagnoses dgn ON p.diagnosis_id = dgn.diagnosis_id
+            WHERE p.prescription_id = ?";
+        
+    $stmt = $database->prepare($query);
+    $stmt->bind_param("i", $prescription_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+        
+    while($row = $result->fetch_assoc()) {
+        $html .= '<tr>
+                    <td>'.$row["patient_name"].'</td>
+                    <td>'.$row["diagnosis_name"].'</td>
+                    <td>'.$row["medication_name"].'</td>
+                    <td>'.$row["prescription_date"].'</td>
+                    <td>'.$row["doctor_name"].'</td>
+                </tr>';
+        }
+        
+    $html .= '</tbody></table>';
 
 // Load HTML to Dompdf
 $dompdf->loadHtml($html);
