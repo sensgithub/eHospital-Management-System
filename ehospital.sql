@@ -1,21 +1,6 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: May 01, 2023 at 05:15 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.0.28
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `ehospital`
@@ -58,8 +43,8 @@ CREATE TABLE `appointment` (
 --
 
 INSERT INTO `appointment` (`appointment_id`, `patient_id`, `appointment_num`, `schedule_id`, `appointment_date`) VALUES
-(1, 1, 1, 1, '2023-06-21'),
-(2, 7, 1, 2, '2023-06-28');
+(1, 1, 1, 1, '0000-00-00'),
+(2, 7, 1, 2, '0000-00-00');
 
 -- --------------------------------------------------------
 
