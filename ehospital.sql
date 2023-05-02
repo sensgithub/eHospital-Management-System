@@ -150,24 +150,26 @@ INSERT INTO `medications` (`medication_id`, `medication_name`) VALUES
 -- Table structure for table `patient`
 --
 
-CREATE TABLE `patient` (
-  `patient_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `patient`;
+CREATE TABLE IF NOT EXISTS `patient` (
+  `patient_id` int(11) NOT NULL AUTO_INCREMENT,
   `patient_email` varchar(50) DEFAULT NULL,
   `patient_name` varchar(25) DEFAULT NULL,
   `patient_password` varchar(25) DEFAULT NULL,
   `patient_city` varchar(25) DEFAULT NULL,
   `patient_egn` varchar(15) DEFAULT NULL,
   `patient_dob` date DEFAULT NULL,
-  `patient_tel` varchar(15) DEFAULT NULL
+  `patient_tel` varchar(15) DEFAULT NULL,
+  PRIMARY KEY (`patient_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `patient`
 --
 
--- INSERT INTO `patient` (`patient_id`, `patient_email`, `patient_name`, `patient_password`, `patient_city`, `patient_egn`, `patient_dob`, `patient_tel`) VALUES
--- (1, 'ivan.ivanov@gmail.com', 'Иван Иванов', '1234', 'Варна', '0034318885', '2000-05-08', '0894563133'),
--- (7, 'georgi.georgiev@gmail.com', 'Георги Георгиев', '094151', 'Варна', '0033318885', '2000-07-31', '0884563133');
+INSERT INTO `patient` (`patient_id`, `patient_email`, `patient_name`, `patient_password`, `patient_city`, `patient_egn`, `patient_dob`, `patient_tel`) VALUES
+(1, 'ivan.ivanov@gmail.com', 'Иван Иванов', '1234', 'Варна', '0034318885', '2000-05-08', '0894563133'),
+(7, 'georgi.georgiev@gmail.com', 'Георги Георгиев', '094151', 'Варна', '0033318885', '2000-07-31', '0884563133');
 
 -- --------------------------------------------------------
 
@@ -193,6 +195,7 @@ CREATE TABLE IF NOT EXISTS `prescriptions` (
   CONSTRAINT `fk_prescriptions_medications` FOREIGN KEY (`medication_id`) REFERENCES `medications` (`medication_id`) ON DELETE CASCADE,
   CONSTRAINT `fk_prescriptions_doctor` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`doctor_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 --
 -- Dumping data for table `prescriptions`
