@@ -214,7 +214,7 @@
                                         '.substr($email,0,50).'
                                         </td>
                                         <td style="text-align:center">
-                                            '.substr($spcil_name,0,40).'
+                                            '.substr($spcil_name,0,80).'
                                         </td>
 
                                         <td style="text-align:center">

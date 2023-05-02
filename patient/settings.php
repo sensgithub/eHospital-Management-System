@@ -498,16 +498,15 @@
                         <div class="popup">
                         <center>
                         <br><br><br><br>
-                            <h2>Edit Successfully!</h2>
+                            <h2>Вашите промени са успешно запазени!</h2>
                             <a class="close" href="settings.php">&times;</a>
                             <div class="content">
-                                If You change your email also Please logout and login again with your new email
-                                
+                                Ако желаете да промените вашия е-майл, моля излезте и влезте с вашия нов е-майл!                             
                             </div>
                             <div style="display: flex;justify-content: center;">
                             
-                            <a href="settings.php" class="non-style-link"><button  class="btn-primary btn"  style="display: flex;justify-content: center;align-items: center;margin:10px;padding:10px;"><font class="tn-in-text">&nbsp;&nbsp;OK&nbsp;&nbsp;</font></button></a>
-                            <a href="../logout.php" class="non-style-link"><button  class="btn-primary-soft btn"  style="display: flex;justify-content: center;align-items: center;margin:10px;padding:10px;"><font class="tn-in-text">&nbsp;&nbsp;Log out&nbsp;&nbsp;</font></button></a>
+                            <a href="settings.php" class="non-style-link"><button  class="btn-primary btn"  style="display: flex;justify-content: center;align-items: center;margin:10px;padding:10px;"><font class="tn-in-text">&nbsp;&nbsp;ОК&nbsp;&nbsp;</font></button></a>
+                            <a href="../logout.php" class="non-style-link"><button  class="btn-primary-soft btn"  style="display: flex;justify-content: center;align-items: center;margin:10px;padding:10px;"><font class="tn-in-text">&nbsp;&nbsp;Излизане&nbsp;&nbsp;</font></button></a>
 
                             </div>
                             <br><br>
