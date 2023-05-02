@@ -49,23 +49,36 @@
       $diagnosisName = $_POST['diagnosis_id'];
       $medicationName = $_POST['medication_id'];
       $prescriptionDate = $_POST['prescription_date'];
-  
-      $patientQuery = "SELECT patient_id FROM patient WHERE patient_name='$patientName'";
-      $diagnosisQuery = "SELECT diagnosis_id FROM diagnoses WHERE diagnosis_name='$diagnosisName'";
-      $medicationQuery = "SELECT medication_id FROM medications WHERE medication_name='$medicationName'";
-  
-      $patientResult = mysqli_query($database, $patientQuery);
-      $diagnosisResult = mysqli_query($database, $diagnosisQuery);
-      $medicationResult = mysqli_query($database, $medicationQuery);
-  
+    
+      $patientQuery = "SELECT patient_id FROM patient WHERE patient_name=?";
+      $diagnosisQuery = "SELECT diagnosis_id FROM diagnoses WHERE diagnosis_name=?";
+      $medicationQuery = "SELECT medication_id FROM medications WHERE medication_name=?";
+    
+      $patientStmt = $database->prepare($patientQuery);
+      $patientStmt->bind_param("s", $patientName);
+      $patientStmt->execute();
+      $patientResult = $patientStmt->get_result();
+    
+      $diagnosisStmt = $database->prepare($diagnosisQuery);
+      $diagnosisStmt->bind_param("s", $diagnosisName);
+      $diagnosisStmt->execute();
+      $diagnosisResult = $diagnosisStmt->get_result();
+    
+      $medicationStmt = $database->prepare($medicationQuery);
+      $medicationStmt->bind_param("s", $medicationName);
+      $medicationStmt->execute();
+      $medicationResult = $medicationStmt->get_result();
+    
       if ($patientResult && $diagnosisResult && $medicationResult) {
           $patientId = mysqli_fetch_assoc($patientResult)['patient_id'];
           $diagnosisId = mysqli_fetch_assoc($diagnosisResult)['diagnosis_id'];
           $medicationId = mysqli_fetch_assoc($medicationResult)['medication_id'];
           $doctorID = $userid;
-  
-          $sql = "INSERT INTO prescriptions (patient_id, diagnosis_id, medication_id, prescription_date, doctor_id) VALUES ('$patientId', '$diagnosisId', '$medicationId', '$prescriptionDate', '$doctorID')";
-          if ($database->query($sql)) {
+    
+          $sql = $database->prepare("INSERT INTO prescriptions (patient_id, diagnosis_id, medication_id, prescription_date, doctor_id) VALUES (?, ?, ?, ?, ?)");
+          $sql->bind_param("iiisi", $patientId, $diagnosisId, $medicationId, $prescriptionDate, $doctorID);
+    
+          if ($sql->execute()) {
             echo '<script>
             var alertBox = document.createElement("div");
             alertBox.style.position = "fixed";
@@ -88,10 +101,10 @@
           </script>';
            header('Refresh: 3; URL=prescription.php');
           } else {
-            echo "<div class='alert alert-danger'>Error: " . mysqli_error($database) . "</div>";
+            echo "<div class='alert alert-danger'>Error: " . $sql->error . "</div>";
         }
-  }
-}
+      }
+    }
 ?>
 
     <div class="container">

@@ -45,9 +45,10 @@
         $schedule_time = $_POST['schedule_time'];
         $nop = $_POST['nop'];
         
-        $sql = "INSERT INTO schedule (doctor_id, title, schedule_date, schedule_time, nop) VALUES ('$doctorID', '$title', '$schedule_date', '$schedule_time', '$nop')";
+        $smnt = $database->prepare("INSERT INTO schedule (doctor_id, title, schedule_date, schedule_time, nop) VALUES (?, ?, ?, ?, ?)");
+        $smnt->bind_param("isssi", $doctorID, $title, $schedule_date, $schedule_time, $nop);
     
-        if ($database->query($sql)) {
+        if ($smnt->execute()) {
             echo '<script>
                   var alertBox = document.createElement("div");
                   alertBox.style.position = "fixed";
