@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
   PRIMARY KEY (`admin_email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
 --
 -- Dumping data for table `admin`
 --
@@ -44,41 +45,13 @@ CREATE TABLE IF NOT EXISTS `appointment` (
   KEY `schedule_id` (`schedule_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
+
 --
 -- Dumping data for table `appointment`
 --
 
 INSERT INTO `appointment` (`appointment_id`, `patient_id`, `appointment_num`, `schedule_id`, `appointment_date`) VALUES
 (1, 1, 1, 1, '20-03-2023');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `diagnoses`
---
-
-DROP TABLE IF EXISTS `diagnoses`;
-CREATE TABLE IF NOT EXISTS `diagnoses` (
-  `diagnosis_id` int(11) NOT NULL AUTO_INCREMENT,
-  `diagnosis_name` varchar(255) NOT NULL,
-  PRIMARY KEY (`diagnosis_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `diagnoses`
---
-
-INSERT INTO `diagnoses` (`diagnosis_id`, `diagnosis_name`) VALUES
-(1, 'I11.9 Артериална хипертония без СН'),
-(2, 'E11.9 Неинсулинозависим захарен диабет БДУ'),
-(3, 'J45.0 Бронхиална астма'),
-(4, 'I20.8 Друга исхемична болест на сърцето'),
-(5, 'D69.3 Идиопатична тромбоцитопенична пурпура'),
-(6, 'Т78.4 Алергия, неуточнена'),
-(7, 'I69.3 Последици от мозъчно съдова болест'),
-(8, 'B34.9 Остра вирусна инфекция, неуточнена'),
-(9, 'D50.8 Друга желязодефицитна анемия '),
-(10, 'M06.9 Ревматоиден артрит, неуточнен');
 
 -- --------------------------------------------------------
 
@@ -103,46 +76,13 @@ CREATE TABLE IF NOT EXISTS `doctor` (
 --
 
 INSERT INTO `doctor` (`doctor_id`, `doctor_email`, `doctor_name`, `doctor_password`, `doctor_tel`, `specialties`) VALUES
-(1, 'velislav_stoyanov@ehospital.bg', 'Велислав Стоянов Кард.', '111654161', '0898314551', 8),
-(2, 'veselin_mladenov@ehospital.bg', 'Веселин Младенов ДБ', '651145611', '0874117654', 17),
-(3, 'toni_hristova@ehospital.bg', 'Антоанета Христова АГ', '145641634', '0981116721', 1),
-(4, 'dobrin_ignatov@ehospital.bg', 'Добрин Игнатов ВБ', '456213453', '0876789090', 6),
-(5, 'petar.petrov@ehospital.bg', 'Петър Петров ХБ', '9878554', '0873413131', 25),
-(6, 'mariya.stoyanov@ehospital.bg', 'Марияна Стоянова Инф.Б', '12589175', '0893413155', 7);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `medications`
---
-
-DROP TABLE IF EXISTS `medications`;
-CREATE TABLE IF NOT EXISTS `medications` (
-  `medication_id` int(11) NOT NULL AUTO_INCREMENT,
-  `medication_name` varchar(255) NOT NULL,
-  PRIMARY KEY (`medication_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `medications`
---
-
-INSERT INTO `medications` (`medication_id`, `medication_name`) VALUES
-(1, 'Аспирин 500mg 3x1'),
-(2, 'Аспирин протект 100mg x1'),
-(3, 'Парацетамол 3x500mg'),
-(4, 'Нурофен 2x200mg'),
-(5, 'Диклак 150 x1 след храна'),
-(6, 'Сефпотек 2x200mg/7дни'),
-(7, 'Тритейс 10mg x1'),
-(8, 'Сиофор 500mg 2x1'),
-(9, 'Зиртек 10mg x1'),
-(10, 'Метилпреднизолон 4mg по схема'),
-(11, 'Сорбифер Дурулес 320mg 2x1'),
-(12, 'Паратрамол 37,5mg/325mg 3x1 при нужда'),
-(13, 'Аркоксия 90mg x1'),
-(14, 'Салбутамол 2mg 3x1'),
-(15, 'Мукосолван 30mg 3x1');
+(1, 'velislav_stoyanov@ehospital.bg', 'Велислав Стоянов', '111654161', '0898314551', 5);
+INSERT INTO `doctor` (`doctor_id`, `doctor_email`, `doctor_name`, `doctor_password`, `doctor_tel`, `specialties`) VALUES
+(2, 'veselin_mladenov@ehospital.bg', 'Веселин Младенов', '651145611', '0874117654', 8);
+INSERT INTO `doctor` (`doctor_id`, `doctor_email`, `doctor_name`, `doctor_password`, `doctor_tel`, `specialties`) VALUES
+(3, 'toni_hristova@ehospital.bg', 'Антоанета Христова', '145641634', '0981116721', 16);
+INSERT INTO `doctor` (`doctor_id`, `doctor_email`, `doctor_name`, `doctor_password`, `doctor_tel`, `specialties`) VALUES
+(4, 'dobrin_ignatov@ehospital.bg', 'Добрин Игнатов', '456213453', '0876789090', 14);
 
 -- --------------------------------------------------------
 
@@ -161,17 +101,59 @@ CREATE TABLE IF NOT EXISTS `patient` (
   `patient_dob` date DEFAULT NULL,
   `patient_tel` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`patient_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `patient` (`patient_email`, `patient_name`, `patient_password`, `patient_city`, `patient_egn`, `patient_dob`, `patient_tel`)
+VALUES ('john.doe@example.com', 'John Doe', 'password123', 'New York', '1234567890', '1990-01-01', '555-1234');
+
 
 --
--- Dumping data for table `patient`
+-- Table structure for table `schedule`
 --
 
-INSERT INTO `patient` (`patient_id`, `patient_email`, `patient_name`, `patient_password`, `patient_city`, `patient_egn`, `patient_dob`, `patient_tel`) VALUES
-(1, 'ivan.ivanov@gmail.com', 'Иван Иванов', '1234', 'Варна', '0034318885', '2000-05-08', '0894563133'),
-(7, 'georgi.georgiev@gmail.com', 'Георги Георгиев', '094151', 'Варна', '0033318885', '2000-07-31', '0884563133');
+DROP TABLE IF EXISTS `schedule`;
+CREATE TABLE IF NOT EXISTS `schedule` (
+  `schedule_id` int(11) NOT NULL AUTO_INCREMENT,
+  `doctor_id` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `schedule_date` date DEFAULT NULL,
+  `schedule_time` time DEFAULT NULL,
+  `nop` int(4) DEFAULT NULL,
+  PRIMARY KEY (`schedule_id`),
+  KEY `doctor_id` (`doctor_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `schedule`
+--
+
+INSERT INTO `schedule` (`schedule_id`, `doctor_id`, `title`, `schedule_date`, `schedule_time`, `nop`) VALUES
+(1, '1', 'Отказване на вредни навици', '2023-06-31', '14:25:00', 50),
+(2, '2', 'Здравен преглед и профилактика', '2023-05-22', '16:45:00', 1),
+(3, '3', 'Управление на хронични заболявания', '2023-05-28', '13:30:00', 1),
+(4, '4', 'Здравословна храна и хидратация', '2023-06-15', '12:00:00', 1);
 
 -- --------------------------------------------------------
+
+--
+-- Table structure for table `diagnoses`
+--
+DROP TABLE IF EXISTS `diagnoses`;
+CREATE TABLE IF NOT EXISTS `diagnoses` (
+  `diagnosis_id` int(11) NOT NULL AUTO_INCREMENT,
+  `diagnosis_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`diagnosis_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Table structure for table `medications`
+--
+DROP TABLE IF EXISTS `medications`;
+CREATE TABLE IF NOT EXISTS `medications` (
+  `medication_id` int(11) NOT NULL AUTO_INCREMENT,
+  `medication_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`medication_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Table structure for table `prescriptions`
@@ -197,42 +179,39 @@ CREATE TABLE IF NOT EXISTS `prescriptions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
---
--- Dumping data for table `prescriptions`
---
-
--- INSERT INTO `prescriptions` (`prescription_id`, `patient_id`, `diagnosis_id`, `medication_id`, `prescription_date`, `doctor_id`) VALUES
--- (4, 7, 9, 11, '2023-05-01', 4);
-
--- --------------------------------------------------------
 
 --
--- Table structure for table `schedule`
+-- Dumping data for table `medications`
 --
 
-DROP TABLE IF EXISTS `schedule`;
-CREATE TABLE IF NOT EXISTS `schedule` (
-  `schedule_id` int(11) NOT NULL AUTO_INCREMENT,
-  `doctor_id` varchar(255) DEFAULT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  `schedule_date` date DEFAULT NULL,
-  `schedule_time` time DEFAULT NULL,
-  `nop` int(4) DEFAULT NULL,
-  PRIMARY KEY (`schedule_id`),
-  KEY `doctor_id` (`doctor_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+INSERT INTO `medications` (`medication_id`, `medication_name`) VALUES
+(1, 'Аспирин'),
+(2, 'Ибупрофен'),
+(3, 'Парацетамол'),
+(4, 'Нурофен'),
+(5, 'Диклофенак'),
+(6, 'Антибиотик Амоксицилин'),
+(7, 'Лекарство за повишено кръвно налягане - Лозартан'),
+(8, 'Лекарство за диабет - Метформин'),
+(9, 'Лекарство за алергии - Цетиризин'),
+(10, 'Хепарин');
 
 --
--- Dumping data for table `schedule`
+-- Dumping data for table `diagnoses`
 --
 
-INSERT INTO `schedule` (`schedule_id`, `doctor_id`, `title`, `schedule_date`, `schedule_time`, `nop`) VALUES
-(1, '1', 'Промоция и профилактика на здравето', '0000-00-00', '14:25:00', 50),
-(2, '2', 'Амбулаторен преглед', '2023-05-22', '16:45:00', 1),
-(3, '3', 'Диспансеризация на пациенти с хронични заболявания', '2023-05-28', '13:30:00', 1),
-(4, '4', 'Здравословен начин на живот и хранене', '2023-06-15', '12:00:00', 1);
+INSERT INTO `diagnoses` (`diagnosis_id`, `diagnosis_name`) VALUES
+(1, 'Хипертония'),
+(2, 'Диабет'),
+(3, 'Астма'),
+(4, 'Кардиомиопатия'),
+(5, 'Депресия'),
+(6, 'Алергия'),
+(7, 'Туберкулоза'),
+(8, 'Грип'),
+(9, 'Анемия'),
+(10, 'Артрит');
 
--- --------------------------------------------------------
 
 --
 -- Table structure for table `specialties`
@@ -250,22 +229,22 @@ CREATE TABLE IF NOT EXISTS `specialties` (
 --
 
 INSERT INTO `specialties` (`specialty_id`, `specialty_name`) VALUES
-(1, 'Акушерство и гинекология'),
-(2, 'Алергология'),
-(3, 'Гастроентерология'),
-(4, 'Кожни и венерически болести'),
-(5, 'Ендокринология и болести на обмяната'),
-(6, 'Вътрешни болести'),
-(7, 'Инфекциозни болести'),
-(8, 'Кардиология'),
-(9, 'Клинична лаборатория'),
-(10, 'Неврология'),
-(12, 'Медицинска онкология'),
-(17, 'Детски болести'),
-(22, 'Урология'),
-(24, 'Клинична хематология'),
-(25, 'Хирургия'),
-(41, 'Микробиология');
+(1, 'Алергология'),
+(2, 'Анестезиология'),
+(3, 'Детски болести'),
+(4, 'Радиология'),
+(5, 'Кардиология'),
+(6, 'Дерматология'),
+(7, 'Гастроентерология'),
+(8, 'Хематология'),
+(9, 'Имунология'),
+(10, 'Инфекциозни болести'),
+(11, 'Микробиология'),
+(12, 'Неврология'),
+(13, 'Клинична лаборатория'),
+(14, 'Ендокринология'),
+(15, 'Неврохирургия'),
+(16, 'Урология');
 
 -- --------------------------------------------------------
 
@@ -286,15 +265,30 @@ CREATE TABLE IF NOT EXISTS `webuser` (
 
 INSERT INTO `webuser` (`email`, `usertype`) VALUES
 ('admin@ehospital.bg', 'a'),
-('dobrin_ignatov@ehospital.bg', 'd'),
-('doctor@ehospital.bg', 'd'),
-('georgi.georgiev@gmail.com', 'p'),
-('ivan.ivanov@gmail.com', 'p'),
 ('patient@ehospital.bg', 'p'),
-('toni_hristova@ehospital.bg', 'd'),
+('doctor@ehospital.bg', 'd'),
 ('velislav_stoyanov@ehospital.bg', 'd'),
 ('veselin_mladenov@ehospital.bg', 'd'),
-('petar.petrov@ehospital.bg', 'd'),
-('mariya.stoyanov@ehospital.bg', 'd');
-
+('toni_hristova@ehospital.bg', 'd'),
+('dobrin_ignatov@ehospital.bg', 'd');
 COMMIT;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reviews`
+--
+
+-- DROP TABLE IF EXISTS `reviews`;
+-- CREATE TABLE IF NOT EXISTS `reviews` (
+--   `review_id` int(11) NOT NULL AUTO_INCREMENT,
+--   `patient_id` int(11) NOT NULL,
+--   `doctor_id` int(11) NOT NULL,
+--   `content` text NOT NULL,
+--   `rating` tinyint(1) NOT NULL,
+--   `submit_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+--   PRIMARY KEY(`review_id`),
+--   FOREIGN KEY(`patient_id`) REFERENCES `patient`(`patient_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+--   FOREIGN KEY(`doctor_id`) REFERENCES `doctor`(`doctor_id`) ON DELETE CASCADE ON UPDATE CASCADE
+-- ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+

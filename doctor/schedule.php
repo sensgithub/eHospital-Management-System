@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/button.css">
     <link rel="stylesheet" href="../css/portal.css">
     <link rel="stylesheet" href="../css/admin-mobile.css">
+    <link rel="stylesheet" href="../css/schedule.css">
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
         
     <title>eHospital | Doctor | Sessions </title>
@@ -36,6 +37,42 @@
     $userid= $userfetch["doctor_id"];
     $username=$userfetch["doctor_name"];
 
+
+    if (isset($_POST['submit2'])) {
+        $doctorID = $userid;
+        $title = $_POST['title'];
+        $schedule_date = $_POST['schedule_date'];
+        $schedule_time = $_POST['schedule_time'];
+        $nop = $_POST['nop'];
+        
+        $sql = "INSERT INTO schedule (doctor_id, title, schedule_date, schedule_time, nop) VALUES ('$doctorID', '$title', '$schedule_date', '$schedule_time', '$nop')";
+    
+        if ($database->query($sql)) {
+            echo '<script>
+                  var alertBox = document.createElement("div");
+                  alertBox.style.position = "fixed";
+                  alertBox.style.top = "17%";
+                  alertBox.style.left = "50%";
+                  alertBox.style.fontSize = "22px";
+                  alertBox.style.transform = "translate(-50%, -50%)";
+                  alertBox.style.padding = "20px";
+                  alertBox.style.background = "white";
+                  alertBox.style.color = "black";
+                  alertBox.style.border = "1px solid cyan";
+                  alertBox.style.borderRadius = "5px";
+                  alertBox.style.textAlign = "center";
+                  alertBox.style.fontFamily = "Arial, sans-serif";
+                  alertBox.innerHTML = "Успешно зададена сесия!";
+                  document.body.appendChild(alertBox);
+                  setTimeout(function() {
+                      document.body.removeChild(alertBox);
+                  }, 3000);
+                </script>';
+             header('Refresh: 3; URL=schedule.php');
+        } else {
+            echo "<div class='alert alert-danger'>Error: " . mysqli_error($database) . "</div>";
+        }
+    }
     
     ?>
     <div class="container">
@@ -77,6 +114,7 @@
     </div>
 </div>
         <div class="dash-body">
+            
             <table border="0" width="100%" style=" border-spacing: 0;margin:0;padding:0;margin-top:25px; ">
                 <tr >
                     <td width="13%" >
@@ -133,7 +171,28 @@
 
                     </tr>
                             </table>
-
+                                                                        <form method="POST" action="">
+                                                                        <div class="form-group">
+                                                                             <label for="title">Име на сесията:</label>
+                                                                             <input type="text" name="title" id="title">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                             <label for="schedule_time">Час:</label>
+                                                                             <input type="time" name="schedule_time" id="schedule_time">
+                                                                       </div>
+                                                                        <div class="form-group">
+                                                                            <label for="nop">Номер на пациенти:</label>
+                                                                            <input type="number" name="nop" id="nop" value="0" min="1" max="50">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="schedule_date">Дата:</label>
+                                                                            <input type="date" name="schedule_date" id="schedule_date">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <button type="submit" name="submit2" class="btn btn-primary">Задаване</button>
+                                                                            <button type="reset" class="btn btn-secondary">Изчистване</button>
+                                                                        </div>
+                                                                    </form>
                         </center>
                     </td>
                     
@@ -146,7 +205,7 @@
    
                         $sqlpt1="";
                         if(!empty($_POST["schedule_date"])){
-                            $sheduledate=$_POST["schedule_date"];
+                            $schedule_date=$_POST["schedule_date"];
                             $sqlmain.=" and schedule.schedule_date='$schedule_date' ";
                         }
                     }
@@ -221,6 +280,7 @@
             </table>
         </div>
     </div>
+    
     <?php
     
     if($_GET){
@@ -399,6 +459,7 @@
     }
 }
     ?>
+
     </div>
 </body>
 </html>

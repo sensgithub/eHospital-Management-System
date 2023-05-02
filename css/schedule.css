@@ -1,0 +1,38 @@
+.form-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  label {
+    margin-right: 20px;
+    width: 100px;
+    text-align: right;
+  }
+  
+  input[type="text"]{
+    width: 400px;
+    margin-right: 20px;
+  }
+
+  input[type="number"]{
+    width: 50px;
+    margin-right: 20px;
+  }
+  
+  button {
+    background-color: #57B0BE;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: 10px;
+    transition: background-color 0.2s ease-in-out;
+    margin-left: 60px;
+  }
+  
+  button:hover {
+    background-color: #368B99;
+  }
+  

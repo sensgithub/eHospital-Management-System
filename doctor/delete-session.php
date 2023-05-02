@@ -1,5 +1,5 @@
 <?php
-
+    
     session_start();
 
     if(isset($_SESSION["user"])){
@@ -14,7 +14,7 @@
     if($_GET){
         include("../connection.php");
         $id=$_GET["id"]; 
-        $sql= $database->query("delete from schedule where schedule_id='$id';");
+        $sql= $database->query("DELETE FROM schedule WHERE schedule_id='$id';");
         header("location: schedule.php");
     }
 ?>
