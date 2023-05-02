@@ -293,6 +293,8 @@ INSERT INTO `webuser` (`email`, `usertype`) VALUES
 ('patient@ehospital.bg', 'p'),
 ('toni_hristova@ehospital.bg', 'd'),
 ('velislav_stoyanov@ehospital.bg', 'd'),
-('veselin_mladenov@ehospital.bg', 'd');
+('veselin_mladenov@ehospital.bg', 'd'),
+('petar.petrov@ehospital.bg', 'd'),
+('mariya.stoyanov@ehospital.bg', 'd');
 
 COMMIT;
