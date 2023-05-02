@@ -48,7 +48,7 @@
                                 <img src="../img/user.png?v=2" alt="" width="100%" style="border-radius:50%">
                         </div>
                         <div style="padding:0px;margin:0px;">
-                            <p class="profile-title"> Aдминистратор </p>
+                            <p class="profile-title"> Администратор </p>
                         </div>
                         <div>
                             <a href="../logout.php"><input type="button" value="Излизане" class="logout-btn btn-primary-soft btn"></a>
@@ -295,11 +295,11 @@
                                                         .'</td >
                                                         <td style="font-weight:600;"> &nbsp;'.
                                                         
-                                                            substr($doctor_name,0,50)
+                                                            substr($doctor_name,0,100)
                                                             .'</td >
 
                                                         <td>
-                                                        '.substr($title,0,35).'
+                                                        '.substr($title,0,100).'
                                                         </td>
                                                     </tr>';                   
                                                 }
@@ -354,10 +354,10 @@
                                                     $nop=$row["nop"];
                                                     echo '<tr>
                                                         <td style="padding:20px;"> &nbsp;'.
-                                                        substr($title,0,30)
+                                                        substr($title,0,100)
                                                         .'</td>
                                                         <td>
-                                                        '.substr($doctor_name,0,50).'
+                                                        '.substr($doctor_name,0,100).'
                                                         </td>
                                                         <td style="text-align:center;">
                                                             '.substr($schedule_date,0,50).' '.substr($schedule_time,0,5).'

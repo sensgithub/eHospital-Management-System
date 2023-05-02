@@ -199,13 +199,13 @@
                                     $spcil_name=$spcil_array["specialty_name"];
                                     echo '<tr>
                                         <td> &nbsp;'.
-                                        substr($name,0,50)
+                                        substr($name,0,100)
                                         .'</td>
                                         <td>
-                                        '.substr($email,0,50).'
+                                        '.substr($email,0,100).'
                                         </td>
                                         <td>
-                                            '.substr($spcil_name,0,50).'
+                                            '.substr($spcil_name,0,100).'
                                         </td>
                                         <td>
                                         <div style="display:flex;justify-content: center;">

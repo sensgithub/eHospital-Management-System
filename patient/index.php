@@ -182,10 +182,10 @@
                                                         $appointment_num
                                                         .'</td>
                                                         <td style="padding:20px;"> &nbsp;'.
-                                                        substr($title,0,30)
+                                                        substr($title,0,100)
                                                         .'</td>
                                                         <td>
-                                                        '.substr($doctor_name,0,20).'
+                                                        '.substr($doctor_name,0,100).'
                                                         </td>
                                                         <td style="text-align:center;">
                                                             '.substr($schedule_date,0,10).' '.substr($schedule_time,0,5).'

@@ -255,10 +255,10 @@
                                     $nop=$row["nop"];
                                     echo '<tr>
                                         <td> &nbsp;'.
-                                        substr($title,0,30)
+                                        substr($title,0,100)
                                         .'</td>
                                         <td>
-                                        '.substr($doctor_name,0,50).'
+                                        '.substr($doctor_name,0,100).'
                                         </td>
                                         <td style="text-align:center;">
                                             '.substr($schedule_date,0,10).' '.substr($schedule_time,0,5).'
@@ -436,7 +436,7 @@
                         <h2>Сигурни ли сте?</h2>
                         <a class="close" href="schedule.php">&times;</a>
                         <div class="content">
-                            Искате да изтриете този запис<br>('.substr($nameget,0,40).').
+                            Искате да изтриете този запис<br>('.substr($nameget,0,100).').
                             
                         </div>
                         <div style="display: flex;justify-content: center;">

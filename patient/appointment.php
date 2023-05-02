@@ -233,13 +233,13 @@ include("../connection.php");
                                                                     Номер: OC-000-'.$appointment_id.'
                                                                 </div>
                                                                 <div class="h1-search">
-                                                                    '.substr($title,0,21).'<br>
+                                                                    '.substr($title,0,100).'<br>
                                                                 </div>
                                                                 <div class="h3-search">
                                                                     Номер на резервацията:<div class="h1-search">0'.$appointment_num.'</div>
                                                                 </div>
                                                                 <div class="h3-search">
-                                                                    '.substr($doctor_name,0,50).'
+                                                                    '.substr($doctor_name,0,100).'
                                                                 </div>                                                                                                        
                                                                 <div class="h4-search">
                                                                     Резервирана дата: '.$schedule_date.'<br>Започва в: <b>'.substr($schedule_time,0,5).'</b>

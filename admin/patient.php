@@ -191,16 +191,16 @@
                                     
                                     echo '<tr>
                                         <td> &nbsp;'.
-                                        substr($name,0,35)
+                                        substr($name,0,100)
                                         .'</td>
                                         <td>
-                                        '.substr($patient_egn,0,12).'
+                                        '.substr($patient_egn,0,10).'
                                         </td>
                                         <td>
                                             '.substr($tel,0,10).'
                                         </td>
                                         <td>
-                                        '.substr($email,0,20).'
+                                        '.substr($email,0,50).'
                                          </td>
                                         <td>
                                         '.substr($dob,0,10).'

@@ -98,14 +98,10 @@
                                            
                     </td>
                     <td width="15%">
-                        <p style="font-size: 14px;color: rgb(119, 119, 119);padding: 0;margin: 0;text-align: right; padding-right:80px">
-                            Днешна дата
-                        </p>
                         <p class="heading-sub12" style="padding: 0;margin: 0;padding-right:70px">
                         <?php 
                         date_default_timezone_set('Europe/Sofia');
                         $today = date('d.m.Y');
-                        echo $today;
                         $list110 = $database->query("SELECT * FROM appointment;");
                         ?>
                         </p>
@@ -247,17 +243,17 @@
                                     echo '<tr >
                                         <td style="font-weight:600;"> &nbsp;'.
                                         
-                                        substr($patient_name,0,25)
+                                        substr($patient_name,0,100)
                                         .'</td >
                                         <td style="text-align:center;font-size:23px;font-weight:500; color: var(--btnnicetext);">
                                         '.$appointment_num.'
                                         
                                         </td>
                                         <td>
-                                        '.substr($doctor_name,0,25).'
+                                        '.substr($doctor_name,0,100).'
                                         </td>
                                         <td>
-                                        '.substr($title,0,15).'
+                                        '.substr($title,0,100).'
                                         </td>
                                         <td style="text-align:center;font-size:12px;">
                                             '.substr($schedule_date,0,10).' <br>'.substr($schedule_time,0,5).'
