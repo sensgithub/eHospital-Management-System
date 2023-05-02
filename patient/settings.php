@@ -11,18 +11,6 @@
     <link rel="stylesheet" href="../css/portal.css">
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
     <title>eHospital | Настройки </title>
-    <style>
-        .dashbord-tables{
-            animation: transitionIn-Y-over 0.5s;
-        }
-        .filter-container{
-            animation: transitionIn-X  0.5s;
-        }
-        .sub-table{
-            animation: transitionIn-Y-bottom 0.5s;
-        }
-    </style>
-    
     
 </head>
 <body>
@@ -416,7 +404,7 @@
                                     </tr>
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <input type="text" name="name" class="input-text" placeholder="Name" value="'.$name.'" required><br>
+                                            <input type="text" name="name" class="input-text" placeholder="Въведете вашето име" value="'.$name.'" required><br>
                                         </td>
                                         
                                     </tr>
@@ -428,7 +416,7 @@
                                     </tr>
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <input type="text" name="egn" class="input-text" placeholder="EGN Number" value="'.$egn.'" required><br>
+                                            <input type="text" name="egn" class="input-text" placeholder="Въведете вашето ЕГН" value="'.$egn.'" required><br>
                                         </td>
                                     </tr>
                                     <tr>
@@ -438,7 +426,7 @@
                                     </tr>
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <input type="tel" name="tel" class="input-text" placeholder="Telephone Number" value="'.$tel.'" required><br>
+                                            <input type="tel" name="tel" class="input-text" placeholder="Телефонен номер" value="'.$tel.'" required><br>
                                         </td>
                                     </tr>
                                     <tr>
@@ -449,7 +437,7 @@
                                     </tr>
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                        <input type="text" name="city" class="input-text" placeholder="City" value="'.$city.'" required><br>
+                                        <input type="text" name="city" class="input-text" placeholder="Въведете вашето населено място" value="'.$city.'" required><br>
                                         </td>
                                     </tr>
                                     <tr>
