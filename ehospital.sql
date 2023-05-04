@@ -3,12 +3,8 @@ SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = '+02:00';
 
-<<<<<<< HEAD
 USE ehospital; 
 GRANT ALL PRIVILEGES ON ehospital.* TO 'db_user'@'mysql';
-=======
-USE ehospital;
->>>>>>> main
 
 --
 -- Database: `ehospital`
