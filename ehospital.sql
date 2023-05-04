@@ -162,7 +162,7 @@ INSERT INTO `diagnoses` (`diagnosis_id`, `diagnosis_name`) VALUES
 (7, 'I69.3 Sequelae of cerebrovascular disease'),
 (8, 'B34.9 Viral infection, unspecified'),
 (9, 'D50.8 Other iron deficiency anemias'),
-(10, 'M06.9 Rheumatoid arthritis, unspecified').
+(10, 'M06.9 Rheumatoid arthritis, unspecified');
 
 
 
