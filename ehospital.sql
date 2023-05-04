@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `patient` (
 
 INSERT INTO `patient` (`patient_id`, `patient_email`, `patient_name`, `patient_password`, `patient_city`, `patient_egn`, `patient_dob`, `patient_tel`) VALUES
 (1, 'ivan.ivanov@gmail.com', 'Ivan Ivanov', '1234', 'Varna', '0034318885', '2000-05-08', '0894563133'),
-(7, 'georgi.georgiev@gmail.com', 'Georgi Georgiev', '094151', 'Varna', '0033318885', '2000-07-31', '0884563133')
+(7, 'georgi.georgiev@gmail.com', 'Georgi Georgiev', '094151', 'Varna', '0033318885', '2000-07-31', '0884563133');
 
 --
 -- Table structure for table `schedule`
