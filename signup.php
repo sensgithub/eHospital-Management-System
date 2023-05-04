@@ -17,8 +17,8 @@
 <body style="margin: 30px 0 0">
 <?php
 
-session_start();
-
+@session_start();
+include("connection.php");
 $_SESSION["user"]="";
 $_SESSION["usertype"]="";
 
@@ -27,7 +27,6 @@ $date = date('d.M.Y');
 
 $_SESSION["date"]=$date;
 
-include("connection.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $egn = $_POST['egn'];

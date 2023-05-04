@@ -17,7 +17,7 @@
 <body>
 <?php
 
-session_start();
+@session_start();
 
 include("connection.php");
 require 'vendor/autoload.php';

@@ -13,14 +13,13 @@
 </head>
 <body>
     <?php
-    session_start();
+    @session_start();
+    include("connection.php");
+    date_default_timezone_set('Europe/Sofia');
     $_SESSION["user"] = "";
     $_SESSION["usertype"] = ""; 
-    date_default_timezone_set('Europe/Sofia');
     $date = date('d.m.Y');
     $_SESSION["date"] = $date;
-
-    include("connection.php");
 
     if ($_POST) {
         $email = $_POST['useremail'];
@@ -72,11 +71,11 @@
                 $_SESSION['usertype'] = 'd';
                 header('location: doctor/index.php');
             } else {
-                $error = '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Невалиден е-майл или парола.</label>';
+                $error = '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;"> Невалиден е-майл или парола. </label>';
             }
         }        
     } else {
-        $error = '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;"Системата не намери акаунта за дадения е-майл.</label>';
+        $error = '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;"> Системата не намери акаунта за дадения е-майл. </label>';
     }
     }else{
         $error='<label for="promter" class="form-label">&nbsp;</label>';
