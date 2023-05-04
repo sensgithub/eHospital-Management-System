@@ -138,30 +138,6 @@ INSERT INTO `schedule` (`schedule_id`, `doctor_id`, `title`, `schedule_date`, `s
 
 -- --------------------------------------------------------
 
-
---
--- Table structure for table `prescriptions`
---
-
-DROP TABLE IF EXISTS `prescriptions`;
-CREATE TABLE IF NOT EXISTS `prescriptions` (
-  `prescription_id` int(11) NOT NULL AUTO_INCREMENT,
-  `patient_id` int(11) NOT NULL,
-  `diagnosis_id` int(11) NOT NULL,
-  `medication_id` int(11) NOT NULL,
-  `prescription_date` DATE NOT NULL,
-  `doctor_id` int(11) NOT NULL,
-  PRIMARY KEY (`prescription_id`),
-  KEY `fk_prescriptions_patient_idx` (`patient_id`),
-  KEY `fk_prescriptions_diagnoses_idx` (`diagnosis_id`),
-  KEY `fk_prescriptions_medications_idx` (`medication_id`),
-  KEY `fk_prescriptions_doctor_idx` (`doctor_id`),
-  CONSTRAINT `fk_prescriptions_patient` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_prescriptions_diagnoses` FOREIGN KEY (`diagnosis_id`) REFERENCES `diagnoses` (`diagnosis_id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_prescriptions_medications` FOREIGN KEY (`medication_id`) REFERENCES `medications` (`medication_id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_prescriptions_doctor` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`doctor_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 --
 -- Table structure for table `medications`
 --
@@ -249,6 +225,29 @@ INSERT INTO `specialties` (`specialty_id`, `specialty_name`) VALUES
 (41, 'Microbiology');
 
 -- --------------------------------------------------------
+
+--
+-- Table structure for table `prescriptions`
+--
+
+DROP TABLE IF EXISTS `prescriptions`;
+CREATE TABLE IF NOT EXISTS `prescriptions` (
+  `prescription_id` int(11) NOT NULL AUTO_INCREMENT,
+  `patient_id` int(11) NOT NULL,
+  `diagnosis_id` int(11) NOT NULL,
+  `medication_id` int(11) NOT NULL,
+  `prescription_date` DATE NOT NULL,
+  `doctor_id` int(11) NOT NULL,
+  PRIMARY KEY (`prescription_id`),
+  KEY `fk_prescriptions_patient_idx` (`patient_id`),
+  KEY `fk_prescriptions_diagnoses_idx` (`diagnosis_id`),
+  KEY `fk_prescriptions_medications_idx` (`medication_id`),
+  KEY `fk_prescriptions_doctor_idx` (`doctor_id`),
+  CONSTRAINT `fk_prescriptions_patient` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_prescriptions_diagnoses` FOREIGN KEY (`diagnosis_id`) REFERENCES `diagnoses` (`diagnosis_id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_prescriptions_medications` FOREIGN KEY (`medication_id`) REFERENCES `medications` (`medication_id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_prescriptions_doctor` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`doctor_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Table structure for table `webuser`
