@@ -143,7 +143,7 @@
                 <td>
                     <br>
                     <label for="" class="sub-text" style="font-weight: 280;">Забравили сте си паролата&#63; </label>
-                    <a href="forgot_password.php" class="hover-link1 non-style-link">Кликнете тук</a>
+                    <a href="#" class="hover-link1 non-style-link">Кликнете тук</a>
                     <br><br><br>
                 </td>
             </tr>                
