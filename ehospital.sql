@@ -3,6 +3,8 @@ SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = '+02:00';
 
+USE ehospital;
+
 --
 -- Database: `ehospital`
 --
