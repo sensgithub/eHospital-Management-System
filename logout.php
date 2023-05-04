@@ -1,6 +1,6 @@
 <?php 
 
-	session_start();
+	@session_start();
 
 	$_SESSION = array();
 
@@ -9,8 +9,6 @@
 	}
 
 	session_destroy();
-
-	// препращане на потребителя към заглавната страница
-	header('Location: login.php?action=logout');
+	echo '<script>window.location.href = "login.php?action=logout";</script>';
 
  ?>

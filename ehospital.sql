@@ -78,12 +78,12 @@ CREATE TABLE IF NOT EXISTS `doctor` (
 --
 
 INSERT INTO `doctor` (`doctor_id`, `doctor_email`, `doctor_name`, `doctor_password`, `doctor_tel`, `specialties`) VALUES
-(1, 'velislav_stoyanov@ehospital.bg', 'Велислав Стоянов Кард.', '111654161', '0898314551', 8),
-(2, 'veselin_mladenov@ehospital.bg', 'Веселин Младенов ДБ', '651145611', '0874117654', 17),
-(3, 'toni_hristova@ehospital.bg', 'Антоанета Христова АГ', '145641634', '0981116721', 1),
-(4, 'dobrin_ignatov@ehospital.bg', 'Добрин Игнатов ВБ', '456213453', '0876789090', 6),
-(5, 'petar.petrov@ehospital.bg', 'Петър Петров ХБ', '9878554', '0873413131', 25),
-(6, 'mariya.stoyanova@ehospital.bg', 'Марияна Стоянова Инф.Б', '12589175', '0893413155', 7);
+(1, 'velislav_stoyanov@ehospital.bg', 'Velislav Stoyanov Card.', '111654161', '0898314551', 8),
+(2, 'veselin_mladenov@ehospital.bg', 'Veselin Mladenov DB', '651145611', '0874117654', 17),
+(3, 'toni_hristova@ehospital.bg', 'Antoaneta Hristova AG', '145641634', '0981116721', 1),
+(4, 'dobrin_ignatov@ehospital.bg', 'Dobrin Ignatov VB', '456213453', '0876789090', 6),
+(5, 'petar.petrov@ehospital.bg', 'Petar Petrov HB', '9878554', '0873413131', 25),
+(6, 'mariya.stoyanova@ehospital.bg', 'Mariana Stoyanova Inf.B', '12589175', '0893413155', 7);
 
 -- --------------------------------------------------------
 
@@ -106,8 +106,8 @@ CREATE TABLE IF NOT EXISTS `patient` (
 
 
 INSERT INTO `patient` (`patient_id`, `patient_email`, `patient_name`, `patient_password`, `patient_city`, `patient_egn`, `patient_dob`, `patient_tel`) VALUES
-(1, 'ivan.ivanov@gmail.com', 'Иван Иванов', '1234', 'Варна', '0034318885', '2000-05-08', '0894563133'),
-(7, 'georgi.georgiev@gmail.com', 'Георги Георгиев', '094151', 'Варна', '0033318885', '2000-07-31', '0884563133');
+(1, 'ivan.ivanov@gmail.com', 'Ivan Ivanov', '1234', 'Varna', '0034318885', '2000-05-08', '0894563133'),
+(7, 'georgi.georgiev@gmail.com', 'Georgi Georgiev', '094151', 'Varna', '0033318885', '2000-07-31', '0884563133');
 
 
 --
@@ -131,11 +131,10 @@ CREATE TABLE IF NOT EXISTS `schedule` (
 --
 
 INSERT INTO `schedule` (`schedule_id`, `doctor_id`, `title`, `schedule_date`, `schedule_time`, `nop`) VALUES
-(1, '1', 'Промоция и профилактика на здравето', '0000-00-00', '14:25:00', 50),
-(2, '2', 'Амбулаторен преглед', '2023-05-22', '16:45:00', 1),
-(3, '3', 'Диспансеризация на пациенти с хронични заболявания', '2023-05-28', '13:30:00', 1),
-(4, '4', 'Здравословен начин на живот и хранене', '2023-06-15', '12:00:00', 1);
-
+(1, '1', 'Health promotion and prevention', '0000-00-00', '14:25:00', 50),
+(2, '2', 'Outpatient Examination', '2023-05-22', '16:45:00', 1),
+(3, '3', 'Dispensary for patients with chronic diseases', '2023-05-28', '13:30:00', 1),
+(4, '4', 'Healthy Lifestyle and Nutrition', '2023-06-15', '12:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -154,16 +153,17 @@ CREATE TABLE IF NOT EXISTS `diagnoses` (
 --
 
 INSERT INTO `diagnoses` (`diagnosis_id`, `diagnosis_name`) VALUES
-(1, 'I11.9 Артериална хипертония без СН'),
-(2, 'E11.9 Неинсулинозависим захарен диабет БДУ'),
-(3, 'J45.0 Бронхиална астма'),
-(4, 'I20.8 Друга исхемична болест на сърцето'),
-(5, 'D69.3 Идиопатична тромбоцитопенична пурпура'),
-(6, 'T78.4 Алергия, неуточнена'),
-(7, 'I69.3 Последици от мозъчно съдова болест'),
-(8, 'B34.9 Остра вирусна инфекция, неуточнена'),
-(9, 'D50.8 Друга желязодефицитна анемия '),
-(10, 'M06.9 Ревматоиден артрит, неуточнен');
+(1, 'I11.9 Hypertensive disease, unspecified'),
+(2, 'E11.9 Type 2 diabetes mellitus without complications'),
+(3, 'J45.0 Asthma, uncomplicated'),
+(4, 'I20.8 Other forms of angina pectoris'),
+(5, 'D69.3 Idiopathic thrombocytopenic purpura'),
+(6, 'T78.4 Unspecified allergy'),
+(7, 'I69.3 Sequelae of cerebrovascular disease'),
+(8, 'B34.9 Viral infection, unspecified'),
+(9, 'D50.8 Other iron deficiency anemias'),
+(10, 'M06.9 Rheumatoid arthritis, unspecified').
+
 
 
 DROP TABLE IF EXISTS `medications`;
@@ -179,21 +179,21 @@ CREATE TABLE IF NOT EXISTS `medications` (
 --
 
 INSERT INTO `medications` (`medication_id`, `medication_name`) VALUES
-(1, 'Аспирин 500mg 3x1'),
-(2, 'Аспирин протект 100mg x1'),
-(3, 'Парацетамол 3x500mg'),
-(4, 'Нурофен 2x200mg'),
-(5, 'Диклак 150 x1 след храна'),
-(6, 'Сефпотек 2x200mg/7дни'),
-(7, 'Тритейс 10mg x1'),
-(8, 'Сиофор 500mg 2x1'),
-(9, 'Зиртек 10mg x1'),
-(10, 'Метилпреднизолон 4mg по схема'),
-(11, 'Сорбифер Дурулес 320mg 2x1'),
-(12, 'Паратрамол 37,5mg/325mg 3x1 при нужда'),
-(13, 'Аркоксия 90mg x1'),
-(14, 'Салбутамол 2mg 3x1'),
-(15, 'Мукосолван 30mg 3x1');
+(1, 'Aspirin 500mg 3x1'),
+(2, 'Aspirin protect 100mg x1'),
+(3, 'Paracetamol 3x500mg'),
+(4, 'Nurofen 2x200mg'),
+(5, 'Diklak 150 x1 after food'),
+(6, 'Sefpotek 2x200mg/7days'),
+(7, 'Tritace 10mg x1'),
+(8, 'Siofor 500mg 2x1'),
+(9, 'Zyrtec 10mg x1'),
+(10, 'Methylprednisolone 4mg by schedule'),
+(11, 'Sorbifer Durules 320mg 2x1'),
+(12, 'Paratramol 37.5mg/325mg 3x1 as needed'),
+(13, 'Arcoxia 90mg x1'),
+(14, 'Salbutamol 2mg 3x1'),
+(15, 'Mucosolvan 30mg 3x1');
 
 
 --
@@ -212,22 +212,23 @@ CREATE TABLE IF NOT EXISTS `specialties` (
 --
 
 INSERT INTO `specialties` (`specialty_id`, `specialty_name`) VALUES
-(1, 'Акушерство и гинекология'),
-(2, 'Алергология'),
-(3, 'Гастроентерология'),
-(4, 'Кожни и венерически болести'),
-(5, 'Ендокринология и болести на обмяната'),
-(6, 'Вътрешни болести'),
-(7, 'Инфекциозни болести'),
-(8, 'Кардиология'),
-(9, 'Клинична лаборатория'),
-(10, 'Неврология'),
-(12, 'Медицинска онкология'),
-(17, 'Детски болести'),
-(22, 'Урология'),
-(24, 'Клинична хематология'),
-(25, 'Хирургия'),
-(41, 'Микробиология');
+(1, 'Obstetrics and gynaecology'),
+(2, 'Allergology'),
+(3, 'Gastroenterology'),
+(4, 'Skin and Venereal Diseases'),
+(5, 'Endocrinology and metabolic diseases'),
+(6, 'Internal diseases'),
+(7, 'Infectious Diseases'),
+(8, 'Cardiology'),
+(9, 'Clinical Laboratory'),
+(10, 'Neurology'),
+(12, 'Medical Oncology'),
+(17, 'Child Diseases'),
+(22, 'Urology'),
+(24, 'Clinical Hematology'),
+(25, 'Surgery'),
+(41, 'Microbiology');
+
 
 --
 -- Table structure for table `prescriptions`

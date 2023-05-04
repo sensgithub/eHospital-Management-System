@@ -25,18 +25,17 @@
     <?php
 
     ob_start();
-    session_start();
+    @session_start();
 
-    if(isset($_SESSION["user"])){
-        if(($_SESSION["user"])=="" or $_SESSION['usertype']!='d'){
-            header("location: ../login.php");
-        }else{
-            $useremail=$_SESSION["user"];
-        }
-
-    }else{
-        header("location: ../login.php");
-    }
+    if (isset($_SESSION["user"])) {
+      if (($_SESSION["user"]) == "" || $_SESSION['usertype'] != 'd') {
+          echo '<script>window.location.href = "../login.php";</script>';
+          exit();
+      }
+  } else {
+      echo '<script>window.location.href = "../login.php";</script>';
+      exit();
+  }
     
     include("../connection.php");
     $userrow = $database->query("SELECT * FROM doctor WHERE doctor_email='$useremail'");
@@ -99,7 +98,7 @@
                 document.body.removeChild(alertBox);
             }, 3000);
           </script>';
-           header('Refresh: 3; URL=prescription.php');
+           echo '<script>location.replace("prescription.php");</script>';
           } else {
             echo "<div class='alert alert-danger'>Error: " . $sql->error . "</div>";
         }

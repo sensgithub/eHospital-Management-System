@@ -17,22 +17,20 @@
 <body>
 <?php
 
-session_start();
+    @session_start();
 
-if (isset($_SESSION["user"])) {
-  if (($_SESSION["user"]) == "" || $_SESSION['usertype'] != 'p') {
-    header("location: ../login.php");
-    exit();
-  } else {
-    $useremail = $_SESSION["user"];
-  }
-} else {
-  header("location: ../login.php");
-  exit();
-}
+    include("../connection.php");
 
-include("../connection.php");
-
+    if (isset($_SESSION["user"])) {
+        if (($_SESSION["user"]) == "" || $_SESSION['usertype'] != 'p') {
+            echo '<script>window.location.href = "../login.php";</script>';
+            exit();
+        }
+    } else {
+        echo '<script>window.location.href = "../login.php";</script>';
+        exit();
+    }
+    
     $sqlmain = "SELECT * FROM patient WHERE patient_email=?";
     $stmt = $database->prepare($sqlmain);
     $stmt->bind_param("s", $useremail);

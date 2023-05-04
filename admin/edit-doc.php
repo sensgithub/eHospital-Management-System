@@ -41,7 +41,7 @@
     }else{
         $error='3';
     }
-    header("location: doctors.php?action=edit&error=".$error."&id=".$id);
+    echo 'window.location.href = "doctors.php?action=edit&error=" + encodeURIComponent("' . $error . '") + "&id=" + encodeURIComponent("' . $id . '");';
     ?>
 </body>
 </html>

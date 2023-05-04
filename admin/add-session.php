@@ -1,15 +1,17 @@
 <?php
 
-    session_start();
+    @session_start();
 
-    if(isset($_SESSION["user"])){
-        if(($_SESSION["user"])=="" or $_SESSION['usertype']!='a'){
-            header("location: ../login.php");
+    if (isset($_SESSION["user"])) {
+        if (($_SESSION["user"]) == "" || $_SESSION['usertype'] != 'a') {
+            echo '<script>window.location.href = "../login.php";</script>';
+            exit();
         }
-
-    }else{
-        header("location: ../login.php");
+    } else {
+        echo '<script>window.location.href = "../login.php";</script>';
+        exit();
     }
+
     
     if($_POST){
         
@@ -23,7 +25,7 @@
         $stmt = $database->prepare($sql);
         $stmt->bind_param("isssi",$doctor_id,$title,$date,$time,$nop);
         $stmt->execute();
-        header("location: schedule.php?action=session-added&title=$title");
+        echo "<script>window.location.href = 'schedule.php?action=session-added&title=$title';</script>";
     }
 
 ?>

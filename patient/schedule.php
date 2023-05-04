@@ -19,18 +19,18 @@
 
     @session_start();
 
-    if(isset($_SESSION["user"])){
-        if(($_SESSION["user"])=="" or $_SESSION['usertype']!='p'){
-            header("location: ../login.php");
-        }else{
-            $useremail=$_SESSION["user"];
-        }
+    include("../connection.php");
 
-    }else{
-        header("location: ../login.php");
+    if (isset($_SESSION["user"])) {
+        if (($_SESSION["user"]) == "" || $_SESSION['usertype'] != 'p') {
+            echo '<script>window.location.href = "../login.php";</script>';
+            exit();
+        }
+    } else {
+        echo '<script>window.location.href = "../login.php";</script>';
+        exit();
     }
 
-    include("../connection.php");
 
     $sqlmain= "SELECT* FROM patient WHERE patient_email=?";
     $stmt = $database->prepare($sqlmain);

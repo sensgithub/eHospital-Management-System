@@ -1,13 +1,14 @@
 <?php
-    session_start();
+    @session_start();
 
-    if(isset($_SESSION["user"])){
-        if(($_SESSION["user"]) == "" or $_SESSION['usertype'] != 'a'){
-            header("location: ../patient/index.php");
+    if (isset($_SESSION["user"])) {
+        if (($_SESSION["user"]) == "" || $_SESSION['usertype'] != 'p') {
+            echo '<script>window.location.href = "../login.php";</script>';
+            exit();
         }
-
-    }else{
-        header("location: ../patient/index.php");
+    } else {
+        echo '<script>window.location.href = "../login.php";</script>';
+        exit();
     }
 
     if($_GET){
@@ -17,6 +18,6 @@
         $stmt = $database->prepare($sqlmain);
         $stmt->bind_param("i", $id);
         $stmt->execute();
-        header("location: ../patient/index.php"); 
+        echo "<script>window.location.href='../patient/index.php';</script>";
     }
 ?>

@@ -43,7 +43,7 @@
             if ($checker->num_rows == 1) {
                 $_SESSION['user'] = $email;
                 $_SESSION['usertype'] = 'p';                 
-                header('location: patient/index.php');
+                echo '<script>window.location.href = "patient/index.php";</script>';
             } else {
                 $error = '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Невалиден е-майл или парола.</label>';
             }
@@ -56,7 +56,7 @@
             if ($checker->num_rows == 1) {
                 $_SESSION['user'] = $email;
                 $_SESSION['usertype'] = 'a';   
-                header('location: admin/index.php');
+                echo '<script>window.location.href = "admin/index.php";</script>';
             } else {
                 $error = '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Невалиден е-майл или парола.</label>';
             }
@@ -69,7 +69,7 @@
             if ($checker->num_rows == 1) {
                 $_SESSION['user'] = $email;
                 $_SESSION['usertype'] = 'd';
-                header('location: doctor/index.php');
+                echo '<script>window.location.href = "doctor/index.php";</script>';
             } else {
                 $error = '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;"> Невалиден е-майл или парола. </label>';
             }

@@ -1,20 +1,21 @@
 <?php
 
     @session_start();
-
-    if(isset($_SESSION["user"])){
-        if(($_SESSION["user"])=="" or $_SESSION['usertype']!='a'){
-            header("location: ../login.php");
-        }
-
-    }else{
-        header("location: ../login.php");
-    }
        
+    if (isset($_SESSION["user"])) {
+        if (($_SESSION["user"]) == "" || $_SESSION['usertype'] != 'd') {
+            echo '<script>window.location.href = "../login.php";</script>';
+            exit();
+        }
+    } else {
+        echo '<script>window.location.href = "../login.php";</script>';
+        exit();
+    }
+
     if($_GET){
         include("../connection.php");
         $id=$_GET["id"];
         $sql= $database->query("DELETE FROM appointment WHERE appointment_id='$id';");
-        header("location: appointment.php");
+        echo '<script>window.location.href = "appointment.php";</script>';        
     }
 ?>

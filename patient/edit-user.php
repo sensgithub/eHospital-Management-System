@@ -3,8 +3,6 @@
     
     include("../connection.php");
 
-
-
     if($_POST){
 
         $result= $database->query("SELECT * FROM webuser");
@@ -52,7 +50,8 @@
         } 
     }
     
-    header("locatiON: settings.php?action=edit&error=".$error."&id=".$id);
+    echo 'window.location.href = "settings.php?action=edit&error=" + encodeURIComponent(error) + "&id=" + encodeURIComponent(id);';
+
     ?> 
 
 </body>

@@ -12,24 +12,22 @@
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
     <title> eHospital| Patient| Dashboard </title>
 </head>
-
 <body>
     <?php
 
     @session_start();
-
-    if(isset($_SESSION["user"])){
-        if(($_SESSION["user"])=="" or $_SESSION['usertype']!='p'){
-            header("location: ../login.php");
-        }else{
-            $useremail=$_SESSION["user"];
-        }
-
-    }else{
-        header("location: ../login.php");
-    }
-    
     include("../connection.php");
+
+    if (isset($_SESSION["user"])) {
+        if (($_SESSION["user"]) == "" || $_SESSION['usertype'] != 'p') {
+            echo '<script>window.location.href = "../login.php";</script>';
+            exit();
+        }
+    } else {
+        echo '<script>window.location.href = "../login.php";</script>';
+        exit();
+    }
+
 
     $sqlmain= "SELECT* FROM patient WHERE patient_email=?";
     $stmt = $database->prepare($sqlmain);
@@ -55,7 +53,7 @@
     <nav>
                 <ul>
                          <li>    
-                             <div style="padding:10px">
+                                <div style="padding:10px">
                                 <div class="profile-container">
                                 <div style="width:30%; padding-left:20px;"> 
                                 <img src="../img/user.png?v=2" alt="" width="100%" style="border-radius:50%">

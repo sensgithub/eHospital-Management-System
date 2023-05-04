@@ -78,7 +78,7 @@ if($_POST)
         'dob'=>$_POST['dob']
     );
     print_r($_SESSION["personal"]);
-    header("location: create-account.php");
+    echo '<script>window.location.href = "create-account.php";</script>';
 }
 
 ?>
@@ -105,6 +105,7 @@ if($_POST)
                 $age = $today->diff($dob)->y;
                 if ($age < 18) {
                 echo '<script>alert("Трябва да сте на 18, за да се регистрирате в системата.");</script>';
+                echo '<script>window.location.href = "signup.php";</script>';
                 }
                 }  
                 ?>

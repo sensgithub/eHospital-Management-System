@@ -1,19 +1,18 @@
 <?php
 
-    session_start();
-
-    if(isset($_SESSION["user"])){
-        if(($_SESSION["user"])=="" or $_SESSION['usertype']!='p'){
-            header("location: ../login.php");
-        }else{
-            $useremail=$_SESSION["user"];
-        }
-
-    }else{
-        header("location: ../login.php");
-    }
-    
+    @session_start();
     include("../connection.php");
+
+    if (isset($_SESSION["user"])) {
+        if (($_SESSION["user"]) == "" || $_SESSION['usertype'] != 'p') {
+            echo '<script>window.location.href = "../login.php";</script>';
+            exit();
+        }
+    } else {
+        echo '<script>window.location.href = "../login.php";</script>';
+        exit();
+    }s
+
     $sqlmain= "SELECT * FROM patient WHERE patient_email=?";
     $stmt = $database->prepare($sqlmain);
     $stmt->bind_param("s",$useremail);
@@ -32,7 +31,9 @@
             $schedule_id=$_POST["schedule_id"];
             $sql2="INSERT INTO appointment(patient_id,appointment_num,schedule_id,appointment_date) values ($userid,$appointment_num,$schedule_id,'$date')";
             $result= $database->query($sql2);
-            header("location: appointment.php?action=booking-added&id=".$appointment_num."&titleget=none");
+            echo '<script>
+                  window.location.href = "appointment.php?action=booking-added&id='.$appointment_num.'&titleget=none";
+                  </script>';
         }
     }
  ?>

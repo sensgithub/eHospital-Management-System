@@ -1,17 +1,17 @@
 <?php
     @session_start();
 
-    include '../connection.php';
-    include 'functions.php';
-
-    // echo "Doctor ID: " . $_SESSION['doctor_id']; // Debug statement
-
-    // Check if the user is logged in as a doctor
-    if (!isset($_SESSION['doctor_id'])) {
-        // Redirect to the login page if not logged in
-        header('Location: index.php');
+    if (isset($_SESSION["user"])) {
+        if (($_SESSION["user"]) == "" || $_SESSION['usertype'] != 'd') {
+            echo '<script>window.location.href = "../login.php";</script>';
+            exit();
+        }
+    } else {
+        echo '<script>window.location.href = "../login.php";</script>';
         exit();
     }
+
+    include '../connection.php';
 
     // Retrieve the doctor ID from the session
     $doctorId = $_SESSION['doctor_id'];

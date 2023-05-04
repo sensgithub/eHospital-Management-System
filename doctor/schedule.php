@@ -15,22 +15,22 @@
     <title>eHospital | Doctor | Sessions </title>
     
 </head>
+
 <body>
     <?php
 
     @session_start();
-
-    if(isset($_SESSION["user"])){
-        if(($_SESSION["user"])=="" or $_SESSION['usertype']!='d'){
-            header("location: ../login.php");
-        }else{
-            $useremail=$_SESSION["user"];
-        }
-
-    }else{
-        header("location: ../login.php");
-    }
     
+    if (isset($_SESSION["user"])) {
+        if (($_SESSION["user"]) == "" || $_SESSION['usertype'] != 'd') {
+            echo '<script>window.location.href = "../login.php";</script>';
+            exit();
+        }
+    } else {
+        echo '<script>window.location.href = "../login.php";</script>';
+        exit();
+    }
+
     include("../connection.php");
     $userrow = $database->query("SELECT * FROM doctor WHERE doctor_email='$useremail'");
     $userfetch=$userrow->fetch_assoc();
@@ -69,11 +69,11 @@
                       document.body.removeChild(alertBox);
                   }, 3000);
                 </script>';
-             header('Refresh: 3; URL=schedule.php');
+            echo '<script>location.replace("schedule.php");</script>';
         } else {
             echo "<div class='alert alert-danger'>Error: " . mysqli_error($database) . "</div>";
         }
-    }
+    }        
     
     ?>
     <div class="container">
