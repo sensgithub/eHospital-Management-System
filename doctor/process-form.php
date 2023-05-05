@@ -10,7 +10,8 @@
         echo '<script>window.location.href = "../login.php";</script>';
         exit();
     }
-
+?>
+<?php
     include '../connection.php';
 
     // Retrieve the doctor ID from the session

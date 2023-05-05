@@ -3,8 +3,6 @@
 
     include("../connection.php");
 
-    var_dump($_SESSION["user"], $_SESSION["usertype"]);
-
     if(isset($_SESSION["user"])){
     if(($_SESSION["user"])=="" or $_SESSION['usertype']!='p'){
         echo '<script>window.location.href = "../login.php";</script>';
@@ -128,7 +126,12 @@
                         if($_POST){                     
                         if(!empty($_POST["search"])){
                             $keyword=$_POST["search"];
-                            $sqlmain= "SELECT * FROM schedule INNER JOIN doctor on schedule.doctor_id=doctor.doctor_id WHERE schedule.schedule_date>='$today' and (doctor.doctor_name='$keyword' or doctor.doctor_name like '$keyword%' or doctor.doctor_name like '%$keyword' or doctor.doctor_name like '%$keyword%' or schedule.title='$keyword' or schedule.title like '$keyword%' or schedule.title like '%$keyword' or schedule.title like '%$keyword%' or schedule.schedule_date like '$keyword%' or schedule.schedule_date like '%$keyword' or schedule.schedule_date like '%$keyword%' or schedule.schedule_date='$keyword' )  order by schedule.schedule_date asc";
+                            $sqlmain= "SELECT * FROM schedule 
+                            INNER JOIN doctor on schedule.doctor_id=doctor.doctor_id 
+                            WHERE schedule.schedule_date>='$today' 
+                            and (doctor.doctor_name='$keyword' or doctor.doctor_name 
+                            like '$keyword%' or doctor.doctor_name like '%$keyword' 
+                            or doctor.doctor_name like '%$keyword%' or schedule.title='$keyword' or schedule.title like '$keyword%' or schedule.title like '%$keyword' or schedule.title like '%$keyword%' or schedule.schedule_date like '$keyword%' or schedule.schedule_date like '%$keyword' or schedule.schedule_date like '%$keyword%' or schedule.schedule_date='$keyword' )  order by schedule.schedule_date asc";
                             $insertkey=$keyword;
                             $searchtype="Търсен резултат: ";
                             $q='"';
@@ -151,7 +154,7 @@
                                         <?php
                                             echo '<datalist id="doctors">';
                                             $list11 = $database->query("SELECT DISTINCT * FROM  doctor;");
-                                            $list12 = $database->query("SELECT DISTINCT * FROM  schedule GROUP BY title;");
+                                            $list12 = $database->query("SELECT DISTINCT schedule_id, title FROM schedule GROUP BY schedule_id, title;");
                                             for ($y=0;$y<$list11->num_rows;$y++)
                                             {
                                                 $row00=$list11->fetch_assoc();

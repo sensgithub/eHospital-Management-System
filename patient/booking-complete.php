@@ -4,8 +4,6 @@
 
     include("../connection.php");
 
-    var_dump($_SESSION["user"], $_SESSION["usertype"]);
-
     if(isset($_SESSION["user"])){
     if(($_SESSION["user"])=="" or $_SESSION['usertype']!='p'){
         echo '<script>window.location.href = "../login.php";</script>';

@@ -1,23 +1,23 @@
-
 <?php
     session_start();
 
     if (isset($_SESSION["user"])) {
-      if (($_SESSION["user"]) == "" || $_SESSION['usertype'] != 'd') {
-          echo '<script>window.location.href = "../login.php";</script>';
-          exit();
-      }
-  } else {
-      echo '<script>window.location.href = "../login.php";</script>';
-      exit();
-  }
-    
+        if (($_SESSION["user"]) == "" || $_SESSION['usertype'] != 'd') {
+            echo '<script>window.location.href = "../login.php";</script>';
+            exit();
+        }
+    } else {
+        echo '<script>window.location.href = "../login.php";</script>';
+        exit();
+    }
+?>
+<?php
     include("../connection.php");
     $userrow = $database->query("SELECT * FROM doctor WHERE doctor_email='$useremail'");
     $userfetch=$userrow->fetch_assoc();
     $userid= $userfetch["doctor_id"];
     $username=$userfetch["doctor_name"];
-
+    
     if (isset($_POST['submit'])) {
       $patientName = $_POST['patient_id'];
       $diagnosisName = $_POST['diagnosis_id'];
