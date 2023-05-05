@@ -1,24 +1,19 @@
 <?php
     session_start();
-
-    if (isset($_SESSION["user"])) {
-        if (($_SESSION["user"]) == "" || $_SESSION['usertype'] != 'd') {
-            echo '<script>window.location.href = "../login.php";</script>';
-            exit();
-        }
+    if (isset($_SESSION["user"]) && !empty($_SESSION["user"]) && $_SESSION['usertype'] == 'd') {
+        include("../connection.php");
+        $useremail = $_SESSION["user"];
+        $userrow = $database->query("SELECT * FROM doctor WHERE doctor_email='$useremail'");
+        $userfetch = $userrow->fetch_assoc();
+        $userid = $userfetch["doctor_id"];
+        $username = $userfetch["doctor_name"];
     } else {
         echo '<script>window.location.href = "../login.php";</script>';
         exit();
     }
 ?>
 <?php
-    include("../connection.php");
-    $userrow = $database->query("SELECT * FROM doctor WHERE doctor_email='$useremail'");
-    $userfetch=$userrow->fetch_assoc();
-    $userid= $userfetch["doctor_id"];
-    $username=$userfetch["doctor_name"];
-    
-    if (isset($_POST['submit'])) {
+if (isset($_POST['submit'])) {
       $patientName = $_POST['patient_id'];
       $diagnosisName = $_POST['diagnosis_id'];
       $medicationName = $_POST['medication_id'];
@@ -92,9 +87,7 @@
     <link rel="stylesheet" href="../css/portal.css">
     <link rel="stylesheet" href="../css/admin-mobile.css">
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
-        
     <title>eHospital | Prescriptions </title>
-
 </head>
 <body>
   <style>
@@ -147,9 +140,9 @@
                     <td width="13%" >
                     <a href="javascript:history.go(-1)"><button class="login-btn btn-primary-soft btn" style="padding-top:11px;padding-bottom:11px;margin-left:20px;width:125px">Назад</button></a>
                     </td>
-                    <td>                     
+                    <td>
                         <form action="" method="post" class="header-search">
-                        <?php       
+                    <?php
                     if($_POST){
 
                         if(isset($_POST["search"])){
