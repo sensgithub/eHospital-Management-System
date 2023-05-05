@@ -33,7 +33,7 @@
             $schedule_id=$_POST["schedule_id"];
             $date=$_POST["date"];
             $schedule_id=$_POST["schedule_id"];
-            $sql2="INSERT INTO appointment(patient_id,appointment_num,schedule_id,appointment_date) values ($userid,$appointment_num,$schedule_id,'$date')";
+            $sql2="INSERT INTO appointment(patient_id,appointment_num,schedule_id,appointment_date) values ('$userid','$appointment_num','$schedule_id','$date')";
             $result= $database->query($sql2);
             echo '<script>
                   window.location.href = "appointment.php?action=booking-added&id='.$appointment_num.'&titleget=none";

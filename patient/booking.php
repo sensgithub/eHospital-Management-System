@@ -1,36 +1,39 @@
 <?php
-
     session_start();
-    
+
     include("../connection.php");
 
-    if (isset($_SESSION["user"])) {
-        if (($_SESSION["user"]) == "" || $_SESSION['usertype'] != 'p') {
-            echo '<script>window.location.href = "../login.php";</script>';
-            exit();
-        }
-    } else {
+    if(isset($_SESSION["user"])){
+    if(($_SESSION["user"])=="" or $_SESSION['usertype']!='p'){
         echo '<script>window.location.href = "../login.php";</script>';
         exit();
+    }else{
+        $useremail=$_SESSION["user"];
+    }
+    }else{
+       echo '<script>window.location.href = "../login.php";</script>';
+       exit();
     }
 ?>
 <?php
-    $sqlmain= "SELECT* FROM patient WHERE patient_email=?";
+
+    $sqlmain = 'SELECT * FROM patient WHERE patient_email=?';
     $stmt = $database->prepare($sqlmain);
     $stmt->bind_param("s",$useremail);
     $stmt->execute();
+
     $userrow = $stmt->get_result();
     $userfetch=$userrow->fetch_assoc();
 
     $userid= $userfetch["patient_id"];
     $username=$userfetch["patient_name"];
 
+date_default_timezone_set('Europe/Sofia');
 
-    date_default_timezone_set('Europe/Sofia');
+$today = date('Y.m.d');
 
-    $today = date('d.m.Y');
 
- ?>
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -127,8 +130,9 @@
                                         
                                         <?php
                                             echo '<datalist id="doctors">';
-                                            $list11 = $database->query("SELECT DISTINCT * FROM  doctor;");
-                                            $list12 = $database->query("SELECT DISTINCT * FROM  schedule GROUP BY title;");
+$list11 = $database->query("SELECT DISTINCT doctor_id, doctor_name FROM  doctor;");
+$list12 = $database->query("SELECT DISTINCT title FROM  schedule GROUP BY title;");
+
                                             for ($y=0;$y<$list11->num_rows;$y++)
                                             {
                                                 $row00=$list11->fetch_assoc();

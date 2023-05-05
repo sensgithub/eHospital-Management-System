@@ -1,5 +1,4 @@
 <?php
-
     session_start();
 
     include("../connection.php");
@@ -17,13 +16,13 @@
     }
 ?>
 <?php
-    if($_GET){
-        include("../connection.php");
-        $id = $_GET["id"];
-        $sql = $database->query("DELETE FROM appointment WHERE appointment_id = '$id';");
-        $stmt = $database->prepare($sqlmain);
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        echo "<script>window.location.href='../patient/index.php';</script>";
-    }
+if($_GET){
+    include("../connection.php");
+    $id = $_GET["id"];
+    $sql = "DELETE FROM appointment WHERE appointment_id = ?";
+    $stmt = $database->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    echo "<script>window.location.href='../patient/index.php';</script>";
+}
 ?>

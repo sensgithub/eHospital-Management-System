@@ -133,7 +133,7 @@
                         $stmt = $database->prepare("SELECT * FROM schedule WHERE doctor_id = ?");
                         $stmt->bind_param("i", $userid);
                         $stmt->execute();
-                        $result = $stmt->get_result();                        
+                        $list110 = $stmt->get_result();                        
                         ?>
                         </p>
                     </td>
