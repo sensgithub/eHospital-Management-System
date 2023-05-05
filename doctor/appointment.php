@@ -1,22 +1,16 @@
 <?php
     session_start();
-
-    if (isset($_SESSION["user"])) {
-        if (($_SESSION["user"]) == "" || $_SESSION['usertype'] != 'd') {
-            echo '<script>window.location.href = "../login.php";</script>';
-            exit();
-        }
+    if (isset($_SESSION["user"]) && !empty($_SESSION["user"]) && $_SESSION['usertype'] == 'd') {
+        include("../connection.php");
+        $useremail = $_SESSION["user"];
+        $userrow = $database->query("SELECT * FROM doctor WHERE doctor_email='$useremail'");
+        $userfetch = $userrow->fetch_assoc();
+        $userid = $userfetch["doctor_id"];
+        $username = $userfetch["doctor_name"];
     } else {
         echo '<script>window.location.href = "../login.php";</script>';
         exit();
     }
-?>
-<?php
-    include("../connection.php");
-    $userrow = $database->query("SELECT * FROM doctor WHERE doctor_email='$useremail'");
-    $userfetch=$userrow->fetch_assoc();
-    $userid= $userfetch["doctor_id"];
-    $username=$userfetch["doctor_name"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -88,10 +82,14 @@
                         date_default_timezone_set('Europe/Sofia');
                         $today = date('d.m.Y');
 
-                        $list110 = $database->query("SELECT * FROM schedule INNER JOIN appointment on schedule.schedule_id=appointment.schedule_id 
+                        $stmt = $database->prepare("SELECT * FROM schedule INNER JOIN appointment on schedule.schedule_id=appointment.schedule_id 
                         INNER JOIN patient on patient.patient_id=appointment.patient_id 
                         INNER JOIN doctor on schedule.doctor_id=doctor.doctor_id 
-                        WHERE doctor.doctor_id=$userid ");
+                        WHERE doctor.doctor_id=?");
+                        $stmt->bind_param("i", $userid);
+                        $stmt->execute();
+                        $result = $stmt->get_result();
+                        $list110 = $result->fetch_all(MYSQLI_ASSOC);                        
                         ?>
                         </p>
                     </td>

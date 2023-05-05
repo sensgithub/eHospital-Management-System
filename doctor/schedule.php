@@ -126,13 +126,13 @@
                     </td>
                     <td width="15%">
                         <p class="heading-sub12" style="padding: 0;margin: 0;">
-                            <?php 
-
+                        <?php 
                         date_default_timezone_set('Europe/Sofia');
                         $today = date('d.m.Y');
-
-                        $list110 = $database->query("SELECT  * FROM  schedule WHERE doctor_id=$userid;");
-
+                        $stmt = $database->prepare("SELECT * FROM schedule WHERE doctor_id = ?");
+                        $stmt->bind_param("i", $userid);
+                        $stmt->execute();
+                        $result = $stmt->get_result();                        
                         ?>
                         </p>
                     </td>
