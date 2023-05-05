@@ -1,3 +1,4 @@
+SET NAMES utf8mb4;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
@@ -17,11 +18,10 @@ USE ehospital;
 
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE IF NOT EXISTS `admin` (
-  `admin_email` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
-  `admin_password` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `admin_email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `admin_password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`admin_email`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admin`
