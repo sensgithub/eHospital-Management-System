@@ -1,3 +1,24 @@
+<?php
+
+    session_start();
+
+    if (isset($_SESSION["user"])) {
+        if (($_SESSION["user"]) == "" || $_SESSION['usertype'] != 'd') {
+            echo '<script>window.location.href = "../login.php";</script>';
+            exit();
+        }
+    } else {
+        echo '<script>window.location.href = "../login.php";</script>';
+        exit();
+    }
+    
+    include("../connection.php");
+    $userrow = $database->query("SELECT * FROM doctor WHERE doctor_email='$useremail'");
+    $userfetch=$userrow->fetch_assoc();
+    $userid= $userfetch["doctor_id"];
+    $username=$userfetch["doctor_name"];
+    
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,28 +36,6 @@
     
 </head>
 <body>
-    <?php
-
-    @session_start();
-
-    if (isset($_SESSION["user"])) {
-        if (($_SESSION["user"]) == "" || $_SESSION['usertype'] != 'd') {
-            echo '<script>window.location.href = "../login.php";</script>';
-            exit();
-        }
-    } else {
-        echo '<script>window.location.href = "../login.php";</script>';
-        exit();
-    }
-    
-    include("../connection.php");
-    $userrow = $database->query("SELECT * FROM doctor WHERE doctor_email='$useremail'");
-    $userfetch=$userrow->fetch_assoc();
-    $userid= $userfetch["doctor_id"];
-    $username=$userfetch["doctor_name"];
-
-    
-    ?>
     <div class="container">
     <div class="navigation">
     <div class="navbar-toggler">

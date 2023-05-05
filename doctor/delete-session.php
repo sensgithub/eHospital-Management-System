@@ -1,5 +1,5 @@
 <?php
-@session_start();
+session_start();
 
 if (isset($_SESSION["user"])) {
     if (($_SESSION["user"]) == "" || $_SESSION['usertype'] != 'a') {

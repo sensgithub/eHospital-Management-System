@@ -1,23 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/index.css"> 
-    <link rel="stylesheet" href="css/login.css">   
-    <link rel="stylesheet" href="css/main.css">  
-    <link rel="stylesheet" href="css/signup.css">  
-    <link rel="stylesheet" href="css/register.css"> 
-    <link rel="stylesheet" href="assets/vendor/animate/animate.css">
-        
-    <title> eHospital | Регистрация </title>
-    
-</head>
-<body style="margin: 30px 0 0">
+
 <?php
 
-@session_start();
+session_start();
 include("connection.php");
 $_SESSION["user"]="";
 $_SESSION["usertype"]="";
@@ -82,7 +66,23 @@ if($_POST)
 }
 
 ?>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css"> 
+    <link rel="stylesheet" href="css/login.css">   
+    <link rel="stylesheet" href="css/main.css">  
+    <link rel="stylesheet" href="css/signup.css">  
+    <link rel="stylesheet" href="css/register.css"> 
+    <link rel="stylesheet" href="assets/vendor/animate/animate.css">
+        
+    <title> eHospital | Регистрация </title>
+    
+</head>
+<body style="margin: 30px 0 0">
     <center>
     <div class="container">
         <table border="0">

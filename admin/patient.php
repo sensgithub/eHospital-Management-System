@@ -1,3 +1,21 @@
+<?php
+    session_start();
+
+    include("../connection.php");
+
+    if (isset($_SESSION["user"])) {
+        if (($_SESSION["user"]) == "" || $_SESSION['usertype'] != 'a') {
+            echo '<script>window.location.href = "../login.php";</script>';
+            exit();
+        }
+    } else {
+        echo '<script>window.location.href = "../login.php";</script>';
+        exit();
+    }
+
+    date_default_timezone_set('Europe/Sofia');
+    $date = date('d.m.Y');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,27 +32,7 @@
     <title>eHospital | Admin | Patients</title>
 </head>
 <body>
-    <?php
-
-    @session_start();
-
-    include("../connection.php");
-
-    if (isset($_SESSION["user"])) {
-        if (($_SESSION["user"]) == "" || $_SESSION['usertype'] != 'a') {
-            echo '<script>window.location.href = "../login.php";</script>';
-            exit();
-        }
-    } else {
-        echo '<script>window.location.href = "../login.php";</script>';
-        exit();
-    }
-
-    date_default_timezone_set('Europe/Sofia');
-    $date = date('d.m.Y');
-    
-    ?>
-      <div class="container">
+    <div class="container">
     <div class="navigation">
     <div class="navbar-toggler">
     <button class="hamburger" onclick="show()">

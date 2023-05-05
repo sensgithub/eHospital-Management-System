@@ -1,3 +1,18 @@
+<?php
+    session_start();
+    setlocale(LC_ALL, 'bg_BG.utf8'); 
+    include("../connection.php");
+
+    if (isset($_SESSION["user"])) {
+        if (($_SESSION["user"]) == "" || $_SESSION['usertype'] != 'a') {
+            echo '<script>window.location.href = "../login.php";</script>';
+            exit();
+        }
+    } else {
+        echo '<script>window.location.href = "../login.php";</script>';
+        exit();
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,22 +28,6 @@
     <title>eHospital | Admin | Schedule </title>
 </head>
 <body>
-    <?php
-    @session_start();
-    setlocale(LC_ALL, 'bg_BG.utf8'); 
-    include("../connection.php");
-
-    if (isset($_SESSION["user"])) {
-        if (($_SESSION["user"]) == "" || $_SESSION['usertype'] != 'a') {
-            echo '<script>window.location.href = "../login.php";</script>';
-            exit();
-        }
-    } else {
-        echo '<script>window.location.href = "../login.php";</script>';
-        exit();
-    }
-
-    ?>
     <div class="container">
     <div class="navigation">
     <div class="navbar-toggler">

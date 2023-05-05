@@ -1,7 +1,6 @@
 <?php
-
 ob_start();
-@session_start();
+session_start();
 include("../connection.php");
 
 // reference the Dompdf namespace
@@ -112,5 +111,4 @@ $filename = 'рецепта.pdf';
 
 // Output the generated PDF to Browser
 $dompdf->stream($filename);
-
 ?>

@@ -1,36 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/animations.css">  
-    <link rel="stylesheet" href="../css/main.css">  
-    <link rel="stylesheet" href="../css/admin.css">
-    <link rel="stylesheet" href="../css/button.css">
-    <link rel="stylesheet" href="../css/portal.css">
-    <link rel="stylesheet" href="../css/mobi.css">
-    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
-    <title>eHospital | Запазени часове </title>
-</head>
-<body>
 <?php
 
-    @session_start();
+    session_start();
 
     include("../connection.php");
 
-    if (isset($_SESSION["user"])) {
-        if (($_SESSION["user"]) == "" || $_SESSION['usertype'] != 'p') {
-            echo '<script>window.location.href = "../login.php";</script>';
-            exit();
-        }
-    } else {
+    var_dump($_SESSION["user"], $_SESSION["usertype"]);
+
+    if(isset($_SESSION["user"])){
+    if(($_SESSION["user"])=="" or $_SESSION['usertype']!='p'){
         echo '<script>window.location.href = "../login.php";</script>';
         exit();
+    }else{
+        $useremail=$_SESSION["user"];
     }
-    
+    }else{
+       echo '<script>window.location.href = "../login.php";</script>';
+       exit();
+    }
+?>
+<?php
+
     $sqlmain = "SELECT * FROM patient WHERE patient_email=?";
     $stmt = $database->prepare($sqlmain);
     $stmt->bind_param("s", $useremail);
@@ -64,7 +53,24 @@
     $stmt->execute();
     $result = $stmt->get_result();
 ?>
-      <div class="container">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/animations.css">  
+    <link rel="stylesheet" href="../css/main.css">  
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/button.css">
+    <link rel="stylesheet" href="../css/portal.css">
+    <link rel="stylesheet" href="../css/mobi.css">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <title>eHospital | Запазени часове </title>
+</head>
+<body>
+    <div class="container">
     <div class="navigation">
     <div class="navbar-toggler">
     <button class="hamburger" onclick="show()">

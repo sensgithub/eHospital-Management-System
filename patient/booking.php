@@ -1,21 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/animations.css">  
-    <link rel="stylesheet" href="../css/main.css">  
-    <link rel="stylesheet" href="../css/admin.css">
-    <link rel="stylesheet" href="../css/portal.css">
-    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
-    <title>eHospital | Booking </title>
-</head>
-<body>
-    <?php
+<?php
 
-
-    @session_start();
+    session_start();
     
     include("../connection.php");
 
@@ -28,7 +13,8 @@
         echo '<script>window.location.href = "../login.php";</script>';
         exit();
     }
-
+?>
+<?php
     $sqlmain= "SELECT* FROM patient WHERE patient_email=?";
     $stmt = $database->prepare($sqlmain);
     $stmt->bind_param("s",$useremail);
@@ -45,6 +31,23 @@
     $today = date('d.m.Y');
 
  ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/animations.css">  
+    <link rel="stylesheet" href="../css/main.css">  
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/button.css">
+    <link rel="stylesheet" href="../css/portal.css">
+    <link rel="stylesheet" href="../css/mobi.css">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <title>eHospital | Запазени часове </title>
+</head>
+<body>
     <div class="container">
     <div class="navigation">
     <div class="navbar-toggler">

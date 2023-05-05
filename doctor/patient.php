@@ -1,22 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/admin.css">
-    <link rel="stylesheet" href="../css/button.css">
-    <link rel="stylesheet" href="../css/portal.css">
-    <link rel="stylesheet" href="../css/admin-mobile.css">
-    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
-        
-    <title>eHospital | Doctor | Patients</title>
-</head>
-<body>
-    <?php
+<?php
 
-    @session_start();
+    session_start();
     
     if (isset($_SESSION["user"])) {
         if (($_SESSION["user"]) == "" || $_SESSION['usertype'] != 'd') {
@@ -34,7 +18,23 @@
     $userid= $userfetch["doctor_id"];
     $username=$userfetch["doctor_name"];
 
-    ?>
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/button.css">
+    <link rel="stylesheet" href="../css/portal.css">
+    <link rel="stylesheet" href="../css/admin-mobile.css">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+        
+    <title>eHospital | Doctor | Patients</title>
+</head>
+<body>
     <div class="container">
     <div class="navigation">
     <div class="navbar-toggler">

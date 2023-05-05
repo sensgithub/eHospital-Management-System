@@ -1,23 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <link rel="stylesheet" href="css/main.css">  
-    <link rel="stylesheet" href="css/signup.css">
-        
-    <title> eHospital | Регистрация </title>
-    <style>
-        .container{
-            animation: transitionIn-X 0.5s;
-        }
-    </style>
-</head>
-<body>
 <?php
 
-@session_start();
+session_start();
 
 include("connection.php");
 require 'vendor/autoload.php';
@@ -152,6 +135,23 @@ if($_POST){
 }
 
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="css/main.css">  
+    <link rel="stylesheet" href="css/signup.css">
+        
+    <title> eHospital | Регистрация </title>
+    <style>
+        .container{
+            animation: transitionIn-X 0.5s;
+        }
+    </style>
+</head>
+<body>
     <center>
     <div class="container">
         <table border="0" style="width: 69%;">

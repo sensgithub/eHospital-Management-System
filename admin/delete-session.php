@@ -1,7 +1,5 @@
 <?php
-
-    @session_start();
-
+    session_start();
     if (isset($_SESSION["user"])) {
         if (($_SESSION["user"]) == "" || $_SESSION['usertype'] != 'a') {
             echo '<script>window.location.href = "../login.php";</script>';
@@ -11,7 +9,6 @@
         echo '<script>window.location.href = "../login.php";</script>';
         exit();
     }
-
     if($_GET){
         include("../connection.php");
         $id=$_GET["id"];
@@ -19,5 +16,4 @@
         echo '<script>window.location.href = "schedule.php";</script>';
 
     }
-
 ?>

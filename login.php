@@ -1,26 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/index.css"> 
-    <link rel="stylesheet" href="css/login.css"> 
-    <link rel="stylesheet" href="css/main.css">  
-    <link rel="stylesheet" href="assets/vendor/animate/animate.css">
-    <link rel="stylesheet" href="css/preloader.css">
-    <title> eHospital | Логин </title>
-</head>
-<body>
-    <?php
-    @session_start();
-    include("connection.php");
-    date_default_timezone_set('Europe/Sofia');
-    $_SESSION["user"] = "";
-    $_SESSION["usertype"] = ""; 
-    $date = date('d.m.Y');
-    $_SESSION["date"] = $date;
+<?php
+session_start();
+include("connection.php");
+date_default_timezone_set('Europe/Sofia');
+$_SESSION["user"] = "";
+$_SESSION["usertype"] = ""; 
+$date = date('d.m.Y');
+$_SESSION["date"] = $date;
+?>
 
+<?php
     if ($_POST) {
         $email = $_POST['useremail'];
         $password = $_POST['userpassword'];
@@ -81,6 +69,20 @@
         $error='<label for="promter" class="form-label">&nbsp;</label>';
     }
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css"> 
+    <link rel="stylesheet" href="css/login.css"> 
+    <link rel="stylesheet" href="css/main.css">  
+    <link rel="stylesheet" href="assets/vendor/animate/animate.css">
+    <link rel="stylesheet" href="css/preloader.css">
+</head>
+<body>
     <center>
     <div id="preloader">
       <div id="loader"></div>

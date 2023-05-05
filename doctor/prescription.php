@@ -1,31 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/admin.css">
-    <link rel="stylesheet" href="../css/button.css">
-    <link rel="stylesheet" href="../css/portal.css">
-    <link rel="stylesheet" href="../css/admin-mobile.css">
-    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
-        
-    <title>eHospital | Prescriptions </title>
 
-</head>
-
-<body>
-  <style>
-    .non-style-link:link, .non-style-link:visited, .non-style-link:hover, .non-style-link:active 
-    {
-    padding-right:10px;
-    }
-    </style>
-    <?php
-
-    ob_start();
-    @session_start();
+<?php
+    session_start();
 
     if (isset($_SESSION["user"])) {
       if (($_SESSION["user"]) == "" || $_SESSION['usertype'] != 'd') {
@@ -105,7 +80,29 @@
       }
     }
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/button.css">
+    <link rel="stylesheet" href="../css/portal.css">
+    <link rel="stylesheet" href="../css/admin-mobile.css">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+        
+    <title>eHospital | Prescriptions </title>
 
+</head>
+<body>
+  <style>
+    .non-style-link:link, .non-style-link:visited, .non-style-link:hover, .non-style-link:active 
+    {
+    padding-right:10px;
+    }
+    </style>
     <div class="container">
     <div class="navigation">
     <div class="navbar-toggler">
