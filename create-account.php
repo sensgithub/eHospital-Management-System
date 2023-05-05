@@ -24,10 +24,10 @@ if($_POST){
     $egn=$_SESSION['personal']['egn'];
     $dob=$_SESSION['personal']['dob'];
 
-    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-    $tele = filter_var($_POST['tele'], FILTER_SANITIZE_NUMBER_INT);
-    $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
-    $cpassword = filter_var($_POST['cpassword'], FILTER_SANITIZE_STRING);
+    $email = $_POST['email'];
+    $tele = $_POST['tele'];
+    $password = $_POST['password'];
+    $cpassword = $_POST['cpassword'];
 
     $email = mysqli_real_escape_string($database, $email);
 
@@ -133,7 +133,6 @@ if($_POST){
         }
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

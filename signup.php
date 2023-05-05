@@ -1,6 +1,4 @@
-
 <?php
-
 session_start();
 include("connection.php");
 $_SESSION["user"]="";
@@ -64,7 +62,6 @@ if($_POST)
     print_r($_SESSION["personal"]);
     echo '<script>window.location.href = "create-account.php";</script>';
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
