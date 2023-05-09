@@ -94,7 +94,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Docker push
-      run: docker push $IMAGE_NAME:${GITHUB_SHA::7}
+      run: docker push $IMAGE_NAME:${{ github.sha }}
 
   update-manifest-stage:
     runs-on: ubuntu-latest
