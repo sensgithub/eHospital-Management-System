@@ -114,6 +114,9 @@ jobs:
           sed -i "s#${{ github.actor }}.*#${{ github.actor }}/DevOps-Project${{ github.sha }}#g" php-deployment.yml
           git add -A
           git commit -am "Update image for - ${{ github.sha }}"
+          git checkout -b new-branch
+          git push -u origin new-branc
+          
       - run: echo ${{ github }}
       - run: git push origin main
       
