@@ -95,12 +95,10 @@ jobs:
       - name: Build image and push to Docker Hub and GitHub Container Registry
         uses: docker/build-push-action@v2
         with:
-          # relative path to the place where source code with Dockerfile is located
           context: ./
-          # Note: tags has to be all lower-case
           tags: |
-            sensgithub/eHospital-Management-System:${{ github.sha }} 
-            ghcr.io/sensgithub/eHospital-Management-System:${{ github.sha }}
+            sensgithub/ehospital:${{ github.sha }} 
+            ghcr.io/sensgithub/ehospital:${{ github.sha }}
           push: ${{ github.ref == 'refs/heads/main' }}
 
   update-manifest-stage:
