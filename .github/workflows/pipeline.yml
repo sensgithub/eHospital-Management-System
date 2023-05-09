@@ -104,7 +104,7 @@ jobs:
       with:
         repository: sensgithub/DevOps-Project
         ref: 'master'
-        token: ${{ secrets.G_TOKEN }}
+        token: ${{ secrets.GIT_TOKEN }}
       
     - name: Update deployment YAML file
       run: |
