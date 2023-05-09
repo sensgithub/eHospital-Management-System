@@ -103,17 +103,15 @@ jobs:
       - uses: actions/checkout@v3
         with:
           repository: sensgithub/DevOps-Project
-          ref: 'main'
+          ref: 'master'
           token: ${{ secrets.G_TOKEN }}
           
-      - name: setup git config
+      - name: Setup Git config
         run: |
           git config --global user.email "svetlan.nikolov@yahoo.com"
           git config --global user.name "sensgithub"
           echo ${{ github.sha }}
           sed -i "s#${{ github.actor }}.*#${{ github.actor }}/ehospital:${{ github.sha }}#g" php-deployment.yml
           git add -A
-          git commit -am "Update image for - eHospital:${{ github.sha }}"  
-          
-      - run: echo ${{ github }}
-      - run: git push origin main
+          git commit -am "Update image for - eHospital:${{ github.sha }}"
+          git push origin master
