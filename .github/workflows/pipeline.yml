@@ -103,7 +103,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           repository: sensgithub/DevOps-Project
-          ref: 'main'
+          ref: 'master'
           token: ${{ secrets.G_TOKEN }}
 
       - name: setup git config
@@ -114,9 +114,9 @@ jobs:
           sed -i "s#${{ github.actor }}.*#${{ github.actor }}/DevOps-Project${{ github.sha }}#g" php-deployment.yml
           git add -A
           git commit -am "Update image for - ${{ github.sha }}"
-          git checkout -b new-branch
-          git push -u origin new-branc
+          git checkout -b master
+          git push -u origin master
           
       - run: echo ${{ github }}
-      - run: git push origin main
+      - run: git push origin master
       
