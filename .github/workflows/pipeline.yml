@@ -73,7 +73,6 @@ jobs:
         
         
   build:
-
     runs-on: ubuntu-latest
 
     defaults:
@@ -96,22 +95,20 @@ jobs:
     - name: Docker push
       run: docker push $IMAGE_NAME:${{ github.sha }}
 
-  update-manifest-stage:
+  update-deployment:
     runs-on: ubuntu-latest
-    needs: ['build']
+    needs: build
+    
     steps:
-      - uses: actions/checkout@v3
-        with:
-          repository: sensgithub/DevOps-Project
-          ref: 'master'
-          token: ${{ secrets.G_TOKEN }}
-          
-      - name: Setup Git config
-        run: |
-          git config --global user.email "svetlan.nikolov@yahoo.com"
-          git config --global user.name "sensgithub"
-          echo ${{ github.sha }}
-          sed -i "s#${{ github.actor }}.*#${{ github.actor }}/ehospital:${{ github.sha }}#g" php-deployment.yml
-          git add -A
-          git commit -am "Update image for - eHospital:${{ github.sha }}"
-          git push origin master
+    - uses: actions/checkout@v2
+      with:
+        repository: sensgithub/DevOps-Project
+        ref: 'main'
+        token: ${{ secrets.G_TOKEN }}
+      
+    - name: Update deployment YAML file
+      run: |
+        sed -i "s#image: ${IMAGE_NAME}:.*#image: ${IMAGE_NAME}:${{ github.sha }}#g" php-deployment.yml
+        git add php-deployment.yml
+        git commit -m "Update image for eHospital to ${IMAGE_NAME}:${{ github.sha }}"
+        git push origin main
