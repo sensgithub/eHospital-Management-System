@@ -74,7 +74,6 @@ jobs:
         
   build:
     runs-on: ubuntu-latest
-
     defaults:
       run:
         shell: bash
@@ -111,7 +110,7 @@ jobs:
         git config --global user.email "svetlan.nikolov@yahoo.com"
         git config --global user.name "sensgithub"
         echo ${{ github.actor }}
-        sed -i "s#sens31.*#sens31/ehospital:${{ github.sha }}#g" php-deployment.yml
+        sed -i "s#sens31.*#sens31/ehospital:${{ github.sha }}#g" YAML/php-deployment.yml
         git add php-deployment.yml
         git commit -m "Update Docker image => ehospital:${{ github.sha }}"
         git push origin master
