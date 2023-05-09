@@ -103,7 +103,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         repository: sensgithub/DevOps-Project
-        ref: 'main'
+        ref: 'master'
         token: ${{ secrets.G_TOKEN }}
       
     - name: Update deployment YAML file
@@ -113,5 +113,5 @@ jobs:
         echo ${{ github.actor }}
         sed -i "s#sens31.*#sens31/ehospital:${{ github.sha }}#g" php-deployment.yml
         git add php-deployment.yml
-        git commit -m "Update image for eHospital to ${IMAGE_NAME}:${{ github.sha }}"
-        git push origin main
+        git commit -m "Update Docker image => ehospital:${{ github.sha }}"
+        git push origin master
