@@ -111,10 +111,9 @@ jobs:
           git config --global user.email "svetlan.nikolov@yahoo.com"
           git config --global user.name "sensgithub"
           echo ${{ github.sha }}
-          sed -i "s#${{ github.actor }}.*#${{ github.actor }}/eHospital-Management-System:${{ github.sha }}#g" YAML/php-deployment.yml
+          sed -i "s#${{ github.actor }}.*#${{ github.actor }}/DevOps-Project${{ github.sha }}#g" php-deployment.yml
           git add -A
           git commit -am "Update image for - ${{ github.sha }}"
       - run: echo ${{ github }}
       - run: git push origin main
-      
       
