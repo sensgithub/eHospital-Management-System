@@ -108,7 +108,9 @@ jobs:
       
     - name: Update deployment YAML file
       run: |
-        sed -i "s#image: ${IMAGE_NAME}:.*#image: ${IMAGE_NAME}:${{ github.sha }}#g" php-deployment.yml
+        git config --global user.email "svetlan.nikolov@yahoo.com"
+        git config --global user.name "sensgithub"
+        sed -i "s#${{ github.actor }}.*#${{ github.actor }}/ehospital:${{ github.sha }}#g" php-deployment.yml
         git add php-deployment.yml
         git commit -m "Update image for eHospital to ${IMAGE_NAME}:${{ github.sha }}"
         git push origin main
