@@ -10,9 +10,6 @@ env:
   IMAGE_NAME: sens31/ehospital
   GITHUB_REPO: sensgithub/eHospital-Management-System
   SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-  
-permissions:
-  contents: read
 
 jobs:
 
@@ -88,12 +85,22 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
 
-      - name: Build image and push to Docker Hub 
+      - name: Login to Github Packages
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.G_TOKEN }}
+          
+      - name: Build image and push to Docker Hub and GitHub Container Registry
         uses: docker/build-push-action@v2
         with:
-          context: .
+          # relative path to the place where source code with Dockerfile is located
+          context: ./
+          # Note: tags has to be all lower-case
           tags: |
-            sens31/ehospital:${{ github.sha }}
+            sensgithub/eHospital-Management-System:${{ github.sha }} 
+            ghcr.io/sensgithub/eHospital-Management-System:${{ github.sha }}
           push: ${{ github.ref == 'refs/heads/main' }}
 
   update-manifest-stage:
@@ -103,9 +110,9 @@ jobs:
       - uses: actions/checkout@v3
         with:
           repository: sensgithub/DevOps-Project
-          ref: 'master'
+          ref: 'main'
           token: ${{ secrets.G_TOKEN }}
-
+          
       - name: setup git config
         run: |
           git config --global user.email "svetlan.nikolov@yahoo.com"
@@ -113,10 +120,7 @@ jobs:
           echo ${{ github.sha }}
           sed -i "s#${{ github.actor }}.*#${{ github.actor }}/DevOps-Project${{ github.sha }}#g" php-deployment.yml
           git add -A
-          git commit -am "Update image for - ${{ github.sha }}"
-          git checkout -b master
-          git push -u origin master
+          git commit -am "Update image for - ${{ github.sha }}"  
           
       - run: echo ${{ github }}
-      - run: git push origin master
-      
+      - run: git push origin main
