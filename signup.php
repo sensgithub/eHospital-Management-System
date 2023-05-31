@@ -1,6 +1,7 @@
 <?php
+
 session_start();
-include("connection.php");
+
 $_SESSION["user"]="";
 $_SESSION["usertype"]="";
 
@@ -9,6 +10,7 @@ $date = date('d.M.Y');
 
 $_SESSION["date"]=$date;
 
+include("connection.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $egn = $_POST['egn'];
@@ -42,9 +44,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             setTimeout(function() {
                 document.body.removeChild(alertBox);
             }, 3000);
-            setTimeout(function() {
-                window.location="signup.php";
-            }, 3000);
+        </script>';
+        exit();
+    }
+}
+
+if (isset($_POST['dateofbirth'])) {
+    $dob = DateTime::createFromFormat('Y-m-d', $_POST['dateofbirth']);
+    $today = new DateTime();
+    $age = $dob->diff($today)->y;
+
+    if ($age < 18) {
+        echo '<script>
+        setTimeout(function() {
+            alert("Не може да се регистрирате, ако не сте пълнолетно лице!");
+            window.location.href = "signup.php";
+        }, 0);
         </script>';
         exit();
     }
@@ -60,9 +75,11 @@ if($_POST)
         'dob'=>$_POST['dob']
     );
     print_r($_SESSION["personal"]);
-    echo '<script>window.location.href = "create-account.php";</script>';
+    header("location: create-account.php");
 }
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,18 +111,6 @@ if($_POST)
                 <td class="label-td" colspan="2">
                     <label for="name" class="form-label">Име: </label>
                 </td>
-                <?php
-                // Валидация на възраст
-                if (isset($_POST['dob'])) {
-                $dob = new DateTime($_POST['dob']);
-                $today = new DateTime();
-                $age = $today->diff($dob)->y;
-                if ($age < 18) {
-                echo '<script>alert("Трябва да сте на 18, за да се регистрирате в системата.");</script>';
-                echo '<script>window.location.href = "signup.php";</script>';
-                }
-                }  
-                ?>
             </tr>
             <tr>
                 <td class="label-td">
@@ -142,7 +147,7 @@ if($_POST)
             </tr>
             <tr>
                 <td class="label-td" colspan="2">
-                    <input type="date" name="dob" class="input-text" required>
+                    <input type="date" name="dateofbirth" class="input-text" required>
                 </td>
             </tr>
             <tr>
