@@ -5,7 +5,6 @@ START TRANSACTION;
 SET time_zone = '+02:00';
 
 USE ehospital;
-
 --
 -- Database: `ehospital`
 --
